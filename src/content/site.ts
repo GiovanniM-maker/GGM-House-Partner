@@ -8,6 +8,47 @@
  * dati reali prima della pubblicazione.
  */
 
+/** Dominio di fallback finché non è stato deciso quello definitivo. */
+const FALLBACK_SITE_URL = "https://www.ggm-sicily.example";
+
+/**
+ * Risolve l'URL pubblico del sito, usato per canonical, Open Graph e sitemap.
+ *
+ * Deve essere impossibile far fallire la build con una variabile d'ambiente
+ * mal configurata: una variabile presente ma vuota (caso tipico su Vercel),
+ * senza protocollo o non valida non deve rompere `new URL()`.
+ *
+ * Ordine di precedenza:
+ *   1. NEXT_PUBLIC_SITE_URL, se valorizzata
+ *   2. il dominio di produzione Vercel
+ *   3. l'URL del deployment corrente (utile per le preview delle pull request)
+ *   4. il dominio placeholder
+ */
+function resolveSiteUrl(): string {
+  const candidates = [
+    process.env.NEXT_PUBLIC_SITE_URL,
+    process.env.VERCEL_PROJECT_PRODUCTION_URL,
+    process.env.VERCEL_URL,
+    FALLBACK_SITE_URL,
+  ];
+
+  for (const candidate of candidates) {
+    const value = candidate?.trim();
+    if (!value) continue;
+
+    // I domini forniti da Vercel arrivano senza protocollo.
+    const withProtocol = /^https?:\/\//.test(value) ? value : `https://${value}`;
+
+    try {
+      return new URL(withProtocol).origin;
+    } catch {
+      // Valore non valido: si passa al candidato successivo.
+    }
+  }
+
+  return FALLBACK_SITE_URL;
+}
+
 export const site = {
   name: "GGM",
   tagline: "Your Sicily Property Partner",
@@ -15,8 +56,8 @@ export const site = {
   positioning: "Partner locale per chi possiede una casa in Sicilia.",
   description:
     "Ristrutturiamo, valorizziamo e gestiamo immobili in Sicilia, anche se vivi lontano. Un unico referente per seguire la tua casa, dai lavori alla messa a reddito.",
-  /** TODO: sostituire con il dominio definitivo (usato per canonical e OG). */
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.ggm-sicily.example",
+  /** TODO: impostare NEXT_PUBLIC_SITE_URL con il dominio definitivo. */
+  url: resolveSiteUrl(),
   locale: "it_IT",
 } as const;
 
