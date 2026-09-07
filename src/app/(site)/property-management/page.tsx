@@ -180,7 +180,7 @@ export default function PropertyManagementPage() {
         ]}
         image={{
           alt: "Interno di una casa preparata per l'ospitalità",
-          label: "Foto hero — interno curato, luce naturale",
+          label: "Foto hero: interno curato, luce naturale",
         }}
       />
 
@@ -205,13 +205,13 @@ export default function PropertyManagementPage() {
 
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
           <div className="reveal rounded-lg border border-white/15 bg-white/5 p-7 sm:p-8">
-            <p className="inline-flex rounded-full bg-teal/20 px-3 py-1 text-xs font-semibold text-teal">
-              Gestione online — tutta la Sicilia
+            <p className="inline-flex rounded-full bg-gold/20 px-3 py-1 text-xs font-semibold text-gold">
+              Gestione online: tutta la Sicilia
             </p>
             <h3 className="mt-5 display-3 font-semibold text-white">
               Tutto quello che si può seguire a distanza
             </h3>
-            <p className="mt-3 text-sm leading-relaxed text-teal-50/75">
+            <p className="mt-3 text-sm leading-relaxed text-cream/75">
               È la parte che facciamo direttamente noi, ovunque si trovi la casa
               sull&apos;isola.
             </p>
@@ -230,13 +230,13 @@ export default function PropertyManagementPage() {
           </div>
 
           <div className="reveal rounded-lg border border-white/15 bg-white/5 p-7 sm:p-8">
-            <p className="inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-teal-50">
-              Gestione locale — {coverage.local.area}
+            <p className="inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-cream">
+              Gestione locale: {coverage.local.area}
             </p>
             <h3 className="mt-5 display-3 font-semibold text-white">
               Tutto quello che richiede una persona sul posto
             </h3>
-            <p className="mt-3 text-sm leading-relaxed text-teal-50/75">
+            <p className="mt-3 text-sm leading-relaxed text-cream/75">
               È la parte che attiviamo solo dove la rete esiste davvero. Dove non
               c&apos;è, te lo diciamo.
             </p>
@@ -309,7 +309,7 @@ export default function PropertyManagementPage() {
         <ExperienceBlock
           eyebrow="Esperienza digitale"
           title="La parte online non la stiamo imparando adesso."
-          description="Le competenze digitali che usiamo nella gestione — marketing, contenuti, automazione, lettura dei dati — arrivano dall'attività professionale precedente dei fondatori, in altri settori. Su questo progetto sono nuove per il settore immobiliare, non per noi."
+          description="Le competenze digitali che usiamo nella gestione (marketing, contenuti, automazione, lettura dei dati) arrivano dall'attività professionale precedente dei fondatori, in altri settori. Su questo progetto sono nuove per il settore immobiliare, non per noi."
           points={[
             "Gestione di presenze online, contenuti e canali di acquisizione.",
             "Automazione dei processi ripetitivi e comunicazione strutturata.",
@@ -348,7 +348,7 @@ export default function PropertyManagementPage() {
       <CTASection
         eyebrow="Primo passo"
         title="Quanto potrebbe rendere la tua casa?"
-        description="Non facciamo promesse a distanza. Prima la analizziamo, poi ti diciamo cosa vediamo — anche se la risposta è che non conviene."
+        description="Non facciamo promesse a distanza. Prima la analizziamo, poi ti diciamo cosa vediamo, anche se la risposta è che non conviene."
         cta={ctas.potenziale}
       />
     </>

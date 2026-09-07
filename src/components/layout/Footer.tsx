@@ -15,28 +15,28 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-ink text-teal-50">
+    <footer className="bg-ink text-cream">
       <Container size="wide" className="py-16 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,2fr)]">
           <div>
-            <Logo tone="dark" />
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-teal-50/70">
+            <Logo tone="dark" size="lg" />
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-cream/70">
               {site.positioning} Ristrutturazione, property management e percorsi
               integrati per chi possiede una casa in Sicilia.
             </p>
 
             <dl className="mt-8 space-y-4 text-sm">
               <div>
-                <dt className="text-xs font-semibold tracking-[0.16em] text-teal uppercase">
+                <dt className="text-xs font-semibold tracking-[0.16em] text-gold uppercase">
                   {coverage.online.title}
                 </dt>
-                <dd className="mt-1 text-teal-50/70">{coverage.online.area}</dd>
+                <dd className="mt-1 text-cream/70">{coverage.online.area}</dd>
               </div>
               <div>
-                <dt className="text-xs font-semibold tracking-[0.16em] text-teal uppercase">
+                <dt className="text-xs font-semibold tracking-[0.16em] text-gold uppercase">
                   {coverage.local.title}
                 </dt>
-                <dd className="mt-1 text-teal-50/70">{coverage.local.area}</dd>
+                <dd className="mt-1 text-cream/70">{coverage.local.area}</dd>
               </div>
             </dl>
 
@@ -46,7 +46,7 @@ export function Footer() {
                   <p>
                     <a
                       href={`mailto:${contact.email}`}
-                      className="text-teal-50 underline underline-offset-4 hover:text-teal"
+                      className="text-cream underline underline-offset-4 hover:text-gold"
                     >
                       {contact.email}
                     </a>
@@ -56,7 +56,7 @@ export function Footer() {
                   <p>
                     <a
                       href={`tel:${contact.phone.replace(/\s/g, "")}`}
-                      className="text-teal-50 underline underline-offset-4 hover:text-teal"
+                      className="text-cream underline underline-offset-4 hover:text-gold"
                     >
                       {contact.phone}
                     </a>
@@ -69,7 +69,7 @@ export function Footer() {
           <div className="grid gap-10 sm:grid-cols-3">
             {columns.map((column) => (
               <nav key={column.title} aria-label={column.title}>
-                <h2 className="text-xs font-semibold tracking-[0.16em] text-teal uppercase">
+                <h2 className="text-xs font-semibold tracking-[0.16em] text-gold uppercase">
                   {column.title}
                 </h2>
                 <ul className="mt-4 space-y-2.5 text-sm">
@@ -77,7 +77,7 @@ export function Footer() {
                     <li key={link.href}>
                       <Link
                         href={link.href}
-                        className="text-teal-50/75 transition-colors hover:text-white"
+                        className="text-cream/75 transition-colors hover:text-white"
                       >
                         {link.label}
                       </Link>
@@ -90,7 +90,7 @@ export function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col gap-6 border-t border-white/10 pt-8 lg:flex-row lg:items-center lg:justify-between">
-          <p className="max-w-2xl text-xs leading-relaxed text-teal-50/65">
+          <p className="max-w-2xl text-xs leading-relaxed text-cream/65">
             GGM è un progetto in avvio. Le esperienze professionali citate sul
             sito appartengono ai fondatori e non costituiscono casi studio della
             società. Non forniamo garanzie di rendimento.
@@ -98,11 +98,11 @@ export function Footer() {
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
             <Link
               href={primaryCta.href}
-              className="inline-flex w-fit items-center justify-center rounded-full bg-teal px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-teal-50"
+              className="inline-flex w-fit items-center justify-center rounded-full bg-gold px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-gold-50"
             >
               {primaryCta.label}
             </Link>
-            <p className="text-xs text-teal-50/65">
+            <p className="text-xs text-cream/65">
               © {year} {site.name}
             </p>
           </div>

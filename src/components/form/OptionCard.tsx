@@ -22,9 +22,9 @@ export function OptionCard({
 }: OptionCardProps) {
   return (
     <label
-      className={`flex cursor-pointer items-start gap-3 rounded-md border p-4 transition-colors has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-teal-700 ${
+      className={`flex cursor-pointer items-start gap-3 rounded-md border p-4 transition-colors has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-gold-700 ${
         checked
-          ? "border-teal-700 bg-teal-50/60"
+          ? "border-gold-700 bg-gold-50/60"
           : "border-line-strong bg-white hover:border-ink-600/40"
       }`}
     >
@@ -34,7 +34,7 @@ export function OptionCard({
         value={value}
         checked={checked}
         onChange={() => onChange(value)}
-        className="mt-1 h-4 w-4 shrink-0 accent-[#2b7a78]"
+        className="mt-1 h-4 w-4 shrink-0 accent-[#8a6820]"
       />
       <span>
         <span className="block text-sm font-medium text-ink">{label}</span>

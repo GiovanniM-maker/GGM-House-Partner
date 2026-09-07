@@ -4,7 +4,7 @@
  * Tutto ciò che è testo di brand, navigazione, CTA e copertura vive qui:
  * le pagine restano dichiarative e il copy si aggiorna in un punto solo.
  *
- * ATTENZIONE — I campi marcati con TODO sono PLACEHOLDER da sostituire con
+ * ATTENZIONE: i campi marcati con TODO sono PLACEHOLDER da sostituire con
  * dati reali prima della pubblicazione.
  */
 
@@ -52,12 +52,21 @@ function resolveSiteUrl(): string {
 export const site = {
   name: "GGM",
   tagline: "Your Sicily Property Partner",
-  fullName: "GGM — Your Sicily Property Partner",
+  fullName: "GGM Your Sicily Property Partner",
   positioning: "Partner locale per chi possiede una casa in Sicilia.",
+  /** Titolo usato nei metadata della home e nell'immagine Open Graph. */
+  metaTitle:
+    "GGM Your Sicily Property Partner | Ristrutturazione e gestione di case in Sicilia",
   description:
     "Ristrutturiamo, valorizziamo e gestiamo immobili in Sicilia, anche se vivi lontano. Un unico referente per seguire la tua casa, dai lavori alla messa a reddito.",
   /** TODO: impostare NEXT_PUBLIC_SITE_URL con il dominio definitivo. */
   url: resolveSiteUrl(),
+  /**
+   * Logo. Finché è `null` viene mostrato il lettering di riserva.
+   * Per usare il logo vero: metti il file in `public/images/`, indica qui il
+   * percorso e le dimensioni reali in pixel.
+   */
+  logo: null as { src: string; width: number; height: number } | null,
   locale: "it_IT",
 } as const;
 

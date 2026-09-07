@@ -52,7 +52,7 @@ export function ExperienceBlock({
               key={point}
               className={`reveal border-t pt-4 text-sm leading-relaxed ${
                 isDark
-                  ? "border-white/15 text-teal-50/80"
+                  ? "border-white/15 text-cream/80"
                   : "border-line text-ink-600"
               }`}
             >
@@ -82,7 +82,7 @@ export function ExperienceBlock({
         <p
           className={`mt-6 max-w-3xl border-l-2 pl-4 text-xs leading-relaxed ${
             isDark
-              ? "border-teal/50 text-teal-50/60"
+              ? "border-gold/50 text-cream/60"
               : "border-line-strong text-muted"
           }`}
         >

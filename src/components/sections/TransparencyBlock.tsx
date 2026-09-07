@@ -34,7 +34,7 @@ export function TransparencyBlock({
     <div className={className}>
       <p
         className={`mb-4 text-xs font-semibold tracking-[0.2em] uppercase ${
-          isDark ? "text-teal" : "text-teal-700"
+          isDark ? "text-gold" : "text-gold-700"
         }`}
       >
         {eyebrow}
@@ -46,7 +46,7 @@ export function TransparencyBlock({
       </h2>
       {description && (
         <p
-          className={`mt-5 max-w-2xl lead ${isDark ? "text-teal-50/85" : "text-muted"}`}
+          className={`mt-5 max-w-2xl lead ${isDark ? "text-cream/85" : "text-muted"}`}
         >
           {description}
         </p>
@@ -68,7 +68,7 @@ export function TransparencyBlock({
             </p>
             <p
               className={`mt-3 pl-[1.6rem] text-sm leading-relaxed ${
-                isDark ? "text-teal-50/75" : "text-muted"
+                isDark ? "text-cream/75" : "text-muted"
               }`}
             >
               {item.reality}
@@ -85,7 +85,7 @@ function Cross({ dark }: { dark: boolean }): ReactNode {
     <svg
       aria-hidden="true"
       viewBox="0 0 20 20"
-      className={`mt-1 h-4 w-4 shrink-0 ${dark ? "text-teal-50/50" : "text-line-strong"}`}
+      className={`mt-1 h-4 w-4 shrink-0 ${dark ? "text-cream/50" : "text-line-strong"}`}
       fill="none"
       stroke="currentColor"
       strokeWidth="2"

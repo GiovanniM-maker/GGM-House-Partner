@@ -32,7 +32,7 @@ export function Navbar() {
                       aria-current={isActive ? "page" : undefined}
                       className={`rounded-full px-3.5 py-2 text-sm transition-colors ${
                         isActive
-                          ? "bg-white text-teal-900"
+                          ? "bg-white text-gold-900"
                           : "text-ink-600 hover:bg-white hover:text-ink"
                       }`}
                     >

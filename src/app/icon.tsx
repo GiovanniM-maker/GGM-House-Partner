@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 /**
- * Favicon — PLACEHOLDER di brand.
+ * Favicon. PLACEHOLDER di brand.
  * Sostituibile con un `icon.png` o `favicon.ico` nella stessa cartella.
  */
 export const size = { width: 64, height: 64 };
@@ -17,8 +17,8 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#17252A",
-          color: "#3AAFA9",
+          backgroundColor: "#132B4F",
+          color: "#C39B4E",
           fontSize: 38,
           fontWeight: 700,
           letterSpacing: "-0.04em",

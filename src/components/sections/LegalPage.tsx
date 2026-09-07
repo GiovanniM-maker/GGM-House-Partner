@@ -19,7 +19,7 @@ type LegalPageProps = {
 /**
  * Impaginazione condivisa delle pagine legali.
  *
- * ATTENZIONE — I testi legali del sito sono PLACEHOLDER strutturali.
+ * ATTENZIONE: i testi legali del sito sono PLACEHOLDER strutturali.
  * Vanno sostituiti con documenti redatti sui dati reali del titolare del
  * trattamento e sugli strumenti effettivamente utilizzati.
  */

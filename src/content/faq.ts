@@ -47,7 +47,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "Fate tutti i lavori internamente?",
         answer:
-          "No, e preferiamo dirlo chiaramente. GGM coordina il progetto e il cantiere; gli interventi specialistici — impianti elettrici, idraulici, pratiche tecniche — sono eseguiti da professionisti qualificati della rete, ciascuno per la propria competenza.",
+          "No, e preferiamo dirlo chiaramente. GGM coordina il progetto e il cantiere; gli interventi specialistici (impianti elettrici, idraulici, pratiche tecniche) sono eseguiti da professionisti qualificati della rete, ciascuno per la propria competenza.",
         tags: ["ristrutturazione", "operativita"],
       },
       {
@@ -65,7 +65,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "Gestite case in tutta la Sicilia?",
         answer:
-          "La gestione online — annunci, prezzi, calendario, prenotazioni e comunicazione — la seguiamo in tutta la Sicilia. Le attività fisiche, come check-in, pulizie e controlli, solo dove esiste una rete locale affidabile.",
+          "La gestione online, cioè annunci, prezzi, calendario, prenotazioni e comunicazione, la seguiamo in tutta la Sicilia. Le attività fisiche, come check-in, pulizie e controlli, solo dove esiste una rete locale affidabile.",
         tags: ["property-management", "copertura"],
       },
       {
@@ -155,7 +155,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "La valutazione iniziale si paga?",
         answer:
-          "La prima analisi delle informazioni che ci lasci nel modulo non ha costi. Eventuali attività successive — sopralluoghi, progetti, pratiche tecniche — vengono concordate prima, con costi chiari.",
+          "La prima analisi delle informazioni che ci lasci nel modulo non ha costi. Eventuali attività successive, come sopralluoghi, progetti e pratiche tecniche, vengono concordate prima, con costi chiari.",
         tags: ["pagamenti"],
       },
       {

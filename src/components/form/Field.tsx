@@ -30,7 +30,7 @@ export function Field({
       >
         {label}
         {required && (
-          <span aria-hidden="true" className="ml-1 text-teal-700">
+          <span aria-hidden="true" className="ml-1 text-gold-700">
             *
           </span>
         )}
@@ -42,7 +42,7 @@ export function Field({
         </p>
       )}
       {error && (
-        <p id={`${htmlFor}-error`} className="mt-2 text-sm text-teal-900">
+        <p id={`${htmlFor}-error`} className="mt-2 text-sm text-gold-900">
           {error}
         </p>
       )}
@@ -71,7 +71,7 @@ export function ChoiceGroup({
       <legend className="text-sm font-medium text-ink">
         {legend}
         {required && (
-          <span aria-hidden="true" className="ml-1 text-teal-700">
+          <span aria-hidden="true" className="ml-1 text-gold-700">
             *
           </span>
         )}
@@ -79,7 +79,7 @@ export function ChoiceGroup({
       {hint && <p className="mt-1 text-xs text-muted">{hint}</p>}
       <div className="mt-3">{children}</div>
       {error && (
-        <p role="alert" className="mt-2 text-sm text-teal-900">
+        <p role="alert" className="mt-2 text-sm text-gold-900">
           {error}
         </p>
       )}
@@ -88,4 +88,4 @@ export function ChoiceGroup({
 }
 
 export const inputClass =
-  "w-full rounded-md border border-line-strong bg-white px-4 py-3 text-ink placeholder:text-muted/60 transition-colors hover:border-ink-600/40 focus:border-teal-700 focus:outline-none";
+  "w-full rounded-md border border-line-strong bg-white px-4 py-3 text-ink placeholder:text-muted/60 transition-colors hover:border-ink-600/40 focus:border-gold-700 focus:outline-none";

@@ -39,7 +39,7 @@ export default function ValutaLaTuaCasaPage() {
       <section className="border-b border-line bg-cream">
         <Container size="wide" className="py-14 sm:py-20">
           <div className="max-w-3xl">
-            <p className="mb-4 text-xs font-semibold tracking-[0.2em] text-teal-700 uppercase">
+            <p className="mb-4 text-xs font-semibold tracking-[0.2em] text-gold-700 uppercase">
               Valuta la tua casa
             </p>
             <h1 className="display-1 font-semibold text-ink">
@@ -62,7 +62,7 @@ export default function ValutaLaTuaCasaPage() {
           <ol className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {dopo.map((item, index) => (
               <li key={item.title} className="border-t border-line pt-5">
-                <span className="text-xs font-semibold tracking-[0.16em] text-teal-700">
+                <span className="text-xs font-semibold tracking-[0.16em] text-gold-700">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <h3 className="mt-3 font-semibold text-ink">{item.title}</h3>
@@ -140,7 +140,7 @@ function Dot() {
   return (
     <span
       aria-hidden="true"
-      className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal"
+      className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold"
     />
   );
 }

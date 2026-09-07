@@ -46,7 +46,7 @@ export function Hero({
   return (
     <section
       className={`relative overflow-hidden ${
-        isDark ? "bg-ink text-teal-50" : "bg-cream text-ink"
+        isDark ? "bg-ink text-cream" : "bg-cream text-ink"
       }`}
     >
       {isDark && (
@@ -54,7 +54,7 @@ export function Hero({
           <div aria-hidden="true" className="absolute inset-0 bg-grid opacity-40" />
           <div
             aria-hidden="true"
-            className="absolute -top-40 -right-24 h-[32rem] w-[32rem] rounded-full bg-teal/15 blur-3xl"
+            className="absolute -top-40 -right-24 h-[32rem] w-[32rem] rounded-full bg-gold/15 blur-3xl"
           />
         </>
       )}
@@ -64,7 +64,7 @@ export function Hero({
         className="relative z-10 pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24"
       >
         {breadcrumbs && (
-          <div className={`mb-8 ${isDark ? "[&_*]:!text-teal-50/70" : ""}`}>
+          <div className={`mb-8 ${isDark ? "[&_*]:!text-cream/70" : ""}`}>
             <Breadcrumbs items={breadcrumbs} />
           </div>
         )}
@@ -80,7 +80,7 @@ export function Hero({
             {eyebrow && (
               <p
                 className={`mb-5 text-xs font-semibold tracking-[0.2em] uppercase ${
-                  isDark ? "text-teal" : "text-teal-700"
+                  isDark ? "text-gold" : "text-gold-700"
                 }`}
               >
                 {eyebrow}
@@ -96,7 +96,7 @@ export function Hero({
             {description && (
               <div
                 className={`mt-6 lead max-w-2xl ${
-                  isDark ? "text-teal-50/85" : "text-muted"
+                  isDark ? "text-cream/85" : "text-muted"
                 }`}
               >
                 {typeof description === "string" ? (
@@ -133,7 +133,7 @@ export function Hero({
             {note && (
               <p
                 className={`mt-6 max-w-md text-sm ${
-                  isDark ? "text-teal-50/60" : "text-muted"
+                  isDark ? "text-cream/60" : "text-muted"
                 }`}
               >
                 {note}

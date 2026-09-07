@@ -18,7 +18,7 @@ import { primaryCta, routes, site } from "@/content/site";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: `${site.fullName} — ${site.positioning}`,
+  title: site.metaTitle,
   description: site.description,
   path: "/",
   absoluteTitle: true,
@@ -153,7 +153,7 @@ export default function HomePage() {
         note="Raccontaci la casa in pochi minuti. Nessun impegno."
         image={{
           alt: "Architettura mediterranea contemporanea in Sicilia",
-          label: "Foto hero — esterno di una casa siciliana, luce naturale",
+          label: "Foto hero: esterno di una casa siciliana, luce naturale",
         }}
       />
 
@@ -199,7 +199,7 @@ export default function HomePage() {
             href={routes.ristrutturazione}
             image={{
               alt: "Lavori di ristrutturazione di un interno",
-              label: "Foto — cantiere o interno ristrutturato",
+              label: "Foto: cantiere o interno ristrutturato",
             }}
           />
           <ServiceCard
@@ -214,7 +214,7 @@ export default function HomePage() {
             href={routes.propertyManagement}
             image={{
               alt: "Interno di una casa preparata per l'ospitalità",
-              label: "Foto — interno curato, pronto per gli ospiti",
+              label: "Foto: interno curato, pronto per gli ospiti",
             }}
           />
           <ServiceCard
@@ -229,7 +229,7 @@ export default function HomePage() {
             href={routes.integrato}
             image={{
               alt: "Casa siciliana da valorizzare",
-              label: "Foto — immobile prima dell'intervento",
+              label: "Foto: immobile prima dell'intervento",
             }}
           />
         </div>
@@ -268,7 +268,7 @@ export default function HomePage() {
           Il percorso completo, servizio per servizio, è descritto in{" "}
           <Link
             href={routes.comeFunziona}
-            className="text-teal-700 underline underline-offset-4"
+            className="text-gold-700 underline underline-offset-4"
           >
             Come funziona
           </Link>
@@ -290,7 +290,7 @@ export default function HomePage() {
           />
           <ImagePlaceholder
             alt="Territorio siciliano"
-            label="Foto — territorio, paesaggio o dettaglio architettonico reale"
+            label="Foto: territorio, paesaggio o dettaglio architettonico reale"
             ratio="photo"
             sizes="(min-width: 1024px) 40vw, 100vw"
           />
@@ -327,7 +327,7 @@ export default function HomePage() {
         <p className="mt-8">
           <Link
             href={routes.faq}
-            className="text-teal-700 underline underline-offset-4"
+            className="text-gold-700 underline underline-offset-4"
           >
             Tutte le domande frequenti
           </Link>

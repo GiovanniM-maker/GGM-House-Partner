@@ -32,7 +32,7 @@ export function SectionHeader({
       {eyebrow && (
         <p
           className={`mb-4 text-xs font-semibold tracking-[0.2em] uppercase ${
-            isDark ? "text-teal" : "text-teal-700"
+            isDark ? "text-gold" : "text-gold-700"
           }`}
         >
           {eyebrow}
@@ -47,7 +47,7 @@ export function SectionHeader({
       </Heading>
       {description && (
         <div
-          className={`mt-5 lead ${isDark ? "text-teal-50/85" : "text-muted"}`}
+          className={`mt-5 lead ${isDark ? "text-cream/85" : "text-muted"}`}
         >
           {typeof description === "string" ? <p>{description}</p> : description}
         </div>

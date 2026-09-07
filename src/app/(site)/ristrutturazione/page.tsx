@@ -151,7 +151,7 @@ export default function RistrutturazionePage() {
         ]}
         image={{
           alt: "Interno di una casa in ristrutturazione",
-          label: "Foto hero — interno in lavorazione o appena consegnato",
+          label: "Foto hero: interno in lavorazione o appena consegnato",
         }}
       />
 
@@ -188,7 +188,7 @@ export default function RistrutturazionePage() {
           </div>
           <ImagePlaceholder
             alt="Sopralluogo in un immobile da ristrutturare"
-            label="Foto — sopralluogo, rilievo o confronto in cantiere"
+            label="Foto: sopralluogo, rilievo o confronto in cantiere"
             ratio="photo"
             tone="dark"
             sizes="(min-width: 1024px) 45vw, 100vw"
@@ -201,7 +201,7 @@ export default function RistrutturazionePage() {
         <SectionHeader
           eyebrow="Cosa possiamo gestire"
           title="Dai lavori interni agli interventi esterni"
-          description="GGM coordina il progetto e il cantiere. Le lavorazioni specialistiche — impianti in primo luogo — sono eseguite da professionisti qualificati della rete."
+          description="GGM coordina il progetto e il cantiere. Le lavorazioni specialistiche, a partire dagli impianti, sono eseguite da professionisti qualificati della rete."
         />
         <CheckList items={cosaGestiamo} columns={2} className="mt-10" />
       </Section>
@@ -234,16 +234,16 @@ export default function RistrutturazionePage() {
           description="Le fotografie qui sotto documentano lavori realizzati nell'attività professionale precedente dei fondatori. Le mostriamo per farti vedere il tipo di intervento e il livello di finitura, non per attribuire quei lavori a GGM."
           images={[
             {
-              alt: "Interno ristrutturato — lavoro precedente",
-              label: "Foto reale — interno ristrutturato",
+              alt: "Interno ristrutturato in un lavoro precedente",
+              label: "Foto reale: interno ristrutturato",
             },
             {
-              alt: "Bagno ristrutturato — lavoro precedente",
-              label: "Foto reale — bagno o cucina",
+              alt: "Bagno ristrutturato in un lavoro precedente",
+              label: "Foto reale: bagno o cucina",
             },
             {
-              alt: "Dettaglio di finitura — lavoro precedente",
-              label: "Foto reale — dettaglio di finitura",
+              alt: "Dettaglio di finitura di un lavoro precedente",
+              label: "Foto reale: dettaglio di finitura",
             },
           ]}
         />

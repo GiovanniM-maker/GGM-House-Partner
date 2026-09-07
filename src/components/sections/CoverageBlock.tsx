@@ -50,14 +50,14 @@ export function CoverageBlock({
             </h3>
             <p
               className={`mt-2 inline-flex w-fit rounded-full px-3 py-1 text-xs font-semibold tracking-wide ${
-                isDark ? "bg-teal/20 text-teal" : "bg-teal-50 text-teal-900"
+                isDark ? "bg-gold/20 text-gold" : "bg-gold-50 text-gold-900"
               }`}
             >
               {block.area}
             </p>
             <p
               className={`mt-4 text-sm leading-relaxed ${
-                isDark ? "text-teal-50/75" : "text-muted"
+                isDark ? "text-cream/75" : "text-muted"
               }`}
             >
               {block.description}
@@ -73,7 +73,7 @@ export function CoverageBlock({
 
       {note && (
         <p
-          className={`mt-6 text-sm ${isDark ? "text-teal-50/60" : "text-muted"}`}
+          className={`mt-6 text-sm ${isDark ? "text-cream/60" : "text-muted"}`}
         >
           {note}
         </p>

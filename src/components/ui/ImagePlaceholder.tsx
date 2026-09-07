@@ -57,7 +57,7 @@ export function ImagePlaceholder({
 
   const skin =
     tone === "dark"
-      ? "border-white/15 bg-ink-800 text-teal-50/70"
+      ? "border-white/15 bg-ink-800 text-cream/70"
       : "border-line-strong/70 bg-sand text-muted";
 
   return (
