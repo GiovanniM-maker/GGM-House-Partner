@@ -62,14 +62,20 @@ export const site = {
   /** TODO: impostare NEXT_PUBLIC_SITE_URL con il dominio definitivo. */
   url: resolveSiteUrl(),
   /**
-   * Logo. Basta caricare il file in `public/images/` con questo nome: il
-   * componente lo usa da solo e, se il file non c'è, ricade sul lettering
-   * senza mostrare un'immagine rotta. Qualsiasi proporzione va bene.
+   * Lockup completo del logo: marchio, tagline, filetto e payoff.
+   * Usato dove c'è spazio per leggerlo, cioè il footer.
+   * Se il file manca, il componente ricade sul lettering senza mostrare
+   * un'immagine rotta.
    */
   logo: "/images/logo-ggm.png",
   /**
-   * Versione del logo per i fondi scuri (footer). Se manca, il logo normale
-   * viene schiarito automaticamente.
+   * Versione compatta, senza il payoff. Nella navbar, alta poco più di 40px,
+   * il lockup completo diventa illeggibile: qui serve solo marchio e tagline.
+   */
+  logoCompact: "/images/logo-ggm-compatto.png",
+  /**
+   * Versione chiara per i fondi scuri. Se manca, il logo viene schiarito
+   * automaticamente.
    */
   logoDark: null as string | null,
   locale: "it_IT",

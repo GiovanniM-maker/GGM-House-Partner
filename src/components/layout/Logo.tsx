@@ -32,7 +32,10 @@ export function Logo({
   const isDark = tone === "dark";
   const [failed, setFailed] = useState(false);
 
-  const source = isDark ? (site.logoDark ?? site.logo) : site.logo;
+  // Alle altezze ridotte serve la versione compatta: il payoff del lockup
+  // completo, sotto i 50px, non si legge più.
+  const lockup = size === "lg" ? site.logo : (site.logoCompact ?? site.logo);
+  const source = isDark ? (site.logoDark ?? lockup) : lockup;
   const needsLightening = isDark && !site.logoDark;
 
   // Se il file manca, l'immagine fallisce mentre il browser legge l'HTML,
