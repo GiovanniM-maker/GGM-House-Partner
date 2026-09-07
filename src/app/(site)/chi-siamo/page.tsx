@@ -16,7 +16,7 @@ export const metadata = pageMetadata({
 });
 
 /**
- * PLACEHOLDER — I profili dei fondatori non contengono nomi, ruoli o biografie
+ * PLACEHOLDER: i profili dei fondatori non contengono nomi, ruoli o biografie
  * inventati. Vanno completati con i dati reali e con fotografie reali delle
  * persone: non usare immagini generate o foto stock di persone.
  */
@@ -25,13 +25,13 @@ const fondatori = [
     ambito: "Territorio e ristrutturazioni",
     descrizione:
       "Esperienza concreta in ristrutturazioni, cantieri e rapporti con artigiani, imprese e tecnici in Sicilia. È la parte che permette a GGM di esserci fisicamente quando serve.",
-    fotoLabel: "Foto reale del fondatore — da inserire",
+    fotoLabel: "Foto reale del fondatore, da inserire",
   },
   {
     ambito: "Digitale e gestione online",
     descrizione:
       "Competenze in marketing, tecnologia, automazione e gestione di attività online. È la parte che permette di seguire una casa con continuità anche a distanza.",
-    fotoLabel: "Foto reale del fondatore — da inserire",
+    fotoLabel: "Foto reale del fondatore, da inserire",
   },
 ];
 
@@ -105,7 +105,7 @@ export default function ChiSiamoPage() {
         image={{
           alt: "Fondatori di GGM sul territorio siciliano",
           label:
-            "Foto reale delle persone del progetto — non usare immagini generate",
+            "Foto reale delle persone del progetto. Non usare immagini generate",
         }}
       />
 
@@ -149,14 +149,14 @@ export default function ChiSiamoPage() {
               className="reveal overflow-hidden rounded-lg border border-line bg-cream"
             >
               <ImagePlaceholder
-                alt={`Fondatore GGM — ${persona.ambito}`}
+                alt={`Fondatore GGM, ${persona.ambito}`}
                 label={persona.fotoLabel}
                 ratio="wide"
                 className="rounded-none"
                 sizes="(min-width: 640px) 50vw, 100vw"
               />
               <div className="p-6 sm:p-8">
-                <p className="text-xs font-semibold tracking-[0.16em] text-teal-700 uppercase">
+                <p className="text-xs font-semibold tracking-[0.16em] text-gold-700 uppercase">
                   {persona.ambito}
                 </p>
                 <p className="mt-4 leading-relaxed text-ink-600">
@@ -213,7 +213,7 @@ export default function ChiSiamoPage() {
           />
           <ImagePlaceholder
             alt="Professionisti al lavoro sul territorio"
-            label="Foto reale — persone della rete al lavoro"
+            label="Foto reale: persone della rete al lavoro"
             ratio="photo"
             sizes="(min-width: 1024px) 40vw, 100vw"
           />
@@ -242,7 +242,7 @@ export default function ChiSiamoPage() {
         <div className="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:items-center lg:gap-16">
           <ImagePlaceholder
             alt="Paesaggio del sud-est siciliano"
-            label="Foto reale — territorio, paese o architettura locale"
+            label="Foto reale: territorio, paese o architettura locale"
             ratio="photo"
             sizes="(min-width: 1024px) 40vw, 100vw"
           />

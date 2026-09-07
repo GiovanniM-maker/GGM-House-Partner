@@ -15,7 +15,7 @@ export default function NotFound() {
       <Navbar />
       <main id="contenuto" className="flex-1">
         <Container className="py-24 sm:py-32">
-          <p className="text-xs font-semibold tracking-[0.2em] text-teal-700 uppercase">
+          <p className="text-xs font-semibold tracking-[0.2em] text-gold-700 uppercase">
             Errore 404
           </p>
           <h1 className="display-2 mt-4 font-semibold text-ink">
@@ -44,7 +44,7 @@ export default function NotFound() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-teal-700 underline underline-offset-4 hover:text-ink"
+                    className="text-gold-700 underline underline-offset-4 hover:text-ink"
                   >
                     {item.label}
                   </Link>

@@ -27,7 +27,7 @@ export function ServiceCard({
 }: ServiceCardProps) {
   return (
     <article
-      className={`group relative flex h-full flex-col overflow-hidden rounded-lg border border-line bg-white transition-colors duration-200 hover:border-teal-700/50 ${className}`}
+      className={`group relative flex h-full flex-col overflow-hidden rounded-lg border border-line bg-white transition-colors duration-200 hover:border-gold-700/50 ${className}`}
     >
       {image && (
         <ImagePlaceholder
@@ -42,7 +42,7 @@ export function ServiceCard({
 
       <div className="flex flex-1 flex-col p-6 sm:p-7">
         {eyebrow && (
-          <p className="mb-3 text-xs font-semibold tracking-[0.16em] text-teal-700 uppercase">
+          <p className="mb-3 text-xs font-semibold tracking-[0.16em] text-gold-700 uppercase">
             {eyebrow}
           </p>
         )}
@@ -66,7 +66,7 @@ export function ServiceCard({
           </ul>
         )}
 
-        <p className="mt-6 flex items-center gap-2 pt-1 text-sm font-medium text-teal-700 transition-transform duration-200 group-hover:translate-x-0.5">
+        <p className="mt-6 flex items-center gap-2 pt-1 text-sm font-medium text-gold-700 transition-transform duration-200 group-hover:translate-x-0.5">
           {ctaLabel}
           <Arrow />
         </p>
@@ -80,7 +80,7 @@ function Check(): ReactNode {
     <svg
       aria-hidden="true"
       viewBox="0 0 20 20"
-      className="mt-[0.3rem] h-3.5 w-3.5 shrink-0 text-teal-700"
+      className="mt-[0.3rem] h-3.5 w-3.5 shrink-0 text-gold-700"
       fill="none"
       stroke="currentColor"
       strokeWidth="2.2"

@@ -164,7 +164,7 @@ export default function IntegratoPage() {
         ]}
         image={{
           alt: "Casa siciliana da valorizzare",
-          label: "Foto hero — immobile prima dell'intervento",
+          label: "Foto hero: immobile prima dell'intervento",
         }}
       />
 
@@ -242,7 +242,7 @@ export default function IntegratoPage() {
                 "Professionisti qualificati per gli interventi specialistici",
                 "Aggiornamenti costanti anche se vivi lontano",
               ],
-              label: "Foto — lavori in corso",
+              label: "Foto: lavori in corso",
               alt: "Lavori di ristrutturazione in corso",
             },
             {
@@ -254,7 +254,7 @@ export default function IntegratoPage() {
                 "Fotografie e contenuti dell'annuncio",
                 "Posizionamento e scelta dei canali",
               ],
-              label: "Foto — interno arredato e pronto",
+              label: "Foto: interno arredato e pronto",
               alt: "Interno arredato e pronto per gli ospiti",
             },
             {
@@ -266,7 +266,7 @@ export default function IntegratoPage() {
                 "Comunicazione con gli ospiti",
                 "Ottimizzazione e report periodici",
               ],
-              label: "Foto — dettaglio dell'ospitalità",
+              label: "Foto: dettaglio dell'ospitalità",
               alt: "Dettaglio di una casa gestita per l'ospitalità",
             },
           ].map((fase) => (
@@ -282,7 +282,7 @@ export default function IntegratoPage() {
                 sizes="(min-width: 1024px) 33vw, 100vw"
               />
               <div className="flex flex-1 flex-col p-6 sm:p-7">
-                <p className="text-xs font-semibold tracking-[0.16em] text-teal-700 uppercase">
+                <p className="text-xs font-semibold tracking-[0.16em] text-gold-700 uppercase">
                   {fase.eyebrow}
                 </p>
                 <h3 className="mt-3 display-3 font-semibold text-ink">
@@ -309,7 +309,7 @@ export default function IntegratoPage() {
         <div className="mt-10 overflow-hidden rounded-lg border border-line-strong bg-sand">
           <div className="border-b border-line-strong px-6 py-4 sm:px-8">
             <p className="text-xs font-semibold tracking-[0.16em] text-muted uppercase">
-              Scenario illustrativo — nessun dato reale
+              Scenario illustrativo, nessun dato reale
             </p>
           </div>
           <dl className="divide-y divide-line-strong">

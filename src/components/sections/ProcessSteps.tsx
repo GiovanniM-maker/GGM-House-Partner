@@ -37,8 +37,8 @@ export function ProcessSteps({
             <span
               className={`relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-xs font-semibold ${
                 isDark
-                  ? "bg-teal text-ink"
-                  : "border border-line bg-white text-teal-700"
+                  ? "bg-gold text-ink"
+                  : "border border-line bg-white text-gold-700"
               }`}
             >
               {String(index + 1).padStart(2, "0")}
@@ -51,7 +51,7 @@ export function ProcessSteps({
               </h3>
               <p
                 className={`mt-1.5 text-sm leading-relaxed ${
-                  isDark ? "text-teal-50/75" : "text-muted"
+                  isDark ? "text-cream/75" : "text-muted"
                 }`}
               >
                 {step.description}
@@ -78,7 +78,7 @@ export function ProcessSteps({
         >
           <span
             className={`text-xs font-semibold tracking-[0.16em] ${
-              isDark ? "text-teal" : "text-teal-700"
+              isDark ? "text-gold" : "text-gold-700"
             }`}
           >
             {String(index + 1).padStart(2, "0")}
@@ -90,7 +90,7 @@ export function ProcessSteps({
           </h3>
           <p
             className={`mt-2 text-sm leading-relaxed ${
-              isDark ? "text-teal-50/75" : "text-muted"
+              isDark ? "text-cream/75" : "text-muted"
             }`}
           >
             {step.description}

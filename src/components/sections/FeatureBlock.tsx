@@ -47,7 +47,7 @@ export function FeatureBlock({
           </h3>
           <p
             className={`mt-2 text-sm leading-relaxed ${
-              isDark ? "text-teal-50/75" : "text-muted"
+              isDark ? "text-cream/75" : "text-muted"
             }`}
           >
             {feature.description}
@@ -83,7 +83,7 @@ export function CheckList({
           <svg
             aria-hidden="true"
             viewBox="0 0 20 20"
-            className={`mt-[0.35rem] h-3.5 w-3.5 shrink-0 ${isDark ? "text-teal" : "text-teal-700"}`}
+            className={`mt-[0.35rem] h-3.5 w-3.5 shrink-0 ${isDark ? "text-gold" : "text-gold-700"}`}
             fill="none"
             stroke="currentColor"
             strokeWidth="2.2"
@@ -92,7 +92,7 @@ export function CheckList({
           >
             <path d="m4 10.5 4 4 8-9" />
           </svg>
-          <span className={isDark ? "text-teal-50/85" : "text-ink-600"}>{item}</span>
+          <span className={isDark ? "text-cream/85" : "text-ink-600"}>{item}</span>
         </li>
       ))}
     </ul>

@@ -12,7 +12,7 @@ export function MinimalFooter() {
       <Container size="wide" className="py-8">
         <div className="flex flex-col gap-4 text-sm sm:flex-row sm:items-center sm:justify-between">
           <p className="text-muted">
-            © {year} {site.name} — {site.tagline}
+            © {year} {site.fullName}
           </p>
           <ul className="flex flex-wrap gap-x-6 gap-y-2">
             {footerNav.legale.map((link) => (

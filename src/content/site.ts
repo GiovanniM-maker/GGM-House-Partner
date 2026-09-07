@@ -4,7 +4,7 @@
  * Tutto ciò che è testo di brand, navigazione, CTA e copertura vive qui:
  * le pagine restano dichiarative e il copy si aggiorna in un punto solo.
  *
- * ATTENZIONE — I campi marcati con TODO sono PLACEHOLDER da sostituire con
+ * ATTENZIONE: i campi marcati con TODO sono PLACEHOLDER da sostituire con
  * dati reali prima della pubblicazione.
  */
 
@@ -52,12 +52,33 @@ function resolveSiteUrl(): string {
 export const site = {
   name: "GGM",
   tagline: "Your Sicily Property Partner",
-  fullName: "GGM — Your Sicily Property Partner",
+  fullName: "GGM Your Sicily Property Partner",
   positioning: "Partner locale per chi possiede una casa in Sicilia.",
+  /** Titolo usato nei metadata della home e nell'immagine Open Graph. */
+  metaTitle:
+    "GGM Your Sicily Property Partner | Ristrutturazione e gestione di case in Sicilia",
   description:
     "Ristrutturiamo, valorizziamo e gestiamo immobili in Sicilia, anche se vivi lontano. Un unico referente per seguire la tua casa, dai lavori alla messa a reddito.",
   /** TODO: impostare NEXT_PUBLIC_SITE_URL con il dominio definitivo. */
   url: resolveSiteUrl(),
+  /**
+   * Lockup completo del logo: marchio, tagline, filetto e payoff.
+   * Usato dove c'è spazio per leggerlo, cioè il footer.
+   * Se il file manca, il componente ricade sul lettering senza mostrare
+   * un'immagine rotta.
+   */
+  logo: "/images/logo-ggm.png",
+  /**
+   * Solo il marchio, senza tagline né payoff. Nella navbar, alta poco più di
+   * 40px, la tagline del lockup diventa una macchia: qui il marchio fa
+   * l'immagine e la tagline la scrive il componente come testo.
+   */
+  logoMark: "/images/logo-ggm-marchio.png",
+  /**
+   * Versione chiara per i fondi scuri. Se manca, il logo viene schiarito
+   * automaticamente.
+   */
+  logoDark: "/images/logo-ggm-chiaro.png" as string | null,
   locale: "it_IT",
 } as const;
 

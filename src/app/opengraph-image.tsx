@@ -3,13 +3,13 @@ import { ImageResponse } from "next/og";
 import { site } from "@/content/site";
 
 /**
- * Immagine Open Graph di default — PLACEHOLDER.
+ * Immagine Open Graph di default. PLACEHOLDER di brand.
  *
  * Generata dal brand, senza fotografie né dati. Va sostituita con la grafica
  * definitiva quando sarà disponibile: basta rimpiazzare questo file con un
  * `opengraph-image.jpg` nella stessa cartella.
  */
-export const alt = `${site.fullName} — ${site.positioning}`;
+export const alt = site.metaTitle;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -23,7 +23,7 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#17252A",
+          backgroundColor: "#132B4F",
           padding: "72px",
           fontFamily: "sans-serif",
         }}
@@ -39,11 +39,11 @@ export default function OpengraphImage() {
           >
             GGM
           </div>
-          <div style={{ width: 2, height: 34, backgroundColor: "#3AAFA9" }} />
+          <div style={{ width: 2, height: 34, backgroundColor: "#C39B4E" }} />
           <div
             style={{
               fontSize: 22,
-              color: "#DEF2F1",
+              color: "#F4EBD8",
               letterSpacing: "0.16em",
               textTransform: "uppercase",
             }}
@@ -69,7 +69,7 @@ export default function OpengraphImage() {
             style={{
               marginTop: 28,
               fontSize: 28,
-              color: "#3AAFA9",
+              color: "#C39B4E",
               maxWidth: 820,
             }}
           >
@@ -77,7 +77,7 @@ export default function OpengraphImage() {
           </div>
         </div>
 
-        <div style={{ display: "flex", height: 8, width: 220, backgroundColor: "#3AAFA9" }} />
+        <div style={{ display: "flex", height: 8, width: 220, backgroundColor: "#C39B4E" }} />
       </div>
     ),
     size,

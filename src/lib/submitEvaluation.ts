@@ -1,19 +1,20 @@
 /**
- * Handler isolato per l'invio della richiesta di valutazione.
+ * Invio della richiesta di valutazione.
  *
- * V1: mock lato client, nessun backend. Il punto di integrazione futura
- * (CRM, email transazionale, notifica WhatsApp) è UNA sola funzione:
- * sostituendo il corpo di `submitEvaluation` il resto del form non cambia.
- *
- * Integrazione tipica:
- *   const res = await fetch("/api/valutazione", {
- *     method: "POST",
- *     body: formDataConAllegati,
- *   });
+ * Il client parla solo con la route interna `/api/valutazione`: l'URL dello
+ * script Google e il token condiviso restano lato server e non finiscono mai
+ * nel browser.
  */
 
+export type EvaluationPhoto = {
+  name: string;
+  mimeType: string;
+  /** Contenuto del file in base64, senza il prefisso `data:`. */
+  dataBase64: string;
+};
+
 export type EvaluationPayload = {
-  /* Step 1 — l'immobile */
+  /* Step 1: l'immobile */
   comune: string;
   provincia: string;
   tipologia: string;
@@ -21,23 +22,23 @@ export type EvaluationPayload = {
   camere: string;
   condizioni: string;
 
-  /* Step 2 — obiettivo */
+  /* Step 2: obiettivo */
   obiettivo: string;
 
-  /* Step 3 — proprietario e utilizzo */
+  /* Step 3: proprietario e utilizzo */
   residenza: string;
   utilizzo: string;
 
-  /* Step 4 — caratteristiche */
+  /* Step 4: caratteristiche */
   caratteristiche: string[];
 
-  /* Step 5 — contatti */
+  /* Step 5: contatti */
   nome: string;
   email: string;
   telefono: string;
   whatsapp: boolean;
   note: string;
-  fotoCount: number;
+  foto: EvaluationPhoto[];
   privacy: boolean;
 };
 
@@ -45,41 +46,51 @@ export type SubmitResult =
   | { ok: true; reference: string }
   | { ok: false; error: string };
 
-/** Ritardo simulato, solo per rendere credibile lo stato di caricamento. */
-const MOCK_LATENCY_MS = 700;
+const GENERIC_ERROR =
+  "Non siamo riusciti a inviare la richiesta. Riprova fra qualche istante.";
 
 export async function submitEvaluation(
   payload: EvaluationPayload,
 ): Promise<SubmitResult> {
   try {
-    // --- PUNTO DI INTEGRAZIONE -------------------------------------------
-    // Sostituire questo blocco con la chiamata reale (route handler,
-    // servizio email o webhook CRM). La firma della funzione resta invariata.
-    if (process.env.NODE_ENV === "development") {
-      console.info("[GGM] Richiesta di valutazione (mock):", payload);
-    }
+    const response = await fetch("/api/valutazione", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
 
-    await new Promise((resolve) => setTimeout(resolve, MOCK_LATENCY_MS));
-    // ---------------------------------------------------------------------
+    const data: unknown = await response.json().catch(() => null);
 
-    return { ok: true, reference: buildReference() };
+    if (isSubmitResult(data)) return data;
+
+    return { ok: false, error: GENERIC_ERROR };
   } catch {
-    return {
-      ok: false,
-      error:
-        "Non siamo riusciti a inviare la richiesta. Riprova fra qualche istante.",
-    };
+    return { ok: false, error: GENERIC_ERROR };
   }
 }
 
-/** Codice di riferimento locale, utile solo a dare un riscontro all'utente. */
-function buildReference(): string {
-  const now = new Date();
-  const stamp = [
-    now.getFullYear().toString().slice(-2),
-    String(now.getMonth() + 1).padStart(2, "0"),
-    String(now.getDate()).padStart(2, "0"),
-  ].join("");
-  const random = Math.random().toString(36).slice(2, 6).toUpperCase();
-  return `GGM-${stamp}-${random}`;
+function isSubmitResult(value: unknown): value is SubmitResult {
+  if (typeof value !== "object" || value === null) return false;
+  const data = value as Record<string, unknown>;
+
+  if (data.ok === true) return typeof data.reference === "string";
+  if (data.ok === false) return typeof data.error === "string";
+  return false;
+}
+
+/** Legge un file come base64, senza il prefisso `data:<mime>;base64,`. */
+export function readFileAsBase64(file: File): Promise<EvaluationPhoto> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = () => reject(reader.error);
+    reader.onload = () => {
+      const result = String(reader.result);
+      resolve({
+        name: file.name,
+        mimeType: file.type || "application/octet-stream",
+        dataBase64: result.slice(result.indexOf(",") + 1),
+      });
+    };
+    reader.readAsDataURL(file);
+  });
 }

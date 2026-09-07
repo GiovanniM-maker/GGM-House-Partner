@@ -161,7 +161,7 @@ export default function ComeFunzionaPage() {
               <ol className="mt-6 flex-1 space-y-3">
                 {percorso.steps.map((step, index) => (
                   <li key={step} className="flex items-center gap-3 text-sm">
-                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-line-strong text-[0.65rem] font-semibold text-teal-700">
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-line-strong text-[0.65rem] font-semibold text-gold-700">
                       {index + 1}
                     </span>
                     <span className="text-ink-600">{step}</span>

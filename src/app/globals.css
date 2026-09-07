@@ -1,22 +1,27 @@
 @import "tailwindcss";
 
 /* ==========================================================================
-   GGM — Design system V1
+   GGM. Design system V1
    Palette, tipografia, spaziature e utility condivise.
    Modificando i token qui sotto si aggiorna tutto il sito.
    ========================================================================== */
 
 @theme {
-  /* Brand */
-  --color-ink: #17252a;
-  --color-ink-800: #1f3238;
-  --color-ink-600: #33505a;
-  --color-muted: #46606a;
+  /* Brand: blu navy e oro del logo GGM */
+  --color-ink: #132b4f;
+  --color-ink-800: #1c3a66;
+  --color-ink-600: #2e4e7a;
+  --color-muted: #4a6484;
 
-  --color-teal: #3aafa9;
-  --color-teal-700: #2b7a78;
-  --color-teal-900: #205b59;
-  --color-teal-50: #def2f1;
+  /*
+   * Nel logo l'oro non porta mai testo: fa i segni (la casa, l'onda, i filetti).
+   * Sul sito vale la stessa regola. `gold-700` e `gold-900` sono le uniche
+   * varianti scure abbastanza da reggere il testo su fondo chiaro.
+   */
+  --color-gold: #c39b4e;
+  --color-gold-700: #8a6820;
+  --color-gold-900: #6e5318;
+  --color-gold-50: #f4ebd8;
 
   /* Neutri caldi */
   --color-cream: #f7f3ea;
@@ -74,13 +79,13 @@
 
   /* Focus visibile e coerente su tutta l'interfaccia */
   :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
-    outline: 2px solid var(--color-teal-700);
+    outline: 2px solid var(--color-gold-700);
     outline-offset: 3px;
     border-radius: var(--radius-xs);
   }
 
   ::selection {
-    background-color: var(--color-teal-50);
+    background-color: var(--color-gold-50);
     color: var(--color-ink);
   }
 }
@@ -119,12 +124,12 @@
 @utility bg-grid {
   background-image: linear-gradient(
       to right,
-      color-mix(in srgb, var(--color-teal) 12%, transparent) 1px,
+      color-mix(in srgb, var(--color-gold) 14%, transparent) 1px,
       transparent 1px
     ),
     linear-gradient(
       to bottom,
-      color-mix(in srgb, var(--color-teal) 12%, transparent) 1px,
+      color-mix(in srgb, var(--color-gold) 14%, transparent) 1px,
       transparent 1px
     );
   background-size: 64px 64px;

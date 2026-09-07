@@ -85,7 +85,7 @@ export function MobileMenu() {
                       aria-current={isActive ? "page" : undefined}
                       className={`block rounded-md px-3 py-3 text-lg font-medium transition-colors ${
                         isActive
-                          ? "bg-white text-teal-900"
+                          ? "bg-white text-gold-900"
                           : "text-ink hover:bg-white"
                       }`}
                     >

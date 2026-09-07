@@ -10,7 +10,7 @@ type SectionProps = {
   containerClassName?: string;
   size?: "narrow" | "default" | "wide";
   /** Sfondo della fascia. */
-  tone?: "cream" | "white" | "sand" | "ink" | "teal";
+  tone?: "cream" | "white" | "sand" | "ink" | "gold";
   /** Spaziatura verticale. */
   spacing?: "sm" | "md" | "lg";
 };
@@ -19,8 +19,8 @@ const tones = {
   cream: "bg-cream text-ink",
   white: "bg-white text-ink",
   sand: "bg-sand text-ink",
-  ink: "bg-ink text-teal-50",
-  teal: "bg-teal-50 text-ink",
+  ink: "bg-ink text-cream",
+  gold: "bg-gold-50 text-ink",
 } as const;
 
 const spacings = {

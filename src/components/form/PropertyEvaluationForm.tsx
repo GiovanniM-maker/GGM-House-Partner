@@ -10,6 +10,8 @@ import {
   caratteristiche,
   condizioni,
   formSteps,
+  MAX_PHOTOS,
+  MAX_TOTAL_PHOTO_BYTES,
   obiettivi,
   province,
   residenze,
@@ -17,11 +19,15 @@ import {
   TOTAL_STEPS,
   utilizzi,
 } from "@/content/evaluation";
-import { submitEvaluation, type EvaluationPayload } from "@/lib/submitEvaluation";
+import {
+  readFileAsBase64,
+  submitEvaluation,
+  type EvaluationPayload,
+} from "@/lib/submitEvaluation";
 import { routes } from "@/content/site";
 import Link from "next/link";
 
-type FormState = Omit<EvaluationPayload, "fotoCount"> & { foto: File[] };
+type FormState = Omit<EvaluationPayload, "foto"> & { foto: File[] };
 
 const initialState: FormState = {
   comune: "",
@@ -46,6 +52,8 @@ const initialState: FormState = {
 type Errors = Partial<Record<keyof FormState, string>>;
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+const MAX_PHOTO_MB = Math.round(MAX_TOTAL_PHOTO_BYTES / (1024 * 1024));
 
 /** Validazione minima e non invasiva: solo ciò che serve per ricontattarti. */
 function validateStep(step: number, state: FormState): Errors {
@@ -76,9 +84,18 @@ function validateStep(step: number, state: FormState): Errors {
     if (!state.privacy) {
       errors.privacy = "Serve il consenso al trattamento dei dati.";
     }
+    if (state.foto.length > MAX_PHOTOS) {
+      errors.foto = `Puoi allegare al massimo ${MAX_PHOTOS} foto.`;
+    } else if (totalBytes(state.foto) > MAX_TOTAL_PHOTO_BYTES) {
+      errors.foto = `Le foto superano ${MAX_PHOTO_MB} MB in totale. Allegane meno oppure inviacele dopo, quando ti rispondiamo.`;
+    }
   }
 
   return errors;
+}
+
+function totalBytes(files: File[]): number {
+  return files.reduce((sum, file) => sum + file.size, 0);
 }
 
 export function PropertyEvaluationForm() {
@@ -140,7 +157,17 @@ export function PropertyEvaluationForm() {
     setSubmitError(null);
 
     const { foto, ...rest } = state;
-    const result = await submitEvaluation({ ...rest, fotoCount: foto.length });
+    let result;
+
+    try {
+      const allegati = await Promise.all(foto.map(readFileAsBase64));
+      result = await submitEvaluation({ ...rest, foto: allegati });
+    } catch {
+      result = {
+        ok: false as const,
+        error: "Non siamo riusciti a leggere le foto allegate. Riprova senza allegati.",
+      };
+    }
 
     setSubmitting(false);
 
@@ -443,24 +470,30 @@ export function PropertyEvaluationForm() {
               />
             </Field>
 
-            <div className="flex items-end">
-              <label className="flex w-full cursor-pointer items-start gap-3 rounded-md border border-line-strong bg-white p-4 transition-colors hover:border-ink-600/40">
-                <input
-                  type="checkbox"
-                  checked={state.whatsapp}
-                  onChange={(event) => set("whatsapp", event.target.checked)}
-                  className="mt-0.5 h-4 w-4 accent-[#2b7a78]"
-                />
-                <span className="text-sm text-ink">
-                  Preferisco essere contattato su WhatsApp
-                </span>
-              </label>
+            {/* Stessa struttura di <Field>: etichetta, poi controllo con mt-2,
+                così il riquadro si allinea agli input della stessa riga. */}
+            <div>
+              <span className="block text-sm font-medium text-ink">WhatsApp</span>
+              <div className="mt-2">
+                <label className="flex cursor-pointer items-center gap-3 rounded-md border border-line-strong bg-white px-4 py-[0.875rem] transition-colors hover:border-ink-600/40">
+                  <input
+                    type="checkbox"
+                    checked={state.whatsapp}
+                    onChange={(event) => set("whatsapp", event.target.checked)}
+                    className="h-4 w-4 shrink-0 accent-[#8a6820]"
+                  />
+                  <span className="text-sm text-ink">
+                    Preferisco essere contattato su WhatsApp
+                  </span>
+                </label>
+              </div>
             </div>
 
             <Field
               label="Foto dell'immobile"
               htmlFor={`${formId}-foto`}
-              hint="Facoltative. Anche foto da telefono vanno benissimo: aiutano a capire lo stato reale."
+              hint={`Facoltative, massimo ${MAX_PHOTOS} file per ${MAX_PHOTO_MB} MB complessivi. Anche foto da telefono vanno benissimo: aiutano a capire lo stato reale.`}
+              error={errors.foto}
               className="sm:col-span-2"
             >
               <input
@@ -477,7 +510,8 @@ export function PropertyEvaluationForm() {
               {state.foto.length > 0 && (
                 <p className="mt-2 text-xs text-muted">
                   {state.foto.length}{" "}
-                  {state.foto.length === 1 ? "file selezionato" : "file selezionati"}.
+                  {state.foto.length === 1 ? "file selezionato" : "file selezionati"},{" "}
+                  {(totalBytes(state.foto) / (1024 * 1024)).toFixed(1)} MB.
                 </p>
               )}
             </Field>
@@ -505,24 +539,24 @@ export function PropertyEvaluationForm() {
                   checked={state.privacy}
                   onChange={(event) => set("privacy", event.target.checked)}
                   aria-invalid={Boolean(errors.privacy)}
-                  className="mt-1 h-4 w-4 shrink-0 accent-[#2b7a78]"
+                  className="mt-1 h-4 w-4 shrink-0 accent-[#8a6820]"
                 />
                 <span className="text-sm leading-relaxed text-muted">
                   Ho letto la{" "}
                   <Link
                     href={routes.privacy}
-                    className="text-teal-700 underline underline-offset-4"
+                    className="text-gold-700 underline underline-offset-4"
                   >
                     privacy policy
                   </Link>{" "}
                   e acconsento al trattamento dei dati per essere ricontattato.
-                  <span aria-hidden="true" className="ml-1 text-teal-700">
+                  <span aria-hidden="true" className="ml-1 text-gold-700">
                     *
                   </span>
                 </span>
               </label>
               {errors.privacy && (
-                <p role="alert" className="mt-2 text-sm text-teal-900">
+                <p role="alert" className="mt-2 text-sm text-gold-900">
                   {errors.privacy}
                 </p>
               )}
@@ -577,15 +611,15 @@ function StepIndicator({ step }: { step: number }) {
               key={item.id}
               aria-current={isCurrent ? "step" : undefined}
               className={`flex items-center gap-1.5 tracking-wide uppercase ${
-                isCurrent ? "font-semibold text-teal-900" : "font-medium text-muted"
+                isCurrent ? "font-semibold text-gold-900" : "font-medium text-muted"
               }`}
             >
               <span
                 className={`flex h-5 w-5 items-center justify-center rounded-full text-[0.65rem] ${
                   isCurrent
-                    ? "bg-teal text-ink"
+                    ? "bg-gold text-ink"
                     : isDone
-                      ? "bg-teal-50 text-teal-900"
+                      ? "bg-gold-50 text-gold-900"
                       : "border border-line-strong"
                 }`}
               >
@@ -606,7 +640,7 @@ function StepIndicator({ step }: { step: number }) {
         className="mt-4 h-1 w-full overflow-hidden rounded-full bg-line"
       >
         <div
-          className="h-full rounded-full bg-teal transition-[width] duration-300 ease-out"
+          className="h-full rounded-full bg-gold transition-[width] duration-300 ease-out"
           style={{ width: `${percentage}%` }}
         />
       </div>
@@ -633,7 +667,7 @@ function Confirmation({
       role="status"
       className="rounded-lg border border-line bg-white p-6 sm:p-10"
     >
-      <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-teal-50 text-teal-900">
+      <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-gold-50 text-gold-900">
         <svg
           aria-hidden="true"
           viewBox="0 0 24 24"
@@ -663,7 +697,7 @@ function Confirmation({
       <ol className="mt-8 space-y-4">
         {nextSteps.map((item, index) => (
           <li key={item} className="flex gap-4">
-            <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-line text-xs font-semibold text-teal-700">
+            <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-line text-xs font-semibold text-gold-700">
               {String(index + 1).padStart(2, "0")}
             </span>
             <span className="text-sm leading-relaxed text-ink-600">{item}</span>
@@ -680,14 +714,14 @@ function Confirmation({
         Nel frattempo puoi leggere{" "}
         <Link
           href={routes.comeFunziona}
-          className="text-teal-700 underline underline-offset-4"
+          className="text-gold-700 underline underline-offset-4"
         >
           come lavoriamo
         </Link>{" "}
         oppure le{" "}
         <Link
           href={routes.faq}
-          className="text-teal-700 underline underline-offset-4"
+          className="text-gold-700 underline underline-offset-4"
         >
           domande frequenti
         </Link>

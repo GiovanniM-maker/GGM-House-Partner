@@ -33,7 +33,7 @@ export function pageMetadata({
       url: "/opengraph-image",
       width: 1200,
       height: 630,
-      alt: `${site.fullName} — ${site.positioning}`,
+      alt: site.metaTitle,
     },
   ];
 

@@ -107,3 +107,20 @@ export const formSteps = [
 ] as const;
 
 export const TOTAL_STEPS = formSteps.length;
+
+/** Limiti sugli allegati. Il tetto tiene conto del limite di corpo richiesta di Vercel. */
+export const MAX_PHOTOS = 8;
+export const MAX_TOTAL_PHOTO_BYTES = 3.5 * 1024 * 1024;
+
+type Option = { value: string; label: string };
+
+/**
+ * Traduce il valore tecnico di un campo nell'etichetta mostrata nel modulo.
+ * Serve a scrivere sul foglio testo leggibile invece di slug.
+ */
+export function labelFor(
+  options: readonly Option[],
+  value: string,
+): string {
+  return options.find((option) => option.value === value)?.label ?? value;
+}

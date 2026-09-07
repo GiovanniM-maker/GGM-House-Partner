@@ -31,13 +31,13 @@ export function RouteCards({
             href={route.href}
             className={`group flex h-full flex-col rounded-lg border p-6 transition duration-200 ${
               isDark
-                ? "border-white/15 bg-white/5 hover:border-teal/60 hover:bg-white/10"
-                : "border-line bg-white hover:-translate-y-0.5 hover:border-teal-700/50"
+                ? "border-white/15 bg-white/5 hover:border-gold/60 hover:bg-white/10"
+                : "border-line bg-white hover:-translate-y-0.5 hover:border-gold-700/50"
             }`}
           >
             <span
               className={`text-xs font-semibold tracking-[0.16em] uppercase ${
-                isDark ? "text-teal" : "text-teal-700"
+                isDark ? "text-gold" : "text-gold-700"
               }`}
             >
               0{index + 1}
@@ -49,14 +49,14 @@ export function RouteCards({
             </span>
             <span
               className={`mt-2.5 flex-1 text-sm leading-relaxed ${
-                isDark ? "text-teal-50/75" : "text-muted"
+                isDark ? "text-cream/75" : "text-muted"
               }`}
             >
               {route.description}
             </span>
             <span
               className={`mt-6 inline-flex items-center gap-2 text-sm font-medium transition-transform duration-200 group-hover:translate-x-0.5 ${
-                isDark ? "text-teal" : "text-teal-700"
+                isDark ? "text-gold" : "text-gold-700"
               }`}
             >
               Vai

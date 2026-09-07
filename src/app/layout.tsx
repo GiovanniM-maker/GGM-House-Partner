@@ -21,8 +21,8 @@ const fraunces = Fraunces({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.fullName} — ${site.positioning}`,
-    template: `%s — ${site.name}`,
+    default: site.metaTitle,
+    template: `%s | ${site.name}`,
   },
   description: site.description,
   applicationName: site.fullName,
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     locale: site.locale,
     siteName: site.fullName,
     url: site.url,
-    title: `${site.fullName} — ${site.positioning}`,
+    title: site.metaTitle,
     description: site.description,
   },
   twitter: {
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#17252A",
+  themeColor: "#132B4F",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

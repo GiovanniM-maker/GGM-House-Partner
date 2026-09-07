@@ -9,7 +9,7 @@ type CTASectionProps = {
   secondary?: { label: string; href: string };
   /** Nota discreta: usata per ricordare che non c'è impegno. */
   note?: string;
-  tone?: "ink" | "teal";
+  tone?: "ink" | "gold";
 };
 
 /** Chiusura di pagina. Presente su tutte le pagine con la CTA pertinente. */
@@ -26,7 +26,7 @@ export function CTASection({
 
   return (
     <section
-      className={`relative overflow-hidden ${isInk ? "bg-ink" : "bg-teal-50"}`}
+      className={`relative overflow-hidden ${isInk ? "bg-ink" : "bg-gold-50"}`}
     >
       {isInk && (
         <div aria-hidden="true" className="absolute inset-0 bg-grid opacity-30" />
@@ -36,7 +36,7 @@ export function CTASection({
           {eyebrow && (
             <p
               className={`mb-4 text-xs font-semibold tracking-[0.2em] uppercase ${
-                isInk ? "text-teal" : "text-teal-700"
+                isInk ? "text-gold" : "text-gold-700"
               }`}
             >
               {eyebrow}
@@ -49,7 +49,7 @@ export function CTASection({
           </h2>
           {description && (
             <p
-              className={`mt-5 lead ${isInk ? "text-teal-50/85" : "text-ink-600"}`}
+              className={`mt-5 lead ${isInk ? "text-cream/85" : "text-ink-600"}`}
             >
               {description}
             </p>
@@ -74,7 +74,7 @@ export function CTASection({
           </div>
           {note && (
             <p
-              className={`mt-6 text-sm ${isInk ? "text-teal-50/60" : "text-muted"}`}
+              className={`mt-6 text-sm ${isInk ? "text-cream/60" : "text-muted"}`}
             >
               {note}
             </p>

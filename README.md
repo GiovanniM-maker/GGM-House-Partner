@@ -1,4 +1,4 @@
-# GGM — Your Sicily Property Partner
+# GGM Your Sicily Property Partner
 
 Prima bozza funzionante del sito (V1). Frontend completo, navigabile e
 responsive, pensato per essere iterato: copy, immagini e proof sono
@@ -12,7 +12,7 @@ sostituibili senza rifare i layout.
 | Linguaggio | TypeScript (strict) |
 | Stile | Tailwind CSS v4 (design token in `src/app/globals.css`) |
 | Font | Inter + Fraunces via `next/font/google` (self-hosted a build time) |
-| Backend | nessuno — l'invio del form è un mock isolato |
+| Backend | route Next.js che inoltra a Google Apps Script |
 
 ## Comandi
 
@@ -34,6 +34,7 @@ src/
 │  ├─ globals.css             # DESIGN SYSTEM: palette, tipografia, animazioni
 │  ├─ opengraph-image.tsx     # immagine OG generata (placeholder di brand)
 │  ├─ robots.ts / sitemap.ts
+│  ├─ api/valutazione/        # route che inoltra il modulo a Google
 │  ├─ (site)/                 # pagine con navbar e footer completi
 │  └─ (conversion)/           # conversion page con header/footer minimali
 ├─ components/
@@ -44,7 +45,8 @@ src/
 │  │            ExperienceBlock, CoverageBlock, TransparencyBlock, LegalPage
 │  └─ form/     PropertyEvaluationForm, Field, ChoiceGroup, OptionCard
 ├─ content/     site.ts (brand, nav, CTA, copertura), faq.ts, evaluation.ts
-└─ lib/         seo.ts, schema.ts, submitEvaluation.ts
+├─ lib/         seo.ts, schema.ts, submitEvaluation.ts
+└─ ../docs/     google-sheet.md, google-apps-script/, prompt-immagini.md
 ```
 
 I contenuti trasversali (navigazione, CTA, copertura, FAQ) vivono in
@@ -58,36 +60,40 @@ l'intero sito.
 
 | Token | Valore | Uso |
 |---|---|---|
-| `ink` | `#17252A` | testo principale, sezioni scure, bottone primario |
-| `teal` | `#3AAFA9` | accento, CTA su fondo scuro |
-| `teal-700` | `#2B7A78` | link e accenti su fondo chiaro (contrasto AA) |
-| `teal-50` | `#DEF2F1` | testo su fondo scuro, badge |
-| `cream` | `#F7F3EA` | fondo pagina |
+| `ink` | `#132B4F` | navy del logo: testo principale, sezioni scure, bottone primario |
+| `gold` | `#C39B4E` | oro del logo: segni grafici, badge, bottone accento |
+| `gold-700` | `#8A6820` | sopratitoli e link su fondo chiaro (contrasto AA) |
+| `gold-900` | `#6E5318` | testo su fondo `gold-50` |
+| `gold-50` | `#F4EBD8` | fasce e badge chiari |
+| `cream` | `#F7F3EA` | fondo pagina e testo sulle sezioni navy |
 | `sand` / `line` | `#EFE8D9` / `#E2DACB` | fasce alternate, bordi |
 
-`teal` puro non viene mai usato come testo su fondo chiaro: il contrasto non
-sarebbe sufficiente. Per quello c'è `teal-700`.
+Nel logo l'oro non porta mai testo: disegna la casa, l'onda e i filetti,
+mentre le scritte sono navy. Sul sito vale la stessa regola. `gold` puro non
+regge il testo su fondo chiaro, per quello ci sono `gold-700` e `gold-900`.
 
 ## Cosa è PLACEHOLDER
 
 Tutti i punti seguenti sono segnalati anche nel codice.
 
-1. **Immagini** — nessuna foto reale nel progetto. Ogni immagine è un
+1. **Immagini**: nessuna foto reale nel progetto. Ogni immagine è un
    `<ImagePlaceholder>` che descrive cosa va inserito. Per sostituirla basta
    mettere il file in `public/images/` e passare `src="/images/nome.jpg"`:
    proporzioni e layout restano identici.
-2. **Logo** — `src/components/layout/Logo.tsx` è un lettering tipografico, da
-   sostituire con il logo definitivo.
-3. **Immagine OG** — generata da `src/app/opengraph-image.tsx`. Per usare una
+2. **Logo**: il file non è ancora nel repository. Caricalo in
+   `public/images/logo-ggm.png` e il sito lo usa da solo, senza modifiche al
+   codice; finché manca compare il lettering di riserva. Istruzioni e formati
+   consigliati in [`public/images/README.md`](public/images/README.md).
+3. **Immagine OG**: generata da `src/app/opengraph-image.tsx`. Per usare una
    grafica definitiva basta sostituire quel file con un `opengraph-image.jpg`
    nella stessa cartella.
-4. **Dominio** — `NEXT_PUBLIC_SITE_URL` (vedi `.env.example`) alimenta
+4. **Dominio**: `NEXT_PUBLIC_SITE_URL` (vedi `.env.example`) alimenta
    canonical, Open Graph e sitemap. Il default è un dominio fittizio.
-5. **Recapiti** — `contact` in `src/content/site.ts` è `null`: finché resta
+5. **Recapiti**: `contact` in `src/content/site.ts` è `null`. Finché resta
    così, email e telefono non compaiono nel footer.
-6. **Pagine legali** — privacy, cookie e termini sono strutture di riferimento
+6. **Pagine legali**: privacy, cookie e termini sono strutture di riferimento
    con un avviso visibile, non documenti definitivi.
-7. **Fondatori** — `chi-siamo` descrive due ambiti di competenza senza nomi,
+7. **Fondatori**: `chi-siamo` descrive due ambiti di competenza senza nomi,
    ruoli o biografie inventati, e senza foto di persone.
 
 ## Cosa richiede dati reali prima della pubblicazione
@@ -101,10 +107,20 @@ Tutti i punti seguenti sono segnalati anche nel codice.
 
 ## Invio del form
 
-`src/lib/submitEvaluation.ts` è l'unico punto di integrazione. Oggi è un mock
-che simula la latenza e restituisce un codice di riferimento. Per collegare
-CRM, email o WhatsApp basta sostituire il corpo di `submitEvaluation`: la
-firma della funzione e il resto del form non cambiano.
+Il modulo scrive su un foglio Google, salva le foto su Drive e invia due email
+(conferma al proprietario, notifica a GGM). Il percorso è:
+
+`PropertyEvaluationForm` → `src/lib/submitEvaluation.ts` →
+`src/app/api/valutazione/route.ts` → Google Apps Script.
+
+La route interna valida i dati, traduce i valori in testo leggibile e aggiunge
+il token: URL dello script e token restano lato server e non raggiungono mai il
+browser.
+
+Configurazione completa in [`docs/google-sheet.md`](docs/google-sheet.md).
+Servono due variabili d'ambiente, `GOOGLE_SCRIPT_URL` e `GGM_FORM_TOKEN`.
+Senza, in sviluppo l'invio è simulato e in produzione il modulo risponde con un
+errore esplicito invece di fingere che la richiesta sia partita.
 
 ## SEO e indicizzazione
 
