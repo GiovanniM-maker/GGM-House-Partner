@@ -80,10 +80,10 @@ Tutti i punti seguenti sono segnalati anche nel codice.
    `<ImagePlaceholder>` che descrive cosa va inserito. Per sostituirla basta
    mettere il file in `public/images/` e passare `src="/images/nome.jpg"`:
    proporzioni e layout restano identici.
-2. **Logo**: il file non è ancora nel repository. Mettilo in `public/images/`
-   e compila `site.logo` in `src/content/site.ts` con percorso e dimensioni:
-   il lettering di riserva sparisce da solo. Per la navbar conviene una
-   versione orizzontale compatta, il lockup completo sta meglio nel footer.
+2. **Logo**: il file non è ancora nel repository. Caricalo in
+   `public/images/logo-ggm.png` e il sito lo usa da solo, senza modifiche al
+   codice; finché manca compare il lettering di riserva. Istruzioni e formati
+   consigliati in [`public/images/README.md`](public/images/README.md).
 3. **Immagine OG**: generata da `src/app/opengraph-image.tsx`. Per usare una
    grafica definitiva basta sostituire quel file con un `opengraph-image.jpg`
    nella stessa cartella.

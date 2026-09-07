@@ -62,11 +62,16 @@ export const site = {
   /** TODO: impostare NEXT_PUBLIC_SITE_URL con il dominio definitivo. */
   url: resolveSiteUrl(),
   /**
-   * Logo. Finché è `null` viene mostrato il lettering di riserva.
-   * Per usare il logo vero: metti il file in `public/images/`, indica qui il
-   * percorso e le dimensioni reali in pixel.
+   * Logo. Basta caricare il file in `public/images/` con questo nome: il
+   * componente lo usa da solo e, se il file non c'è, ricade sul lettering
+   * senza mostrare un'immagine rotta. Qualsiasi proporzione va bene.
    */
-  logo: null as { src: string; width: number; height: number } | null,
+  logo: "/images/logo-ggm.png",
+  /**
+   * Versione del logo per i fondi scuri (footer). Se manca, il logo normale
+   * viene schiarito automaticamente.
+   */
+  logoDark: null as string | null,
   locale: "it_IT",
 } as const;
 
