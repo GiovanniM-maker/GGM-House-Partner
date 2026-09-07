@@ -21,8 +21,8 @@ export function Footer() {
           <div>
             <Logo tone="dark" size="lg" />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-cream/70">
-              {site.positioning} Ristrutturazione, property management e percorsi
-              integrati per chi possiede una casa in Sicilia.
+              {site.positioning} Ristrutturazione, property management e
+              percorsi integrati, con un unico referente sul posto.
             </p>
 
             <dl className="mt-8 space-y-4 text-sm">

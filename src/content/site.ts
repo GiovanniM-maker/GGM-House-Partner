@@ -69,15 +69,16 @@ export const site = {
    */
   logo: "/images/logo-ggm.png",
   /**
-   * Versione compatta, senza il payoff. Nella navbar, alta poco più di 40px,
-   * il lockup completo diventa illeggibile: qui serve solo marchio e tagline.
+   * Solo il marchio, senza tagline né payoff. Nella navbar, alta poco più di
+   * 40px, la tagline del lockup diventa una macchia: qui il marchio fa
+   * l'immagine e la tagline la scrive il componente come testo.
    */
-  logoCompact: "/images/logo-ggm-compatto.png",
+  logoMark: "/images/logo-ggm-marchio.png",
   /**
    * Versione chiara per i fondi scuri. Se manca, il logo viene schiarito
    * automaticamente.
    */
-  logoDark: null as string | null,
+  logoDark: "/images/logo-ggm-chiaro.png" as string | null,
   locale: "it_IT",
 } as const;
 

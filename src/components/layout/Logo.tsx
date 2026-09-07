@@ -11,10 +11,15 @@ type LogoProps = {
   asLink?: boolean;
   /** Altezza resa. La larghezza segue le proporzioni del file. */
   size?: "sm" | "md" | "lg";
+  /**
+   * Visibilità della tagline accanto al marchio. La navbar la nasconde alle
+   * larghezze in cui competerebbe con i link di navigazione.
+   */
+  taglineClassName?: string;
   className?: string;
 };
 
-const heights = { sm: "h-9", md: "h-11", lg: "h-16" } as const;
+const heights = { sm: "h-8", md: "h-10", lg: "h-24" } as const;
 
 /**
  * Marchio GGM.
@@ -27,14 +32,17 @@ export function Logo({
   tone = "light",
   asLink = true,
   size = "md",
+  taglineClassName = "hidden sm:block",
   className = "",
 }: LogoProps) {
   const isDark = tone === "dark";
   const [failed, setFailed] = useState(false);
 
-  // Alle altezze ridotte serve la versione compatta: il payoff del lockup
-  // completo, sotto i 50px, non si legge più.
-  const lockup = size === "lg" ? site.logo : (site.logoCompact ?? site.logo);
+  // Il lockup completo si legge solo dove c'è spazio, cioè il footer.
+  // Altrove va il solo marchio, con la tagline scritta come testo accanto:
+  // rimane nitida a qualsiasi dimensione.
+  const isFull = size === "lg";
+  const lockup = isFull ? site.logo : (site.logoMark ?? site.logo);
   const source = isDark ? (site.logoDark ?? lockup) : lockup;
   const needsLightening = isDark && !site.logoDark;
 
@@ -45,20 +53,41 @@ export function Logo({
     if (node && node.complete && node.naturalWidth === 0) setFailed(true);
   }, []);
 
+  const marchio = source && !failed && (
+    // Immagine non ottimizzata di proposito: le proporzioni del logo non
+    // sono note in anticipo e `onError` permette la ricaduta sul lettering.
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      ref={checkLoaded}
+      src={source}
+      alt={isFull ? site.fullName : site.name}
+      onError={() => setFailed(true)}
+      className={`w-auto ${heights[size]} ${
+        needsLightening ? "brightness-0 invert" : ""
+      }`}
+    />
+  );
+
   const content =
     source && !failed ? (
-      // Immagine non ottimizzata di proposito: le proporzioni del logo non
-      // sono note in anticipo e `onError` permette la ricaduta sul lettering.
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
-        ref={checkLoaded}
-        src={source}
-        alt={site.fullName}
-        onError={() => setFailed(true)}
-        className={`w-auto ${heights[size]} ${
-          needsLightening ? "brightness-0 invert" : ""
-        } ${className}`}
-      />
+      isFull ? (
+        <span className={className}>{marchio}</span>
+      ) : (
+        <span className={`flex items-center gap-2.5 ${className}`}>
+          {marchio}
+          <span
+            aria-hidden="true"
+            className={`h-5 w-px ${taglineClassName} ${isDark ? "bg-white/25" : "bg-gold"}`}
+          />
+          <span
+            className={`text-[0.7rem] font-medium tracking-[0.16em] whitespace-nowrap uppercase ${taglineClassName} ${
+              isDark ? "text-cream/70" : "text-muted"
+            }`}
+          >
+            {site.tagline}
+          </span>
+        </span>
+      )
     ) : (
       <span className={`flex items-baseline gap-2.5 ${className}`}>
         <span
