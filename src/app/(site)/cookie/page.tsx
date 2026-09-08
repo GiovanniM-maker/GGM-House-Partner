@@ -26,6 +26,31 @@ export default function CookiePage() {
           ),
         },
         {
+          heading: "Identificativi di clic pubblicitario",
+          body: (
+            <>
+              <p>
+                Se arrivi sul sito da un annuncio Google, l&apos;indirizzo della
+                pagina contiene un identificativo del clic (<code>gclid</code>,
+                <code> gbraid</code> o <code>wbraid</code>). Il sito lo conserva
+                nella memoria locale del tuo browser e lo allega alla richiesta,
+                se decidi di compilare il modulo.
+              </p>
+              <p>
+                Serve solo a capire da quale annuncio è arrivata una richiesta.
+                Non identifica la persona, non viene usato per profilazione e
+                non viene ceduto a terzi al di fuori della rendicontazione della
+                campagna. Viene scartato dopo 90 giorni e puoi rimuoverlo
+                svuotando i dati del sito dal tuo browser.
+              </p>
+              <p>
+                Da completare con la valutazione sul consenso, insieme alla
+                revisione professionale del documento.
+              </p>
+            </>
+          ),
+        },
+        {
           heading: "Cookie tecnici",
           body: (
             <p>

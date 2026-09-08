@@ -59,6 +59,8 @@ export async function POST(request: Request) {
     whatsapp: body.whatsapp === true,
     note: text("note"),
     privacy: body.privacy === true,
+    // Identificativi di clic Google, per ricollegare la richiesta all'annuncio.
+    ...clickIds(body.attribuzione),
   };
 
   if (!data.comune) errors.push("Manca il comune dell'immobile.");
@@ -151,6 +153,24 @@ export async function POST(request: Request) {
       { status: 502 },
     );
   }
+}
+
+/** Estrae gclid, gbraid e wbraid, scartando qualsiasi altro campo. */
+function clickIds(value: unknown): {
+  gclid: string;
+  gbraid: string;
+  wbraid: string;
+} {
+  const dati = (typeof value === "object" && value !== null ? value : {}) as Record<
+    string,
+    unknown
+  >;
+
+  return {
+    gclid: clean(dati.gclid).slice(0, 200),
+    gbraid: clean(dati.gbraid).slice(0, 200),
+    wbraid: clean(dati.wbraid).slice(0, 200),
+  };
 }
 
 function clean(value: unknown): string {

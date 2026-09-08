@@ -36,7 +36,11 @@ export default function PrivacyPage() {
                 <li>dati sull&apos;immobile: località, tipologia, superficie, stato;</li>
                 <li>l&apos;obiettivo che indichi e le informazioni sull&apos;utilizzo della casa;</li>
                 <li>dati di contatto: nome, email, telefono e preferenza per WhatsApp;</li>
-                <li>eventuali fotografie e note che decidi di allegare.</li>
+                <li>eventuali fotografie e note che decidi di allegare;</li>
+                <li>
+                  l&apos;identificativo del clic pubblicitario, se sei arrivato
+                  da un annuncio, per ricollegare la richiesta alla campagna.
+                </li>
               </ul>
               <p>
                 Da completare con l&apos;indicazione dei dati raccolti
