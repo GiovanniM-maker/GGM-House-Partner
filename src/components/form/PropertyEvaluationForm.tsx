@@ -24,10 +24,13 @@ import {
   submitEvaluation,
   type EvaluationPayload,
 } from "@/lib/submitEvaluation";
+import { readAttribution } from "@/lib/attribution";
 import { routes } from "@/content/site";
 import Link from "next/link";
 
-type FormState = Omit<EvaluationPayload, "foto"> & { foto: File[] };
+type FormState = Omit<EvaluationPayload, "foto" | "attribuzione"> & {
+  foto: File[];
+};
 
 const initialState: FormState = {
   comune: "",
@@ -161,7 +164,11 @@ export function PropertyEvaluationForm() {
 
     try {
       const allegati = await Promise.all(foto.map(readFileAsBase64));
-      result = await submitEvaluation({ ...rest, foto: allegati });
+      result = await submitEvaluation({
+        ...rest,
+        foto: allegati,
+        attribuzione: readAttribution(),
+      });
     } catch {
       result = {
         ok: false as const,

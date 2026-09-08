@@ -13,6 +13,8 @@ export type EvaluationPhoto = {
   dataBase64: string;
 };
 
+import type { Attribution } from "@/lib/attribution";
+
 export type EvaluationPayload = {
   /* Step 1: l'immobile */
   comune: string;
@@ -40,6 +42,9 @@ export type EvaluationPayload = {
   note: string;
   foto: EvaluationPhoto[];
   privacy: boolean;
+
+  /* Da dove arriva la richiesta, se da un annuncio */
+  attribuzione: Attribution;
 };
 
 export type SubmitResult =

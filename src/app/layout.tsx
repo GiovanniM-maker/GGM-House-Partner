@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter } from "next/font/google";
 
+import { AttributionCapture } from "@/components/AttributionCapture";
 import { organizationSchema } from "@/lib/schema";
 import { site } from "@/content/site";
 import "./globals.css";
@@ -62,6 +63,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Vai al contenuto principale
         </a>
         {children}
+        <AttributionCapture />
         <script
           type="application/ld+json"
           // Dati strutturati: solo informazioni già presenti sul sito.

@@ -103,6 +103,13 @@ a colpo d'occhio a chi non è arrivato niente.
 Sulla notifica interna il "rispondi a" è già impostato sull'indirizzo di chi ha
 compilato, così rispondendo scrivi direttamente alla persona.
 
+Le ultime tre colonne (`gclid`, `gbraid`, `wbraid`) contengono l'identificativo
+del clic quando la richiesta arriva da un annuncio Google, e servono per
+caricare le conversioni offline su Google Ads. Restano vuote per il traffico
+organico. Le colonne nuove vanno sempre aggiunte in fondo all'elenco `COLONNE`:
+lo script le accoda a destra di quelle esistenti, così un foglio già avviato
+resta allineato.
+
 ## Limiti da conoscere
 
 - **Foto**: massimo 8 file per 3,5 MB complessivi. Il limite viene dal tetto sul

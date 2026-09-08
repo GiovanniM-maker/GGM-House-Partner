@@ -60,12 +60,19 @@ var CARTELLA_FOTO = 'Foto richieste';
 // Quante richieste accettiamo dallo stesso indirizzo in un quarto d'ora.
 var MAX_INVII = 3;
 
+// Le colonne nuove vanno aggiunte in fondo: intestazione() le accoda a destra
+// di quelle esistenti, e un foglio gia' avviato resta allineato.
 var COLONNE = [
   'Data', 'Riferimento', 'Nome', 'Email', 'Telefono', 'WhatsApp',
   'Comune', 'Provincia', 'Tipologia', 'Superficie (mq)', 'Camere',
   'Stato immobile', 'Obiettivo', 'Residenza', 'Utilizzo attuale',
-  'Caratteristiche', 'Note', 'Foto', 'Privacy', 'Stato lavorazione', 'Conferma'
+  'Caratteristiche', 'Note', 'Foto', 'Privacy', 'Stato lavorazione', 'Conferma',
+  'gclid', 'gbraid', 'wbraid'
 ];
+
+// La colonna dell'esito va cercata per nome, non presa come ultima: cosi'
+// resta al suo posto anche aggiungendo altre colonne dopo.
+var COL_CONFERMA = COLONNE.indexOf('Conferma') + 1;
 
 
 function doPost(e) {
@@ -130,7 +137,12 @@ function doPost(e) {
       // contatto, non solo verificato nel browser e poi dimenticato.
       d.privacy ? 'si' : 'NO',
       'Da analizzare',
-      ''
+      '',
+      // Identificativi del clic pubblicitario, vuoti se la richiesta non
+      // arriva da un annuncio. Servono a caricare le conversioni su Google Ads.
+      String((d.gclid || '')),
+      String((d.gbraid || '')),
+      String((d.wbraid || ''))
     ]);
     riga = sh.getLastRow();
   } catch (err) {
@@ -170,7 +182,7 @@ function doPost(e) {
   }
 
   try {
-    sh.getRange(riga, COLONNE.length).setValue(esitoConferma);
+    sh.getRange(riga, COL_CONFERMA).setValue(esitoConferma);
   } catch (err) {}
 
   return risposta({ ok: true, reference: riferimento, conferma: esitoConferma });
@@ -315,6 +327,7 @@ function corpoNotifica(d, riferimento, foto, esitoConferma) {
     + riga('Note', d.messaggio || d.note)
     + riga('Privacy', d.privacy ? 'consenso prestato' : 'NON prestato')
     + riga('Foto', foto.numero ? foto.numero + ' file: ' + foto.testo : 'nessuna')
+    + riga('Da annuncio', d.gclid || d.gbraid || d.wbraid ? 'si' : '')
     + riga('Conferma', esitoConferma)
     + '</table>'
     + '<p style="margin:24px 0 0;color:#4A6484;font-size:14px">'
