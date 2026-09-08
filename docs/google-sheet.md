@@ -1,7 +1,7 @@
 # Collegare il modulo a Google Sheet
 
 Il modulo "Valuta la tua casa" scrive su un foglio Google, salva le foto su
-Drive e invia due email: la conferma al proprietario e la notifica a GGM.
+Drive e invia due email: la conferma a chi ha compilato e la notifica a GGM.
 
 ## Come sono collegati i pezzi
 
@@ -10,59 +10,52 @@ Browser
    │  POST /api/valutazione  (solo dati del modulo)
    ▼
 Route Next.js  src/app/api/valutazione/route.ts
-   │  valida, normalizza, aggiunge il token
+   │  valida, normalizza, aggiunge il segreto condiviso
    │  POST all'URL dello script
    ▼
 Google Apps Script  docs/google-apps-script/Codice.gs
-   ├─ salva le foto in una cartella di Drive
-   ├─ aggiunge una riga al foglio
-   ├─ invia l'email di conferma al proprietario
-   └─ invia l'email di notifica a GGM
+   ├─ scrive la riga nel foglio
+   ├─ salva le foto in una cartella accanto al foglio
+   ├─ invia la conferma a chi ha compilato
+   └─ invia la notifica a GGM
 ```
 
-L'URL dello script e il token non arrivano mai al browser: il sito parla solo
+L'URL dello script e il segreto non arrivano mai al browser: il sito parla solo
 con la propria route interna. Questo evita anche i problemi di CORS che si
 incontrano chiamando Apps Script direttamente dal client.
 
-## 1. Crea il foglio e la cartella
+## 1. Crea il foglio e incolla lo script
 
-1. Crea un foglio Google nuovo, per esempio "GGM richieste". Copia l'ID
-   dall'indirizzo: `docs.google.com/spreadsheets/d/`**`ID`**`/edit`.
-2. Crea in Drive una cartella per le foto, per esempio "GGM foto richieste".
-   Copia l'ID dall'indirizzo: `drive.google.com/drive/folders/`**`ID`**.
-
-## 2. Crea lo script
-
-1. Vai su [script.google.com](https://script.google.com) e crea un progetto
-   nuovo, per esempio "GGM modulo".
-2. Incolla il contenuto di `docs/google-apps-script/Codice.gs` al posto del
+1. Crea un foglio Google nuovo, per esempio "GGM | Richieste".
+2. Dal foglio: **Estensioni → Apps Script**.
+3. Incolla il contenuto di `docs/google-apps-script/Codice.gs` al posto del
    codice di esempio e salva.
 
-## 3. Imposta le proprietà dello script
+Non serve nessun ID: lo script è dentro al foglio e lo trova da solo. Anche la
+cartella per le foto viene creata accanto al foglio la prima volta che serve.
 
-Nell'editor: Impostazioni progetto, poi "Proprietà script".
+## 2. Compila le due costanti in cima al file
 
-| Proprietà | Obbligatoria | Valore |
-|---|---|---|
-| `SHEET_ID` | sì | ID del foglio del punto 1 |
-| `NOTIFY_EMAIL` | sì | indirizzo GGM che riceve le notifiche |
-| `DRIVE_FOLDER_ID` | no | ID della cartella foto. Senza, le foto non vengono salvate |
-| `SHEET_NAME` | no | nome della scheda, predefinito `Richieste` |
-| `SENDER_NAME` | no | nome mittente delle email |
-| `FORM_TOKEN` | no | generato automaticamente al passo 4 |
+```js
+var NOTIFICA_A = 'CAMBIAMI@esempio.it';   // dove vuoi ricevere le notifiche
+var MITTENTE_ALIAS = '';                  // alias Gmail verificato, se ne hai uno
+```
 
-## 4. Prepara il foglio e genera il token
+`MITTENTE_ALIAS` è facoltativo. Se lo lasci vuoto, la conferma parte
+dall'indirizzo dell'account che autorizza lo script.
 
-Nell'editor scegli la funzione `preparaFoglio` ed eseguila. Al primo avvio
-Google chiede l'autorizzazione ad accedere a Fogli, Drive e Gmail: è normale,
-lo script gira con il tuo account.
+## 3. Genera il segreto condiviso
 
-La funzione crea le intestazioni e stampa nel log il token da copiare. Tienilo
-a portata di mano per il punto 6.
+Nell'editor scegli la funzione `mostraToken` ed eseguila. Genera una stringa
+casuale, se la salva nelle proprietà dello script e la stampa nel log:
+è il valore che ti servirà al punto 5.
 
-## 5. Pubblica come applicazione web
+Al primo avvio Google chiede l'autorizzazione ad accedere a Fogli, Drive e
+Gmail: è normale, lo script gira con il tuo account.
 
-Distribuisci, poi "Nuovo deployment", tipo "Applicazione web":
+## 4. Pubblica come applicazione web
+
+Distribuisci → "Nuovo deployment" → tipo "Applicazione web":
 
 - **Esegui come**: me stesso
 - **Chi ha accesso**: chiunque
@@ -72,53 +65,65 @@ Copia l'URL che termina con `/exec`.
 > Ogni volta che modifichi il codice devi creare una **nuova versione** del
 > deployment, altrimenti resta attiva quella vecchia.
 
-## 6. Configura il sito
+## 5. Configura il sito
 
-Su Vercel, in Settings, Environment Variables, aggiungi le due variabili per
-tutti gli ambienti:
+Su Vercel, in Settings → Environment Variables, aggiungi per tutti gli ambienti:
 
 | Variabile | Valore |
 |---|---|
-| `GOOGLE_SCRIPT_URL` | l'URL `/exec` del punto 5 |
-| `GGM_FORM_TOKEN` | il token del punto 4 |
+| `GOOGLE_SCRIPT_URL` | l'URL `/exec` del punto 4 |
+| `GGM_FORM_TOKEN` | la stringa stampata al punto 3 |
 
 In locale bastano le stesse righe in un file `.env.local`.
 
 Poi fai un nuovo deploy: le variabili vengono lette a ogni richiesta, ma il
 deployment già pubblicato non le vede.
 
-## Comportamento senza configurazione
-
-- **In sviluppo**, se le variabili mancano, la richiesta viene registrata nel
-  log del server e il modulo mostra comunque la conferma: si può lavorare
-  sull'interfaccia senza collegare nulla.
-- **In produzione**, se mancano, il modulo risponde con un errore esplicito
-  invece di far credere all'utente che la richiesta sia partita.
-
 ## Verifiche
 
-1. Nell'editor dello script esegui `provaInvio`: scrive una riga di prova sul
-   foglio e manda le due email. Cancella poi la riga.
-2. Dal sito, compila il modulo per intero e controlla foglio, cartella Drive e
-   casella di posta.
+1. Nell'editor esegui `provaInvio`: crea le intestazioni del foglio e ti manda
+   una mail di prova, scrivendo nel log la quota rimasta per oggi.
+2. Dal sito, compila il modulo per intero e controlla foglio, cartella e posta.
+
+## Comportamento senza configurazione
+
+- **In sviluppo**, se le variabili mancano, la richiesta finisce nel log del
+  server e il modulo mostra comunque la conferma: si può lavorare
+  sull'interfaccia senza collegare nulla.
+- **In produzione**, se mancano, il modulo risponde con un errore esplicito
+  invece di far credere che la richiesta sia partita.
+
+## Come è fatto lo script
+
+L'ordine delle operazioni non è casuale. Prima si scrive la riga, che è l'unica
+cosa che non deve mai fallire, poi partono le mail. Se una mail non parte, il
+contatto resta salvato e la colonna **Conferma** dice cosa è successo: si vede
+a colpo d'occhio a chi non è arrivato niente.
+
+Sulla notifica interna il "rispondi a" è già impostato sull'indirizzo di chi ha
+compilato, così rispondendo scrivi direttamente alla persona.
 
 ## Limiti da conoscere
 
-- **Foto**: massimo 8 file per 3,5 MB complessivi. Il limite viene dal tetto
-  sul corpo delle richieste delle funzioni Vercel. Oltre quella soglia il
-  modulo lo dice e chiede di allegarne meno.
+- **Foto**: massimo 8 file per 3,5 MB complessivi. Il limite viene dal tetto sul
+  corpo delle richieste delle funzioni Vercel. Oltre quella soglia il modulo lo
+  dice e chiede di allegarne meno.
 - **Email**: un account Gmail gratuito invia circa 100 email al giorno, un
-  account Workspace circa 1500. Ogni richiesta ne consuma due.
+  account Workspace circa 1500. Ogni richiesta ne consuma due, quindi circa 50
+  richieste al giorno con Gmail. Superata la quota le mail si fermano ma il
+  foglio continua a riempirsi.
 - **Invii ripetuti**: lo script accetta al massimo 3 richieste ogni 15 minuti
-  dallo stesso indirizzo email. Il modulo è pubblico e manda una email a un
-  destinatario scelto da chi compila, quindi il freno serve.
+  dallo stesso indirizzo email. Il segreto ferma chi chiama lo script
+  scavalcando il sito, non chi compila il modulo cento volte: per quello serve
+  questo freno.
 
 ## Se qualcosa non funziona
 
 - **"Il modulo non è ancora collegato"**: mancano `GOOGLE_SCRIPT_URL` o
   `GGM_FORM_TOKEN`, oppure non hai rifatto il deploy dopo averle aggiunte.
-- **"Non siamo riusciti a registrare la richiesta"**: guarda i log della
-  funzione su Vercel e le esecuzioni dello script su Apps Script. Le cause più
-  frequenti sono un token diverso fra le due parti e un deployment non
-  aggiornato dopo una modifica al codice.
-- **Foto assenti nel foglio**: manca `DRIVE_FOLDER_ID`.
+- **`{"ok":false,"error":"auth"}`**: il segreto sul sito e quello nello script
+  non coincidono.
+- **`{"ok":false,"error":"sheet"}`**: lo script non è collegato a un foglio.
+  Va incollato da Estensioni → Apps Script del foglio, non come progetto a sé.
+- **Modifiche che non hanno effetto**: non hai creato una nuova versione del
+  deployment.
