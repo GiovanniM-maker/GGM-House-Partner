@@ -150,8 +150,8 @@ export default function RistrutturazionePage() {
           { label: "Ristrutturazione" },
         ]}
         image={{
-          alt: "Interno di una casa in ristrutturazione",
-          label: "Foto hero: interno in lavorazione o appena consegnato",
+          src: "/images/ristrutturazione-hero.jpg",
+          alt: "Interno appena consegnato di una casa siciliana, con arco in pietra, pavimento in cotto e luce radente",
         }}
       />
 
@@ -187,8 +187,8 @@ export default function RistrutturazionePage() {
             />
           </div>
           <ImagePlaceholder
-            alt="Sopralluogo in un immobile da ristrutturare"
-            label="Foto: sopralluogo, rilievo o confronto in cantiere"
+            src="/images/ristrutturazione-sopralluogo.jpg"
+            alt="Disegni arrotolati, metro e misuratore laser appoggiati su un cavalletto in una stanza vuota"
             ratio="photo"
             tone="dark"
             sizes="(min-width: 1024px) 45vw, 100vw"

@@ -152,8 +152,8 @@ export default function HomePage() {
         secondaryCta={{ label: "Come funziona", href: routes.comeFunziona }}
         note="Raccontaci la casa in pochi minuti. Nessun impegno."
         image={{
-          alt: "Architettura mediterranea contemporanea in Sicilia",
-          label: "Foto hero: esterno di una casa siciliana, luce naturale",
+          src: "/images/home-hero.jpg",
+          alt: "Casa in pietra calcarea nella campagna ragusana, con muretto a secco e ulivi, alla luce del tardo pomeriggio",
         }}
       />
 
@@ -198,8 +198,8 @@ export default function HomePage() {
             ]}
             href={routes.ristrutturazione}
             image={{
-              alt: "Lavori di ristrutturazione di un interno",
-              label: "Foto: cantiere o interno ristrutturato",
+              src: "/images/card-ristrutturazione.jpg",
+              alt: "Interno di una casa siciliana durante i lavori, con intonaco nuovo e pavimento in cotto",
             }}
           />
           <ServiceCard
@@ -213,8 +213,8 @@ export default function HomePage() {
             ]}
             href={routes.propertyManagement}
             image={{
-              alt: "Interno di una casa preparata per l'ospitalità",
-              label: "Foto: interno curato, pronto per gli ospiti",
+              src: "/images/card-property-management.jpg",
+              alt: "Soggiorno di una casa siciliana preparato per gli ospiti, con divano in lino e luce dalle persiane",
             }}
           />
           <ServiceCard
@@ -228,8 +228,8 @@ export default function HomePage() {
             ]}
             href={routes.integrato}
             image={{
-              alt: "Casa siciliana da valorizzare",
-              label: "Foto: immobile prima dell'intervento",
+              src: "/images/card-percorso-integrato.jpg",
+              alt: "Facciata in pietra di una casa non ristrutturata in un paese siciliano, con persiane consumate",
             }}
           />
         </div>
@@ -289,8 +289,8 @@ export default function HomePage() {
             ]}
           />
           <ImagePlaceholder
-            alt="Territorio siciliano"
-            label="Foto: territorio, paesaggio o dettaglio architettonico reale"
+            src="/images/home-territorio.jpg"
+            alt="Veduta di un paese collinare del sud est siciliano all'ora dorata, con tetti in pietra e uliveti"
             ratio="photo"
             sizes="(min-width: 1024px) 40vw, 100vw"
           />

@@ -163,8 +163,8 @@ export default function IntegratoPage() {
           { label: "Ristruttura & Metti a Reddito" },
         ]}
         image={{
-          alt: "Casa siciliana da valorizzare",
-          label: "Foto hero: immobile prima dell'intervento",
+          src: "/images/reddito-hero.jpg",
+          alt: "Stanza vuota di una casa non ristrutturata, con pavimento in cementine consumate e una lama di luce dalla finestra",
         }}
       />
 
@@ -242,8 +242,8 @@ export default function IntegratoPage() {
                 "Professionisti qualificati per gli interventi specialistici",
                 "Aggiornamenti costanti anche se vivi lontano",
               ],
-              label: "Foto: lavori in corso",
-              alt: "Lavori di ristrutturazione in corso",
+              src: "/images/reddito-fase-1-lavori.jpg",
+              alt: "Intonaco nuovo steso su una parete, con trabattello e attrezzi in ordine",
             },
             {
               eyebrow: "Fase 2",
@@ -254,8 +254,8 @@ export default function IntegratoPage() {
                 "Fotografie e contenuti dell'annuncio",
                 "Posizionamento e scelta dei canali",
               ],
-              label: "Foto: interno arredato e pronto",
-              alt: "Interno arredato e pronto per gli ospiti",
+              src: "/images/reddito-fase-2-arredato.jpg",
+              alt: "Angolo pranzo di una casa siciliana arredata, con tavolo in legno e luce del pomeriggio",
             },
             {
               eyebrow: "Fase 3",
@@ -266,8 +266,8 @@ export default function IntegratoPage() {
                 "Comunicazione con gli ospiti",
                 "Ottimizzazione e report periodici",
               ],
-              label: "Foto: dettaglio dell'ospitalità",
-              alt: "Dettaglio di una casa gestita per l'ospitalità",
+              src: "/images/reddito-fase-3-ospitalita.jpg",
+              alt: "Chiavi appoggiate su un panno di lino sul davanzale in pietra, con un rametto di rosmarino",
             },
           ].map((fase) => (
             <article
@@ -275,8 +275,8 @@ export default function IntegratoPage() {
               className="reveal flex flex-col overflow-hidden rounded-lg border border-line bg-white"
             >
               <ImagePlaceholder
+                src={fase.src}
                 alt={fase.alt}
-                label={fase.label}
                 ratio="wide"
                 className="rounded-none"
                 sizes="(min-width: 1024px) 33vw, 100vw"
@@ -305,6 +305,38 @@ export default function IntegratoPage() {
           title="Come si legge un'analisi, su un caso inventato"
           description="Quello che segue è uno scenario costruito a scopo esplicativo. Non è un lavoro realizzato da GGM, non è un cliente e i suoi elementi non sono dati reali: serve solo a mostrare il ragionamento."
         />
+
+        <div className="mt-10 grid gap-5 sm:grid-cols-2">
+          {[
+            {
+              momento: "Prima",
+              src: "/images/esempio-bagno-prima.jpg",
+              alt: "Bagno di un appartamento con rivestimenti rimossi, impianti a vista e pavimento in parte demolito",
+            },
+            {
+              momento: "Dopo",
+              src: "/images/esempio-bagno-dopo.jpg",
+              alt: "Lo stesso bagno con rivestimenti in gres chiaro, mobile sospeso e sanitari nuovi",
+            },
+          ].map((scatto) => (
+            <div key={scatto.momento}>
+              <p className="mb-2 text-xs font-semibold tracking-[0.16em] text-muted uppercase">
+                {scatto.momento}
+              </p>
+              <ImagePlaceholder
+                src={scatto.src}
+                alt={scatto.alt}
+                ratio="photo"
+                sizes="(min-width: 640px) 50vw, 100vw"
+              />
+            </div>
+          ))}
+        </div>
+
+        <p className="mt-4 text-xs leading-relaxed text-muted">
+          Simulazione. Le due immagini sono generate al computer e non
+          documentano un lavoro realizzato da GGM.
+        </p>
 
         <div className="mt-10 overflow-hidden rounded-lg border border-line-strong bg-sand">
           <div className="border-b border-line-strong px-6 py-4 sm:px-8">
