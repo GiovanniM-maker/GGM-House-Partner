@@ -241,8 +241,8 @@ export default function ChiSiamoPage() {
       <Section tone="cream" spacing="lg" size="wide">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:items-center lg:gap-16">
           <ImagePlaceholder
-            alt="Paesaggio del sud-est siciliano"
-            label="Foto reale: territorio, paese o architettura locale"
+            src="/images/chi-siamo-territorio.jpg"
+            alt="Dettaglio barocco in pietra calcarea sotto un balcone, con luce laterale netta"
             ratio="photo"
             sizes="(min-width: 1024px) 40vw, 100vw"
           />

@@ -179,8 +179,8 @@ export default function PropertyManagementPage() {
           { label: "Property Management" },
         ]}
         image={{
-          alt: "Interno di una casa preparata per l'ospitalità",
-          label: "Foto hero: interno curato, luce naturale",
+          src: "/images/property-management-hero.jpg",
+          alt: "Camera da letto di una casa siciliana preparata per gli ospiti, con lino bianco e persiane socchiuse",
         }}
       />
 

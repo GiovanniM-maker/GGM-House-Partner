@@ -17,6 +17,12 @@ type ImagePlaceholderProps = {
   priority?: boolean;
   sizes?: string;
   tone?: "light" | "dark";
+  /**
+   * Didascalia visibile sotto l'immagine. Serve a dichiarare quando
+   * un'immagine è una simulazione: la dichiarazione sta nel componente, non
+   * nella memoria di chi costruisce la pagina.
+   */
+  nota?: string;
 };
 
 const ratios = {
@@ -36,11 +42,12 @@ export function ImagePlaceholder({
   priority = false,
   sizes = "(min-width: 1024px) 50vw, 100vw",
   tone = "light",
+  nota,
 }: ImagePlaceholderProps) {
   const shell = `relative isolate overflow-hidden rounded-lg ${ratios[ratio]} ${className}`;
 
   if (src) {
-    return (
+    const immagine = (
       <div className={shell}>
         <Image
           src={src}
@@ -52,6 +59,21 @@ export function ImagePlaceholder({
           className="object-cover"
         />
       </div>
+    );
+
+    if (!nota) return immagine;
+
+    return (
+      <figure className="m-0">
+        {immagine}
+        <figcaption
+          className={`mt-2 text-xs leading-relaxed ${
+            tone === "dark" ? "text-cream/60" : "text-muted"
+          }`}
+        >
+          {nota}
+        </figcaption>
+      </figure>
     );
   }
 

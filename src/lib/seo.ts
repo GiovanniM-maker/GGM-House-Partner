@@ -25,12 +25,12 @@ export function pageMetadata({
 }: PageMetaInput): Metadata {
   const url = path === "/" ? site.url : `${site.url}${path}`;
 
-  // L'immagine è generata da `src/app/opengraph-image.tsx`. Va dichiarata
+  // L'immagine sta in `src/app/opengraph-image.jpg`. Va dichiarata
   // esplicitamente: quando una pagina definisce il proprio blocco `openGraph`,
   // Next non vi aggiunge automaticamente l'immagine da file convention.
   const images = [
     {
-      url: "/opengraph-image",
+      url: "/opengraph-image.jpg",
       width: 1200,
       height: 630,
       alt: site.metaTitle,
