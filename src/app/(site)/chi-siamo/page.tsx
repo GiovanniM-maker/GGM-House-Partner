@@ -16,24 +16,16 @@ export const metadata = pageMetadata({
 });
 
 /**
- * PLACEHOLDER: i profili dei fondatori non contengono nomi, ruoli o biografie
- * inventati. Vanno completati con i dati reali e con fotografie reali delle
- * persone: non usare immagini generate o foto stock di persone.
+ * Profilo del fondatore. Nessun dato inventato: la biografia si limita
+ * all'ambito di competenza, e la fotografia è reale.
  */
-const fondatori = [
-  {
-    ambito: "Territorio e ristrutturazioni",
-    descrizione:
-      "Esperienza concreta in ristrutturazioni, cantieri e rapporti con artigiani, imprese e tecnici in Sicilia. È la parte che permette a GGM di esserci fisicamente quando serve.",
-    fotoLabel: "Foto reale del fondatore, da inserire",
-  },
-  {
-    ambito: "Digitale e gestione online",
-    descrizione:
-      "Competenze in marketing, tecnologia, automazione e gestione di attività online. È la parte che permette di seguire una casa con continuità anche a distanza.",
-    fotoLabel: "Foto reale del fondatore, da inserire",
-  },
-];
+const fondatore = {
+  nome: "Giovanni Mavilla",
+  ambito: "Digitale e gestione online",
+  foto: "/images/giovanni-mavilla.jpg",
+  descrizione:
+    "Competenze in marketing, tecnologia, automazione e gestione di attività online. È la parte che permette di seguire una casa con continuità anche a distanza, che è poi il motivo per cui GGM può occuparsi di una casa in Sicilia mentre il proprietario vive altrove.",
+};
 
 const dueMondi = [
   {
@@ -138,38 +130,29 @@ export default function ChiSiamoPage() {
       <Section tone="white" spacing="lg" size="wide">
         <SectionHeader
           eyebrow="Le persone"
-          title="Due competenze che di solito stanno in aziende diverse"
-          description="Il progetto nasce dall'incontro di due percorsi professionali distinti, ed è la ragione per cui può occuparsi sia dei lavori sia della gestione."
+          title="Chi risponde quando scrivi a GGM"
+          description="Un progetto piccolo ha un vantaggio: sai con chi stai parlando fin dal primo messaggio."
         />
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2">
-          {fondatori.map((persona) => (
-            <article
-              key={persona.ambito}
-              className="reveal overflow-hidden rounded-lg border border-line bg-cream"
-            >
-              <ImagePlaceholder
-                alt={`Fondatore GGM, ${persona.ambito}`}
-                label={persona.fotoLabel}
-                ratio="wide"
-                className="rounded-none"
-                sizes="(min-width: 640px) 50vw, 100vw"
-              />
-              <div className="p-6 sm:p-8">
-                <p className="text-xs font-semibold tracking-[0.16em] text-gold-700 uppercase">
-                  {persona.ambito}
-                </p>
-                <p className="mt-4 leading-relaxed text-ink-600">
-                  {persona.descrizione}
-                </p>
-                <p className="mt-5 text-xs leading-relaxed text-muted">
-                  Nome, ruolo e biografia verranno pubblicati con i dati reali
-                  delle persone del progetto.
-                </p>
-              </div>
-            </article>
-          ))}
-        </div>
+        <article className="reveal mt-12 grid gap-8 rounded-lg border border-line bg-cream p-6 sm:grid-cols-[minmax(0,15rem)_minmax(0,1fr)] sm:items-start sm:gap-10 sm:p-8">
+          <ImagePlaceholder
+            src={fondatore.foto}
+            alt={`${fondatore.nome}, fondatore di GGM`}
+            ratio="square"
+            sizes="(min-width: 640px) 240px, 100vw"
+          />
+          <div>
+            <h3 className="display-3 font-semibold text-ink">
+              {fondatore.nome}
+            </h3>
+            <p className="mt-2 text-xs font-semibold tracking-[0.16em] text-gold-700 uppercase">
+              {fondatore.ambito}
+            </p>
+            <p className="mt-5 leading-relaxed text-ink-600">
+              {fondatore.descrizione}
+            </p>
+          </div>
+        </article>
       </Section>
 
       {/* Due mondi */}
