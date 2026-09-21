@@ -80,7 +80,7 @@ export function Hero({
               : "max-w-4xl"
           }
         >
-          <div className="enter">
+          <div className="enter-stagger">
             {eyebrow && (
               <p
                 className={`mb-5 text-xs font-semibold tracking-[0.2em] uppercase ${
@@ -146,7 +146,7 @@ export function Hero({
           </div>
 
           {image && (
-            <div className="enter [animation-delay:120ms]">
+            <div className="settle">
               <ImagePlaceholder
                 src={image.src}
                 alt={image.alt}

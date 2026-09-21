@@ -93,6 +93,9 @@
     color: var(--color-ink);
     font-family: var(--font-sans);
     text-rendering: optimizeLegibility;
+    /* Inter e Fraunces sono variabili: lasciamo che cambino forma con la
+     * dimensione invece di scalare lo stesso disegno. */
+    font-optical-sizing: auto;
   }
 
   h1,
@@ -189,7 +192,7 @@
  */
 @keyframes ggm-shift {
   from {
-    transform: translateY(12px);
+    transform: translateY(18px) scale(0.985);
   }
   to {
     transform: none;
@@ -442,4 +445,133 @@
 
 @utility spinner {
   animation: ggm-spin 600ms linear infinite;
+}
+
+/* --------------------------------------------------------------------------
+   Materiali e profondità
+   La chrome che galleggia sopra il contenuto non è una fascia opaca che si
+   mangia una striscia di pagina: è uno strato translucido sotto cui il
+   contenuto scorre.
+   -------------------------------------------------------------------------- */
+
+@utility header-material {
+  background-color: color-mix(in srgb, var(--color-cream) 72%, transparent);
+  backdrop-filter: blur(20px) saturate(180%);
+
+  /*
+   * Chi ha chiesto meno trasparenza o più contrasto riceve una barra piena.
+   * La translucenza è un effetto, la leggibilità no.
+   */
+  @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+    background-color: var(--color-cream);
+    backdrop-filter: none;
+  }
+}
+
+/*
+ * Bordo della barra che compare solo quando c'è davvero del contenuto a
+ * passarci sotto. Un filetto sempre acceso divide la pagina anche quando
+ * non c'è niente da dividere.
+ */
+@keyframes ggm-header-edge {
+  from {
+    border-bottom-color: transparent;
+    box-shadow: 0 10px 30px -24px rgb(19 43 79 / 0);
+  }
+  to {
+    border-bottom-color: var(--color-line);
+    box-shadow: 0 10px 30px -24px rgb(19 43 79 / 0.55);
+  }
+}
+
+@utility header-edge {
+  border-bottom: 1px solid transparent;
+
+  @supports (animation-timeline: scroll()) {
+    animation: ggm-header-edge linear both;
+    animation-timeline: scroll();
+    animation-range: 0 72px;
+  }
+
+  /* Senza animazioni legate allo scorrimento il filetto resta fisso. */
+  @supports not (animation-timeline: scroll()) {
+    border-bottom-color: var(--color-line);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Ingressi in cascata
+   Quando un gruppo di elementi entra tutto insieme sembra un blocco unico.
+   Sfalsarli di poco li fa leggere come cose distinte che arrivano.
+   -------------------------------------------------------------------------- */
+
+/*
+ * Sul timeline di scorrimento il ritardo non si esprime in millisecondi:
+ * un `animation-delay` qui verrebbe ignorato. La cascata si ottiene
+ * spostando l'intervallo di scorrimento in cui ogni elemento si completa.
+ */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal-stagger > *:nth-child(2) {
+      animation-range: entry 14% entry 64%;
+    }
+
+    .reveal-stagger > *:nth-child(3) {
+      animation-range: entry 18% entry 68%;
+    }
+
+    .reveal-stagger > *:nth-child(4) {
+      animation-range: entry 22% entry 72%;
+    }
+  }
+}
+
+/*
+ * Ingresso dell'hero. Qui il tempo è a carico del caricamento della pagina,
+ * non di un'interazione: si può stare più larghi che nel resto del sito.
+ */
+@utility enter-stagger {
+  @media (prefers-reduced-motion: no-preference) {
+    & > * {
+      animation: ggm-rise 520ms var(--ease-out) both;
+    }
+
+    & > *:nth-child(2) {
+      animation-delay: 60ms;
+    }
+
+    & > *:nth-child(3) {
+      animation-delay: 120ms;
+    }
+
+    & > *:nth-child(4) {
+      animation-delay: 180ms;
+    }
+
+    & > *:nth-child(5) {
+      animation-delay: 240ms;
+    }
+  }
+}
+
+/*
+ * L'immagine dell'hero si posa invece di comparire: parte appena più grande
+ * e si assesta. È la stessa idea di una superficie che arriva, non di un
+ * rettangolo che si accende.
+ */
+@keyframes ggm-settle {
+  from {
+    opacity: 0;
+    transform: scale(1.03);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility settle {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: ggm-settle 700ms var(--ease-out) 120ms both;
+  }
 }
