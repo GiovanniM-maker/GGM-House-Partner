@@ -23,8 +23,9 @@ export const metadata = pageMetadata({
 });
 
 /** Etichette di competenza mostrate sotto l'hero. */
+// "Annunci su Airbnb e Booking.com" non c'è più: i due loghi, sopra queste
+// etichette, dicono già la stessa cosa e meglio.
 const competenze = [
-  "Annunci su Airbnb e Booking.com",
   "Revenue Management",
   "Remote Management",
   "Guest Communication",
@@ -247,9 +248,17 @@ export default function PropertyManagementPage() {
         }}
       />
 
-      {/* Competenze: si leggono in un colpo d'occhio, senza diventare un elenco */}
-      <Section tone="white" spacing="sm" size="wide">
-        <Badges items={competenze} />
+      {/* Piattaforme e competenze: i loghi dicono dove operiamo prima di
+          qualsiasi testo, le etichette dicono di cosa ci occupiamo. */}
+      <Section tone="white" spacing="md" size="wide">
+        <PortalBand
+          variante="compatta"
+          titolo="Gestiamo il tuo immobile su"
+          portali={portali}
+          nota="Airbnb e Booking.com sono marchi dei rispettivi proprietari. GGM gestisce annunci pubblicati su queste piattaforme e non è affiliata, sponsorizzata o approvata da esse."
+        >
+          <Badges items={competenze} className="mx-auto max-w-3xl justify-center" />
+        </PortalBand>
       </Section>
 
       {/* Problema */}
@@ -336,16 +345,6 @@ export default function PropertyManagementPage() {
             sizes="(min-width: 1024px) 45vw, 100vw"
           />
         </div>
-      </Section>
-
-      {/* Portali */}
-      <Section tone="white" spacing="md" size="wide">
-        <PortalBand
-          titolo="Il tuo immobile, sui canali che contano"
-          portali={portali}
-          descrizione="Gestiamo annunci, disponibilità, prenotazioni, comunicazione e performance da un unico sistema."
-          nota="Airbnb e Booking.com sono marchi dei rispettivi proprietari. GGM gestisce annunci pubblicati su queste piattaforme e non è affiliata, sponsorizzata o approvata da esse."
-        />
       </Section>
 
       {/* Modello operativo */}

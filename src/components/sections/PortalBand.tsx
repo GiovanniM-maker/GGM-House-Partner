@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 import Image from "next/image";
 
 export type Portal = {
@@ -25,6 +27,14 @@ type PortalBandProps = {
   portali: readonly Portal[];
   tone?: "light" | "dark";
   /**
+   * "compatta" serve quando la fascia sta subito sotto l'hero: i loghi vanno
+   * visti prima di tutto, ma il titolo non deve competere con quello della
+   * pagina, quindi scende al peso di un occhiello.
+   */
+  variante?: "completa" | "compatta";
+  /** Contenuto extra fra i loghi e la nota sui marchi. */
+  children?: ReactNode;
+  /**
    * Nota sui marchi. Serve a chiarire che nominare un portale non significa
    * esserne partner: Airbnb vieta espressamente a chi gestisce immobili di
    * far credere di avere un rapporto privilegiato con loro.
@@ -38,19 +48,36 @@ export function PortalBand({
   descrizione,
   portali,
   tone = "light",
+  variante = "completa",
   nota,
+  children,
 }: PortalBandProps) {
   const isDark = tone === "dark";
+  const isCompatta = variante === "compatta";
 
   return (
     <div className="text-center">
-      <h2
-        className={`display-3 font-semibold ${isDark ? "text-white" : "text-ink"}`}
-      >
-        {titolo}
-      </h2>
+      {isCompatta ? (
+        <p
+          className={`text-xs font-semibold tracking-[0.2em] uppercase ${
+            isDark ? "text-gold" : "text-gold-700"
+          }`}
+        >
+          {titolo}
+        </p>
+      ) : (
+        <h2
+          className={`display-3 font-semibold ${isDark ? "text-white" : "text-ink"}`}
+        >
+          {titolo}
+        </h2>
+      )}
 
-      <ul className="mt-10 flex flex-wrap items-center justify-center gap-4">
+      <ul
+        className={`flex flex-wrap items-center justify-center gap-4 ${
+          isCompatta ? "mt-6" : "mt-10"
+        }`}
+      >
         {portali.map((portale) => (
           <li key={portale.nome}>
             <span
@@ -84,13 +111,15 @@ export function PortalBand({
 
       {descrizione && (
         <p
-          className={`mx-auto mt-10 max-w-2xl text-sm leading-relaxed ${
-            isDark ? "text-cream/70" : "text-muted"
-          }`}
+          className={`mx-auto max-w-2xl text-sm leading-relaxed ${
+            isCompatta ? "mt-8" : "mt-10"
+          } ${isDark ? "text-cream/70" : "text-muted"}`}
         >
           {descrizione}
         </p>
       )}
+
+      {children && <div className="mt-8">{children}</div>}
 
       {nota && (
         <p
