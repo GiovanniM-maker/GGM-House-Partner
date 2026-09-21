@@ -1,32 +1,46 @@
 # Loghi dei portali
 
-Cartella per i loghi ufficiali di Airbnb e Booking.com.
+Qui stanno i loghi usati nella fascia "Il tuo immobile, sui canali che contano"
+della landing Property Management.
 
-**È vuota di proposito.** I loghi non si prendono da una ricerca immagini: vanno
-richiesti ai due portali, che ne regolano l'uso.
+| File | Marchio | Formato |
+| --- | --- | --- |
+| `airbnb.svg` | Bélo + lettering "airbnb", coral `#FF5A5F` | 320 x 100 |
+| `booking.svg` | Lettering "Booking.com", blu `#273b7d` e `#499fdd` | 119 x 20 |
 
-## Airbnb
+Sono i marchi nella loro forma corrente, ripuliti dai metadati dell'editor con
+cui erano stati salvati. Non sono ridisegnati a mano e non sono stati ricolorati:
+alterare un marchio è una violazione più seria che usarlo.
 
-Le linee guida vietano a chi gestisce immobili di usare il marchio senza
-autorizzazione esplicita, e vietano di presentarsi come "Airbnb Management
-Company" o di lasciar intendere un rapporto privilegiato con Airbnb.
+## Cosa manca ancora, e non è un dettaglio
 
-Quello che **è** consentito è dire che si gestiscono immobili pubblicati su
-Airbnb, purché Airbnb non diventi il centro della comunicazione.
+Questi file sono l'artwork giusto, ma non sono un'autorizzazione all'uso.
 
-L'autorizzazione si chiede all'assistenza Airbnb, descrivendo l'uso previsto.
+**Airbnb** nelle sue linee guida sui marchi vieta espressamente l'uso del logo e
+del Bélo senza permesso scritto, e cita proprio le società di gestione immobili
+come caso a cui il divieto si applica. Quello che resta consentito senza
+permesso è la parola "Airbnb" nel testo, per dire che si gestiscono immobili
+pubblicati lì. Il permesso per il logo si chiede all'assistenza Airbnb
+descrivendo l'uso previsto.
 
-## Booking.com
+**Booking.com** distribuisce asset ufficiali e regole di co-branding nell'area
+partner, nella sezione materiali di marketing. Se da lì arriva una versione
+diversa da questa, sostituisci il file: vince la loro.
 
-Gli asset ufficiali e le regole di co-branding stanno nel portale partner,
-nella sezione dei materiali di marketing. Vanno richiesti da lì.
+Finché le autorizzazioni non ci sono, la fascia resta accompagnata dalla nota
+che dice che i marchi sono dei rispettivi proprietari e che GGM non è affiliata,
+sponsorizzata o approvata da loro. Quella nota non va tolta.
 
-## Quando hai i file
+## Come si cambia un logo
 
-1. Mettili qui, per esempio `airbnb.svg` e `booking.svg`.
-2. In `src/app/(site)/property-management/page.tsx`, nell'elenco `portali`,
-   aggiungi `logo: "/images/portali/airbnb.svg"` alla voce corrispondente.
-3. Il componente li mostra al posto del nome scritto, senza altre modifiche.
+1. Sostituisci il file qui, tenendo lo stesso nome.
+2. Se cambiano le proporzioni, aggiorna `larghezza` e `altezza` nella voce
+   corrispondente dell'elenco `portali` in
+   `src/app/(site)/property-management/page.tsx`.
+3. `classeLogo`, nella stessa voce, decide a che altezza viene mostrato. Non è
+   uguale per tutti: un logo con simbolo occupa in verticale più spazio del solo
+   lettering, quindi sta più basso perché le due scritte appaiano della stessa
+   misura.
 
-Rispetta le dimensioni minime e le aree di rispetto indicate dalle due
-aziende: sono parte delle condizioni d'uso, non un suggerimento grafico.
+Rispetta le dimensioni minime e le aree di rispetto indicate dalle due aziende:
+sono parte delle condizioni d'uso, non un suggerimento grafico.

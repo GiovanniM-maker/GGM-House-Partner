@@ -8,6 +8,15 @@ export type Portal = {
    * violerebbe le linee guida del marchio.
    */
   logo?: string;
+  /** Dimensioni intrinseche del file, servono a riservare lo spazio giusto. */
+  larghezza?: number;
+  altezza?: number;
+  /**
+   * Altezza a cui mostrarlo. Non è la stessa per tutti: un logo con simbolo
+   * occupa in verticale molto più spazio del solo lettering, quindi va tenuto
+   * più basso perché le due scritte appaiano della stessa misura.
+   */
+  classeLogo?: string;
 };
 
 type PortalBandProps = {
@@ -55,9 +64,9 @@ export function PortalBand({
                 <Image
                   src={portale.logo}
                   alt={portale.nome}
-                  width={160}
-                  height={40}
-                  className="h-7 w-auto sm:h-8"
+                  width={portale.larghezza ?? 160}
+                  height={portale.altezza ?? 40}
+                  className={`w-auto ${portale.classeLogo ?? "h-6 sm:h-7"}`}
                 />
               ) : (
                 <span
