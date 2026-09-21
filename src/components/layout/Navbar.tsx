@@ -13,7 +13,7 @@ export function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line/80 bg-cream [--ggm-header-height:4.5rem]">
+    <header className="header-material header-edge sticky top-0 z-50 [--ggm-header-height:4.5rem]">
       <Container size="wide">
         <div className="flex h-[var(--ggm-header-height)] items-center justify-between gap-6">
           <Logo taglineClassName="hidden sm:block lg:hidden xl:block" />

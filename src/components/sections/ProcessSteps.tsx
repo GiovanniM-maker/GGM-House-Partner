@@ -25,7 +25,7 @@ export function ProcessSteps({
 
   if (layout === "timeline") {
     return (
-      <ol className={`relative space-y-8 ${className}`}>
+      <ol className={`reveal-stagger relative space-y-8 ${className}`}>
         <div
           aria-hidden="true"
           className={`absolute top-2 bottom-2 left-[1.15rem] w-px ${
@@ -65,7 +65,7 @@ export function ProcessSteps({
 
   return (
     <ol
-      className={`grid gap-4 sm:grid-cols-2 ${
+      className={`reveal-stagger grid gap-4 sm:grid-cols-2 ${
         columns === 4 ? "lg:grid-cols-4" : "lg:grid-cols-3"
       } ${className}`}
     >

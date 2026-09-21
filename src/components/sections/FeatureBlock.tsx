@@ -37,7 +37,7 @@ export function FeatureBlock({
         : "";
 
   return (
-    <ul className={`grid gap-6 ${cols} ${className}`}>
+    <ul className={`reveal-stagger grid gap-6 ${cols} ${className}`}>
       {features.map((feature) => (
         <li key={feature.title} className={`reveal ${itemClass}`}>
           <h3
