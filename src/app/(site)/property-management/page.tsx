@@ -24,8 +24,7 @@ export const metadata = pageMetadata({
 
 /** Etichette di competenza mostrate sotto l'hero. */
 const competenze = [
-  "Airbnb Management",
-  "Booking Management",
+  "Annunci su Airbnb e Booking.com",
   "Revenue Management",
   "Remote Management",
   "Guest Communication",
@@ -36,9 +35,12 @@ const competenze = [
 
 /**
  * Canali su cui gestiamo l'annuncio.
- * TODO: aggiungere i loghi ufficiali in `public/images/portali/` e indicarli
- * qui. Finché mancano viene mostrato il nome: un logo ricostruito a mano
- * violerebbe le linee guida del marchio.
+ *
+ * I loghi non sono inclusi di proposito. Airbnb richiede un'autorizzazione
+ * esplicita per l'uso del marchio da parte di chi gestisce immobili, e
+ * Booking.com distribuisce i propri asset solo attraverso il portale partner.
+ * Ottenuti i file ufficiali, vanno messi in `public/images/portali/` e
+ * indicati qui in `logo`: il componente li usa al posto del nome.
  */
 const portali = [{ nome: "Airbnb" }, { nome: "Booking.com" }] as const;
 
@@ -326,6 +328,7 @@ export default function PropertyManagementPage() {
           titolo="Il tuo immobile, sui canali che contano"
           portali={portali}
           descrizione="Gestiamo annunci, disponibilità, prenotazioni, comunicazione e performance da un unico sistema."
+          nota="Airbnb e Booking.com sono marchi dei rispettivi proprietari. GGM gestisce annunci pubblicati su queste piattaforme e non è affiliata, sponsorizzata o approvata da esse."
         />
       </Section>
 
