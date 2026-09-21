@@ -32,7 +32,7 @@ export function CTASection({
         <div aria-hidden="true" className="absolute inset-0 bg-grid opacity-30" />
       )}
       <Container className="relative z-10 py-16 sm:py-20 lg:py-24">
-        <div className="max-w-3xl">
+        <div className="reveal max-w-3xl">
           {eyebrow && (
             <p
               className={`mb-4 text-xs font-semibold tracking-[0.2em] uppercase ${

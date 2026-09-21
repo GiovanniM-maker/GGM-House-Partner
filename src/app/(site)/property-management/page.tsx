@@ -429,7 +429,7 @@ export default function PropertyManagementPage() {
             <p className="text-sm text-muted">Gestione</p>
             <p className="mt-1 display-1 font-semibold text-ink">250€</p>
             <p className="mt-1 text-sm text-muted">al mese, per immobile</p>
-            <p className="mt-6 border-t border-line pt-6 text-sm leading-relaxed text-ink-600">
+            <p className="mt-6 border-t border-line pt-6 text-sm leading-relaxed font-semibold text-ink">
               Lo sai prima di cominciare e non cambia per stagione. Prima di
               metterti sul mercato guardiamo i numeri della casa: se il
               potenziale non c&apos;è, te lo diciamo invece di farti partire.
