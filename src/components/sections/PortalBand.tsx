@@ -15,6 +15,12 @@ type PortalBandProps = {
   descrizione?: string;
   portali: readonly Portal[];
   tone?: "light" | "dark";
+  /**
+   * Nota sui marchi. Serve a chiarire che nominare un portale non significa
+   * esserne partner: Airbnb vieta espressamente a chi gestisce immobili di
+   * far credere di avere un rapporto privilegiato con loro.
+   */
+  nota?: string;
 };
 
 /** Fascia dei canali su cui gestiamo l'annuncio. */
@@ -23,6 +29,7 @@ export function PortalBand({
   descrizione,
   portali,
   tone = "light",
+  nota,
 }: PortalBandProps) {
   const isDark = tone === "dark";
 
@@ -34,26 +41,34 @@ export function PortalBand({
         {titolo}
       </h2>
 
-      <ul className="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-8 sm:gap-x-16">
+      <ul className="mt-10 flex flex-wrap items-center justify-center gap-4">
         {portali.map((portale) => (
-          <li key={portale.nome} className="flex items-center">
-            {portale.logo ? (
-              <Image
-                src={portale.logo}
-                alt={portale.nome}
-                width={140}
-                height={40}
-                className={`h-7 w-auto sm:h-8 ${isDark ? "brightness-0 invert" : ""}`}
-              />
-            ) : (
-              <span
-                className={`text-lg font-semibold tracking-tight sm:text-xl ${
-                  isDark ? "text-cream/70" : "text-ink-600"
-                }`}
-              >
-                {portale.nome}
-              </span>
-            )}
+          <li key={portale.nome}>
+            <span
+              className={`flex h-16 items-center justify-center rounded-lg border px-8 sm:px-12 ${
+                isDark
+                  ? "border-white/15 bg-white/5"
+                  : "border-line bg-white"
+              }`}
+            >
+              {portale.logo ? (
+                <Image
+                  src={portale.logo}
+                  alt={portale.nome}
+                  width={160}
+                  height={40}
+                  className="h-7 w-auto sm:h-8"
+                />
+              ) : (
+                <span
+                  className={`text-lg font-semibold tracking-tight sm:text-xl ${
+                    isDark ? "text-cream" : "text-ink"
+                  }`}
+                >
+                  {portale.nome}
+                </span>
+              )}
+            </span>
           </li>
         ))}
       </ul>
@@ -65,6 +80,16 @@ export function PortalBand({
           }`}
         >
           {descrizione}
+        </p>
+      )}
+
+      {nota && (
+        <p
+          className={`mx-auto mt-6 max-w-2xl text-xs leading-relaxed ${
+            isDark ? "text-cream/50" : "text-muted"
+          }`}
+        >
+          {nota}
         </p>
       )}
     </div>

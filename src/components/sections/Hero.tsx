@@ -25,6 +25,10 @@ type HeroProps = {
     src?: string;
     alt: string;
     label?: string;
+    /** Proporzioni dell'immagine. Predefinito verticale. */
+    ratio?: "portrait" | "square" | "photo";
+    /** Per limitare la larghezza quando il file originale è piccolo. */
+    className?: string;
   };
   variant?: "dark" | "light";
 };
@@ -147,11 +151,11 @@ export function Hero({
                 src={image.src}
                 alt={image.alt}
                 label={image.label}
-                ratio="portrait"
+                ratio={image.ratio ?? "portrait"}
                 tone={isDark ? "dark" : "light"}
                 priority
                 sizes="(min-width: 1024px) 45vw, 100vw"
-                className="lg:rounded-xl"
+                className={`lg:rounded-xl ${image.className ?? ""}`}
               />
             </div>
           )}

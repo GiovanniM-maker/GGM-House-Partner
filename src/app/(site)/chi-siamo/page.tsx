@@ -90,14 +90,15 @@ export default function ChiSiamoPage() {
     <>
       <Hero
         eyebrow="Chi siamo"
-        title="Dietro GGM ci sono persone che conoscono il territorio e il digitale."
+        title="Dietro GGM c'è una persona, e una rete che sta crescendo."
         description="Un progetto nuovo, costruito su esperienza reale. Non abbiamo ancora una storia come società: abbiamo il lavoro che c'era prima e un modo preciso di affrontare questo."
         primaryCta={ctas.parlaci}
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Chi siamo" }]}
         image={{
-          alt: "Fondatori di GGM sul territorio siciliano",
-          label:
-            "Foto reale delle persone del progetto. Non usare immagini generate",
+          src: "/images/giovanni-mavilla.jpg",
+          alt: "Giovanni Mavilla, fondatore di GGM",
+          ratio: "square",
+          className: "mx-auto max-w-xs sm:max-w-sm",
         }}
       />
 
