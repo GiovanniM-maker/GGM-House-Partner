@@ -187,8 +187,8 @@ export default function RistrutturazionePage() {
             />
           </div>
           <ImagePlaceholder
-            src="/images/ristrutturazione-sopralluogo.jpg"
-            alt="Disegni arrotolati, metro e misuratore laser appoggiati su un cavalletto in una stanza vuota"
+            src="/images/persone-sopralluogo.jpg"
+            alt="Figura di spalle in fondo a una stanza vuota, in piedi davanti alla finestra, mentre osserva il soffitto"
             ratio="photo"
             tone="dark"
             sizes="(min-width: 1024px) 45vw, 100vw"
@@ -231,7 +231,7 @@ export default function RistrutturazionePage() {
         <ExperienceBlock
           eyebrow="Esperienza tecnica"
           title="Cantieri veri, prima di GGM."
-          description="Le fotografie qui sotto documentano lavori realizzati nell'attività professionale precedente dei fondatori. Le mostriamo per farti vedere il tipo di intervento e il livello di finitura, non per attribuire quei lavori a GGM."
+          description="Le fotografie qui sotto documentano lavori realizzati nell'attività professionale precedente del fondatore. Le mostriamo per farti vedere il tipo di intervento e il livello di finitura, non per attribuire quei lavori a GGM."
           images={[
             {
               alt: "Interno ristrutturato in un lavoro precedente",

@@ -67,7 +67,7 @@ const trasparenza = [
   {
     claim: "Casi studio e numeri di GGM",
     reality:
-      "GGM è un progetto in avvio: non abbiamo ancora risultati come società e non ne inventiamo. Quello che mostriamo è l'esperienza professionale precedente dei fondatori, dichiarata come tale.",
+      "GGM è un progetto in avvio: non abbiamo ancora risultati come società e non ne inventiamo. Quello che mostriamo è l'esperienza professionale precedente del fondatore, dichiarata come tale.",
   },
   {
     claim: "Presenza fisica in tutta la Sicilia",
@@ -195,8 +195,8 @@ export default function ChiSiamoPage() {
             }
           />
           <ImagePlaceholder
-            alt="Professionisti al lavoro sul territorio"
-            label="Foto reale: persone della rete al lavoro"
+            src="/images/persone-consegna-chiavi.jpg"
+            alt="Due persone in controluce sulla soglia di una casa in pietra, una consegna le chiavi all'altra"
             ratio="photo"
             sizes="(min-width: 1024px) 40vw, 100vw"
           />

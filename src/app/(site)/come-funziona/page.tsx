@@ -5,6 +5,7 @@ import { FeatureBlock } from "@/components/sections/FeatureBlock";
 import { Hero } from "@/components/sections/Hero";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { SectionHeader } from "@/components/sections/SectionHeader";
+import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
 import { Section } from "@/components/ui/Section";
 import { ButtonLink } from "@/components/ui/Button";
 import { faqByTag } from "@/content/faq";
@@ -200,11 +201,26 @@ export default function ComeFunzionaPage() {
           title="GGM coordina. Le lavorazioni le fanno professionisti qualificati."
           description="Non ci presentiamo come un'impresa che esegue ogni tipo di intervento: non lo saremmo e non sarebbe un vantaggio per te."
         />
+        <div className="mt-12 grid gap-5 sm:grid-cols-2">
+          <ImagePlaceholder
+            src="/images/persone-gestione-online.jpg"
+            alt="Mani su un computer portatile appoggiato a un tavolo in legno, accanto a un quaderno e una tazza, con luce dalla finestra"
+            ratio="photo"
+            sizes="(min-width: 640px) 50vw, 100vw"
+          />
+          <ImagePlaceholder
+            src="/images/persone-preparazione-casa.jpg"
+            alt="Figura di spalle in fondo a una camera luminosa mentre sistema un copriletto di lino"
+            ratio="photo"
+            sizes="(min-width: 640px) 50vw, 100vw"
+          />
+        </div>
+
         <FeatureBlock
           features={chiFaCosa}
           columns={2}
           variant="card"
-          className="mt-12"
+          className="mt-10"
         />
       </Section>
 

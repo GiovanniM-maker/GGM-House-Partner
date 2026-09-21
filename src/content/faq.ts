@@ -77,7 +77,7 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "Vi occupate di check-in e pulizie?",
         answer:
-          "Dove è disponibile la rete locale, sì: check-in e check-out, pulizie, preparazione dell'immobile e controlli periodici. Dove la rete non c'è, non lo promettiamo.",
+          "Non ancora. Partiamo con la gestione da remoto, cioè annunci, prezzi, calendario, prenotazioni e ospiti. Le attività sul posto continua a seguirle chi già lo fa per te, e noi ci coordiniamo. Quando le attiveremo lo scriveremo qui.",
         tags: ["property-management", "operativita"],
       },
       {
@@ -149,13 +149,13 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "Quanto costa la gestione della casa?",
         answer:
-          "Il modello economico del property management non è ancora definitivo e non pubblichiamo tariffe che potrebbero cambiare. Le condizioni vengono definite e messe per iscritto dopo l'analisi dell'immobile, prima di qualsiasi impegno.",
+          "Si parte dal 12% dei ricavi generati. La percentuale esatta dipende da quanto lavora la casa e da quante cose seguiamo, e te la diciamo dopo l'analisi, per iscritto, prima di qualsiasi impegno. Nessun canone fisso: se la casa non genera, non guadagniamo.",
         tags: ["pagamenti", "property-management"],
       },
       {
-        question: "La valutazione iniziale si paga?",
+        question: "L'analisi è davvero gratuita?",
         answer:
-          "La prima analisi delle informazioni che ci lasci nel modulo non ha costi. Eventuali attività successive, come sopralluoghi, progetti e pratiche tecniche, vengono concordate prima, con costi chiari.",
+          "Sì, e non è un modo di dire: analizziamo ricavi, costi, commissioni e performance del tuo immobile e ti diciamo cosa vediamo, anche quando la conclusione è che affidarci la gestione non ti conviene. Eventuali attività successive vengono concordate prima, con costi chiari.",
         tags: ["pagamenti"],
       },
       {

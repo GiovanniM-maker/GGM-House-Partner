@@ -1,24 +1,71 @@
 import { CTASection } from "@/components/sections/CTASection";
-import { CoverageBlock } from "@/components/sections/CoverageBlock";
 import { ExperienceBlock } from "@/components/sections/ExperienceBlock";
 import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { CheckList, FeatureBlock } from "@/components/sections/FeatureBlock";
 import { Hero } from "@/components/sections/Hero";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
+import { Badges } from "@/components/sections/Badges";
+import { PortalBand } from "@/components/sections/PortalBand";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { TransparencyBlock } from "@/components/sections/TransparencyBlock";
+import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
 import { Section } from "@/components/ui/Section";
 import { faqByTag } from "@/content/faq";
-import { coverage, ctas, routes } from "@/content/site";
+import { ctas, routes } from "@/content/site";
 import { faqSchema } from "@/lib/schema";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Property management in Sicilia",
+  title: "Remote property management in Sicilia",
   description:
-    "Gestiamo la tua casa in Sicilia anche se vivi altrove: annunci, prezzi, calendario, prenotazioni e comunicazione online in tutta l'isola, attività sul posto dove esiste una rete affidabile.",
+    "Analisi gratuita del tuo immobile: ricavi, costi, commissioni e potenziale. Poi, se ha senso, gestiamo annunci, prezzi, calendario, prenotazioni e ospiti su Airbnb e Booking.",
   path: routes.propertyManagement,
 });
+
+/** Etichette di competenza mostrate sotto l'hero. */
+const competenze = [
+  "Airbnb Management",
+  "Booking Management",
+  "Revenue Management",
+  "Remote Management",
+  "Guest Communication",
+  "Listing Optimization",
+  "Pricing Optimization",
+  "Multi-Channel Management",
+] as const;
+
+/**
+ * Canali su cui gestiamo l'annuncio.
+ * TODO: aggiungere i loghi ufficiali in `public/images/portali/` e indicarli
+ * qui. Finché mancano viene mostrato il nome: un logo ricostruito a mano
+ * violerebbe le linee guida del marchio.
+ */
+const portali = [
+  { nome: "Airbnb" },
+  { nome: "Booking.com" },
+  { nome: "Vrbo" },
+  { nome: "Expedia" },
+] as const;
+
+/** Cosa riceve il proprietario con l'analisi gratuita. */
+const cosaAnalizziamo = [
+  {
+    title: "Ricavi",
+    description: "Quanto genera oggi e quale potenziale può avere.",
+  },
+  {
+    title: "Costi",
+    description: "Commissioni dei portali e principali costi di gestione.",
+  },
+  {
+    title: "Performance",
+    description: "Occupazione, pricing, posizionamento e qualità dell'annuncio.",
+  },
+  {
+    title: "Opportunità",
+    description: "Dove potrebbe esserci margine di miglioramento.",
+  },
+];
 
 const problemi = [
   {
@@ -37,9 +84,14 @@ const problemi = [
       "Un annuncio scritto male o con foto sbagliate viene mostrato meno e converte peggio.",
   },
   {
-    title: "Check-in, pulizie, manutenzione",
+    title: "Commissioni e costi",
     description:
-      "Sono attività fisiche: qualcuno deve esserci, ogni volta, con la stessa qualità.",
+      "Fra portali, pulizie e utenze, quello che resta al proprietario è spesso diverso da quello che sembra.",
+  },
+  {
+    title: "Il tuo tempo",
+    description:
+      "È il costo che nessuno mette a bilancio, ed è quello che pesa di più quando vivi lontano.",
   },
 ];
 
@@ -139,8 +191,9 @@ const nonPromettiamo = [
       "Dipende da posizione, stagionalità, domanda e stato dell'immobile. Analizziamo il potenziale e ti spieghiamo su cosa si basa la valutazione, senza numeri promessi in anticipo.",
   },
   {
-    claim: "Presenza fisica ovunque in Sicilia",
-    reality: `Le attività sul posto sono attive dove abbiamo una rete affidabile: ${coverage.local.area.toLowerCase()}. La gestione online invece copre tutta l'isola.`,
+    claim: "Pulizie, check-in e manutenzione",
+    reality:
+      "Questo servizio è da remoto e non le comprende. Continua a occuparsene chi già lo fa per te, e noi ci coordiniamo. Quando attiveremo le attività sul posto lo scriveremo qui, non prima.",
   },
   {
     claim: "Che ogni casa debba diventare casa vacanza",
@@ -148,9 +201,9 @@ const nonPromettiamo = [
       "Per alcune case ha più senso un affitto a medio termine, per altre un uso diverso. La formula si decide dopo l'analisi, non prima.",
   },
   {
-    claim: "Un listino prezzi valido per tutti",
+    claim: "Una percentuale uguale per ogni casa",
     reality:
-      "Il modello economico del servizio non è ancora definitivo e non pubblichiamo tariffe che potrebbero cambiare. Le condizioni si definiscono per iscritto dopo l'analisi.",
+      "Si parte dal 12% dei ricavi, ma dipende da quanto lavora la casa e da quante cose seguiamo. La percentuale esatta arriva dopo l'analisi, per iscritto.",
   },
 ];
 
@@ -165,15 +218,12 @@ export default function PropertyManagementPage() {
       />
 
       <Hero
-        eyebrow="Property Management"
-        title="Hai una casa in Sicilia ma vivi altrove? La gestiamo noi."
-        description="Dalla messa online alla gestione delle prenotazioni, fino al coordinamento delle attività locali dove disponibili."
-        primaryCta={ctas.potenziale}
-        secondaryCta={{
-          label: "Ristruttura & metti a reddito",
-          href: routes.integrato,
-        }}
-        note="Prima analizziamo la casa. Solo dopo parliamo di gestione."
+        eyebrow="Remote Property Management"
+        title="Quanto ti costa davvero gestire il tuo immobile?"
+        description="Analizziamo gratuitamente ricavi, costi, commissioni e potenziale del tuo immobile per capire dove puoi migliorare la redditività."
+        primaryCta={ctas.analisi}
+        secondaryCta={{ label: "Come funziona", href: routes.comeFunziona }}
+        note="Gratis. Senza impegno. Analisi personalizzata."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Property Management" },
@@ -183,6 +233,11 @@ export default function PropertyManagementPage() {
           alt: "Camera da letto di una casa siciliana preparata per gli ospiti, con lino bianco e persiane socchiuse",
         }}
       />
+
+      {/* Competenze: si leggono in un colpo d'occhio, senza diventare un elenco */}
+      <Section tone="white" spacing="sm" size="wide">
+        <Badges items={competenze} />
+      </Section>
 
       {/* Problema */}
       <Section tone="cream" spacing="lg" size="wide">
@@ -194,92 +249,116 @@ export default function PropertyManagementPage() {
         <FeatureBlock features={problemi} columns={4} className="mt-12" />
       </Section>
 
-      {/* Overview */}
-      <Section tone="ink" spacing="lg" size="wide">
+      {/* Cosa analizziamo */}
+      <Section tone="white" spacing="lg" size="wide">
         <SectionHeader
-          eyebrow="Come funziona il servizio"
-          title="Due livelli distinti, e li teniamo separati."
-          description="Confondere gestione online e operatività locale è il modo più veloce per promettere cose che poi non si possono mantenere. Preferiamo dirti da subito quale delle due copriamo dove si trova la tua casa."
-          tone="dark"
+          eyebrow="L'analisi gratuita"
+          title="Prima analizziamo. Poi decidiamo."
+          description="Non tutti gli immobili hanno lo stesso potenziale e non tutte le gestioni sono economicamente convenienti. Per questo analizziamo prima i numeri del tuo immobile."
         />
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-2">
-          <div className="reveal rounded-lg border border-white/15 bg-white/5 p-7 sm:p-8">
-            <p className="inline-flex rounded-full bg-gold/20 px-3 py-1 text-xs font-semibold text-gold">
-              Gestione online: tutta la Sicilia
-            </p>
-            <h3 className="mt-5 display-3 font-semibold text-white">
-              Tutto quello che si può seguire a distanza
-            </h3>
-            <p className="mt-3 text-sm leading-relaxed text-cream/75">
-              È la parte che facciamo direttamente noi, ovunque si trovi la casa
-              sull&apos;isola.
-            </p>
+        <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {cosaAnalizziamo.map((voce, indice) => (
+            <li
+              key={voce.title}
+              className="reveal flex flex-col rounded-lg border border-line bg-cream p-6"
+            >
+              <span className="text-xs font-semibold tracking-[0.16em] text-gold-700">
+                {String(indice + 1).padStart(2, "0")}
+              </span>
+              <h3 className="mt-3 text-lg font-semibold text-ink">
+                {voce.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted">
+                {voce.description}
+              </p>
+            </li>
+          ))}
+        </ol>
+
+        <p className="mt-8 text-sm text-muted">
+          L&apos;analisi si basa sui dati disponibili sul tuo immobile. Dove un
+          dato manca lo diciamo, invece di riempirlo con una stima.
+        </p>
+      </Section>
+
+      {/* Remote Property Management */}
+      <Section tone="ink" spacing="lg" size="wide">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-16">
+          <div>
+            <SectionHeader
+              eyebrow="Remote Property Management"
+              title="La gestione che si fa a distanza, fatta bene."
+              description="Partiamo dalla parte digitale e strategica, quella che pesa di più sui risultati e che si può seguire da ovunque si trovi la casa in Sicilia."
+              tone="dark"
+            />
             <CheckList
               tone="dark"
-              className="mt-6"
+              className="mt-8"
+              columns={2}
               items={[
-                "Creazione e ottimizzazione degli annunci",
-                "Pubblicazione su Airbnb, Booking e altri canali",
-                "Strategia di prezzo e gestione del calendario",
+                "Annunci su Airbnb e Booking",
+                "Ottimizzazione delle schede",
+                "Strategia di prezzo",
+                "Calendario e disponibilità",
                 "Gestione delle prenotazioni",
-                "Comunicazione con gli ospiti, prima e durante il soggiorno",
-                "Report periodici al proprietario",
+                "Comunicazione con gli ospiti",
+                "Recensioni e reputazione",
+                "Revenue management",
+                "Report periodici",
               ]}
             />
+            <p className="mt-8 max-w-xl text-sm leading-relaxed text-cream/70">
+              Le attività che richiedono una persona sul posto, come pulizie e
+              accoglienza fisica, non sono comprese in questo servizio. Se ne
+              occupa chi già le segue per te, e noi ci coordiniamo.
+            </p>
           </div>
 
-          <div className="reveal rounded-lg border border-white/15 bg-white/5 p-7 sm:p-8">
-            <p className="inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-cream">
-              Gestione locale: {coverage.local.area}
-            </p>
-            <h3 className="mt-5 display-3 font-semibold text-white">
-              Tutto quello che richiede una persona sul posto
-            </h3>
-            <p className="mt-3 text-sm leading-relaxed text-cream/75">
-              È la parte che attiviamo solo dove la rete esiste davvero. Dove non
-              c&apos;è, te lo diciamo.
-            </p>
-            <CheckList
-              tone="dark"
-              className="mt-6"
-              items={[
-                "Check-in e check-out degli ospiti",
-                "Pulizie e cambio biancheria",
-                "Preparazione dell'immobile fra un soggiorno e l'altro",
-                "Controlli periodici sulla casa",
-                "Piccola manutenzione e coordinamento degli interventi",
-              ]}
-            />
-          </div>
+          <ImagePlaceholder
+            src="/images/persone-gestione-online.jpg"
+            alt="Mani su un computer portatile appoggiato a un tavolo in legno, accanto a un quaderno e una tazza, con luce dalla finestra"
+            ratio="photo"
+            tone="dark"
+            sizes="(min-width: 1024px) 45vw, 100vw"
+          />
         </div>
+      </Section>
+
+      {/* Portali */}
+      <Section tone="white" spacing="md" size="wide">
+        <PortalBand
+          titolo="Il tuo immobile, sui canali che contano"
+          portali={portali}
+          descrizione="Gestiamo annunci, disponibilità, prenotazioni, comunicazione e performance da un unico sistema."
+        />
       </Section>
 
       {/* Modello operativo */}
       <Section tone="white" spacing="lg" size="wide">
         <SectionHeader
-          eyebrow="Modello operativo"
-          title="Online quando basta. Sul posto quando serve."
-          description="Non tutte le case hanno bisogno dello stesso livello di presenza. Costruiamo la gestione sulla situazione reale dell'immobile, non su un pacchetto standard."
+          eyebrow="Come miglioriamo la gestione"
+          title="Tre leve, e si vedono tutte nei numeri."
+          description="Non c'è una formula magica: la redditività di una casa si muove su poche cose fatte con costanza. Sono quelle su cui interveniamo."
         />
         <FeatureBlock
           className="mt-12"
           columns={3}
           features={[
             {
-              title: "Online quando basta",
+              title: "L'annuncio",
               description:
-                "Se hai già chi si occupa di pulizie e accoglienza, possiamo seguire solo la parte digitale: annunci, prezzi, calendario e ospiti.",
+                "Foto, titolo, descrizione e dotazioni dichiarate decidono quante volte la casa viene mostrata e quante volte viene scelta.",
             },
             {
-              title: "Sul posto quando serve",
+              title: "Il prezzo",
               description:
-                "Dove abbiamo la rete, coordiniamo anche le attività fisiche, così non devi gestire più fornitori separati.",
+                "Un prezzo che non si muove lascia sul tavolo i periodi forti e riempie male quelli deboli. Si corregge nel tempo, non una volta sola.",
             },
             {
-              title: "Network per le attività specifiche",
+              title: "La risposta agli ospiti",
               description:
-                "Pulizie, manutenzioni e interventi tecnici sono affidati a operatori locali; GGM resta il tuo unico riferimento.",
+                "Rispondere in fretta e bene incide sulle prenotazioni e sulle recensioni, e le recensioni tornano dentro al posizionamento.",
             },
           ]}
         />
@@ -288,9 +367,9 @@ export default function PropertyManagementPage() {
       {/* Valutazione */}
       <Section tone="sand" spacing="lg" size="wide">
         <SectionHeader
-          eyebrow="Valutazione dell'immobile"
-          title="Cosa guardiamo prima di dirti qualcosa"
-          description="Sono gli elementi su cui si costruisce una valutazione seria. Chi ti dà un numero senza averli guardati, sta indovinando."
+          eyebrow="Dentro l'analisi"
+          title="Gli elementi su cui lavoriamo"
+          description="Sono le cose che guardiamo per capire il potenziale di una casa. Chi ti dà un numero senza averle guardate, sta indovinando."
         />
         <FeatureBlock features={valutazione} columns={3} className="mt-12" />
       </Section>
@@ -309,7 +388,7 @@ export default function PropertyManagementPage() {
         <ExperienceBlock
           eyebrow="Esperienza digitale"
           title="La parte online non la stiamo imparando adesso."
-          description="Le competenze digitali che usiamo nella gestione (marketing, contenuti, automazione, lettura dei dati) arrivano dall'attività professionale precedente dei fondatori, in altri settori. Su questo progetto sono nuove per il settore immobiliare, non per noi."
+          description="Le competenze digitali che usiamo nella gestione (marketing, contenuti, automazione, lettura dei dati) arrivano dall'attività professionale precedente del fondatore, in altri settori. Su questo progetto sono nuove per il settore immobiliare, non per noi."
           points={[
             "Gestione di presenze online, contenuti e canali di acquisizione.",
             "Automazione dei processi ripetitivi e comunicazione strutturata.",
@@ -325,6 +404,27 @@ export default function PropertyManagementPage() {
         <FeatureBlock features={perChi} columns={4} className="mt-12" />
       </Section>
 
+      {/* Prezzo */}
+      <Section tone="sand" spacing="lg" size="wide">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-16">
+          <SectionHeader
+            eyebrow="Come ci paghi"
+            title="Una percentuale sui ricavi, non un canone fisso."
+            description="Se la casa non genera, non guadagniamo. È il modo più semplice per essere sicuri che stiamo lavorando sulla stessa cosa."
+          />
+          <div className="reveal rounded-lg border border-line-strong bg-white p-8">
+            <p className="text-sm text-muted">Gestione a partire dal</p>
+            <p className="mt-1 display-1 font-semibold text-ink">12%</p>
+            <p className="mt-1 text-sm text-muted">dei ricavi generati</p>
+            <p className="mt-6 border-t border-line pt-6 text-sm leading-relaxed text-ink-600">
+              La percentuale dipende da quanto lavora la casa e da quante cose
+              seguiamo. Te la diciamo dopo l&apos;analisi, per iscritto, prima di
+              qualsiasi impegno.
+            </p>
+          </div>
+        </div>
+      </Section>
+
       {/* Trasparenza */}
       <Section tone="ink" spacing="lg" size="wide">
         <TransparencyBlock
@@ -336,7 +436,11 @@ export default function PropertyManagementPage() {
 
       {/* Copertura */}
       <Section tone="white" spacing="lg" size="wide">
-        <CoverageBlock />
+        <SectionHeader
+          eyebrow="Dove operiamo"
+          title="In tutta la Sicilia, perché si fa da remoto."
+          description="È il vantaggio di partire dalla gestione digitale: non dipende da dove si trova la casa. Le attività sul posto arriveranno dopo, e su quelle saremo precisi su zone e tempi."
+        />
       </Section>
 
       {/* FAQ */}
@@ -347,9 +451,10 @@ export default function PropertyManagementPage() {
 
       <CTASection
         eyebrow="Primo passo"
-        title="Quanto potrebbe rendere la tua casa?"
-        description="Non facciamo promesse a distanza. Prima la analizziamo, poi ti diciamo cosa vediamo, anche se la risposta è che non conviene."
-        cta={ctas.potenziale}
+        title="Scopri se il tuo immobile può rendere di più."
+        description="Richiedi gratuitamente la nostra analisi e scopri quanto ti costa oggi gestire il tuo immobile, dove puoi ottimizzare le performance e se il nostro modello di gestione può essere conveniente per te."
+        cta={ctas.analisi}
+        note="Gratis. Senza impegno. Se dall'analisi risulta che non conviene, te lo diciamo."
       />
     </>
   );

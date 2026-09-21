@@ -24,10 +24,15 @@ export type EvaluationPayload = {
   camere: string;
   condizioni: string;
 
-  /* Step 2: obiettivo */
+  /* Step 2: come lavora oggi, per qualificare la richiesta */
+  numeroImmobili: string;
+  ricaviAttuali: string;
+  annuncioAttivo: string;
+  linkAnnuncio: string;
+
+  /* Step 3: obiettivo, proprietario e utilizzo */
   obiettivo: string;
 
-  /* Step 3: proprietario e utilizzo */
   residenza: string;
   utilizzo: string;
 

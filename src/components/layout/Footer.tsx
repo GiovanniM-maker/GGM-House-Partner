@@ -92,7 +92,7 @@ export function Footer() {
         <div className="mt-14 flex flex-col gap-6 border-t border-white/10 pt-8 lg:flex-row lg:items-center lg:justify-between">
           <p className="max-w-2xl text-xs leading-relaxed text-cream/65">
             GGM è un progetto in avvio. Le esperienze professionali citate sul
-            sito appartengono ai fondatori e non costituiscono casi studio della
+            sito appartengono al fondatore e non costituiscono casi studio della
             società. Non forniamo garanzie di rendimento.
           </p>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center">

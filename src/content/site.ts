@@ -105,12 +105,17 @@ export const routes = {
 
 /** CTA globale, presente in navbar e in chiusura di ogni pagina. */
 export const primaryCta = {
-  label: "Valuta la tua casa",
+  label: "Analisi gratuita",
   href: routes.valutazione,
 } as const;
 
 /** CTA specifiche di pagina (portano tutte alla stessa conversion page). */
 export const ctas = {
+  /** Conversione principale dell'avvio: l'analisi viene prima della vendita. */
+  analisi: {
+    label: "Analizza gratuitamente il mio immobile",
+    href: routes.valutazione,
+  },
   sopralluogo: { label: "Richiedi un sopralluogo", href: routes.valutazione },
   potenziale: {
     label: "Valuta il potenziale della tua casa",
@@ -119,18 +124,24 @@ export const ctas = {
   parlaci: { label: "Parlaci della tua casa", href: routes.valutazione },
 } as const;
 
+/**
+ * Navigazione dell'avvio. Si parte con il solo property management: le pagine
+ * di ristrutturazione e del percorso integrato restano nel repository, pronte,
+ * ma fuori dai menu finché il servizio non è davvero attivo. Promuovere un
+ * servizio che non si può ancora erogare è il modo più veloce per bruciare la
+ * fiducia di un proprietario.
+ */
 export const mainNav = [
-  { label: "Ristrutturazione", href: routes.ristrutturazione },
   { label: "Property Management", href: routes.propertyManagement },
-  { label: "Ristruttura & Metti a Reddito", href: routes.integrato },
+  { label: "Come funziona", href: routes.comeFunziona },
   { label: "Chi siamo", href: routes.chiSiamo },
 ] as const;
 
 export const footerNav = {
   servizi: [
-    { label: "Ristrutturazione", href: routes.ristrutturazione },
     { label: "Property Management", href: routes.propertyManagement },
-    { label: "Ristruttura & Metti a Reddito", href: routes.integrato },
+    { label: "Come funziona", href: routes.comeFunziona },
+    { label: "Domande frequenti", href: routes.faq },
   ],
   progetto: [
     { label: "Chi siamo", href: routes.chiSiamo },
@@ -165,9 +176,9 @@ export const coverage = {
   },
   local: {
     title: "Operatività sul posto",
-    area: "Provincia di Ragusa e aree coperte dalla rete",
+    area: "In avvio nella provincia di Ragusa",
     description:
-      "Sopralluoghi, cantieri, check-in, pulizie e manutenzione richiedono persone di fiducia sul territorio. Le attiviamo solo dove la rete esiste davvero: preferiamo dire di no piuttosto che promettere una presenza che non possiamo garantire.",
+      "Check-in, pulizie, controlli e manutenzione richiedono persone di fiducia sul territorio. È la parte che stiamo costruendo adesso, nella provincia di Ragusa: la attiviamo caso per caso e solo dove possiamo garantirla davvero. Se per la tua casa non è ancora disponibile, te lo diciamo prima, non dopo.",
     items: [
       "Sopralluoghi e coordinamento dei lavori",
       "Check-in e check-out",
@@ -175,5 +186,5 @@ export const coverage = {
       "Controlli periodici e manutenzione",
     ],
   },
-  note: "Se la tua casa è fuori dalle aree coperte, te lo diciamo subito e ti spieghiamo cosa possiamo comunque seguire online.",
+  note: "La gestione online è quella con cui partiamo e funziona ovunque in Sicilia. Le attività sul posto si valutano insieme, sulla singola casa.",
 } as const;

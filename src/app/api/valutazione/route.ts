@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
 import {
+  annunciAttivi,
   condizioni,
   labelFor,
   MAX_PHOTOS,
@@ -48,6 +49,10 @@ export async function POST(request: Request) {
     camere: text("camere"),
     condizioni: labelFor(condizioni, text("condizioni")),
     obiettivo: labelFor(obiettivi, text("obiettivo")),
+    numeroImmobili: text("numeroImmobili"),
+    ricaviAttuali: text("ricaviAttuali"),
+    annuncioAttivo: labelFor(annunciAttivi, text("annuncioAttivo")),
+    linkAnnuncio: text("linkAnnuncio"),
     residenza: text("residenza"),
     utilizzo: labelFor(utilizzi, text("utilizzo")),
     caratteristiche: Array.isArray(body.caratteristiche)
@@ -67,6 +72,9 @@ export async function POST(request: Request) {
   if (!data.tipologia) errors.push("Manca la tipologia dell'immobile.");
   if (!text("condizioni")) errors.push("Manca lo stato dell'immobile.");
   if (!text("obiettivo")) errors.push("Manca l'obiettivo.");
+  if (!data.numeroImmobili) errors.push("Manca il numero di immobili.");
+  if (!data.ricaviAttuali) errors.push("Mancano i ricavi attuali.");
+  if (!text("annuncioAttivo")) errors.push("Manca lo stato dell'annuncio.");
   if (!data.residenza) errors.push("Manca la residenza del proprietario.");
   if (!text("utilizzo")) errors.push("Manca l'utilizzo attuale della casa.");
   if (!data.nome) errors.push("Manca il nome.");

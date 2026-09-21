@@ -7,14 +7,12 @@ import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { FeatureBlock } from "@/components/sections/FeatureBlock";
 import { Hero } from "@/components/sections/Hero";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
-import { RouteCards } from "@/components/sections/RouteCards";
 import { SectionHeader } from "@/components/sections/SectionHeader";
-import { ServiceCard } from "@/components/sections/ServiceCard";
 import { Section } from "@/components/ui/Section";
 import { ButtonLink } from "@/components/ui/Button";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
 import { allFaqItems } from "@/content/faq";
-import { primaryCta, routes, site } from "@/content/site";
+import { ctas, routes, site } from "@/content/site";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -47,24 +45,23 @@ const situazioni = [
   },
 ];
 
-const percorsi = [
+/** Cosa riceve il proprietario con l'analisi gratuita. */
+const cosaAnalizziamo = [
   {
-    label: "Voglio ristrutturare",
-    description:
-      "Ci sono lavori da fare e ti serve qualcuno che li segua sul posto.",
-    href: routes.ristrutturazione,
+    title: "Ricavi",
+    description: "Quanto genera oggi e quale potenziale può avere.",
   },
   {
-    label: "Voglio metterla a reddito",
-    description:
-      "La casa è utilizzabile e vorresti che iniziasse a produrre qualcosa.",
-    href: routes.propertyManagement,
+    title: "Costi",
+    description: "Commissioni dei portali e principali costi di gestione.",
   },
   {
-    label: "Voglio fare entrambe le cose",
-    description:
-      "Prima capire cosa può diventare, poi sistemarla e gestirla.",
-    href: routes.integrato,
+    title: "Performance",
+    description: "Occupazione, pricing, posizionamento e qualità dell'annuncio.",
+  },
+  {
+    title: "Opportunità",
+    description: "Dove potrebbe esserci margine di miglioramento.",
   },
 ];
 
@@ -147,10 +144,13 @@ export default function HomePage() {
       <Hero
         eyebrow={site.positioning}
         title="Hai una casa in Sicilia? Ci pensiamo noi."
-        description="Ristrutturiamo, valorizziamo e gestiamo immobili in Sicilia, anche se vivi lontano. Un unico referente per seguire la tua casa, dai lavori alla messa a reddito."
-        primaryCta={primaryCta}
-        secondaryCta={{ label: "Come funziona", href: routes.comeFunziona }}
-        note="Raccontaci la casa in pochi minuti. Nessun impegno."
+        description="Gestiamo annunci, prezzi, calendario, prenotazioni e ospiti della tua casa in Sicilia, anche se vivi lontano. Si parte da un'analisi gratuita dei numeri del tuo immobile."
+        primaryCta={ctas.analisi}
+        secondaryCta={{
+          label: "Property Management",
+          href: routes.propertyManagement,
+        }}
+        note="Gratis. Senza impegno. Analisi personalizzata."
         image={{
           src: "/images/home-hero.jpg",
           alt: "Casa in pietra calcarea nella campagna ragusana, con muretto a secco e ulivi, alla luce del tardo pomeriggio",
@@ -167,71 +167,45 @@ export default function HomePage() {
         <FeatureBlock features={situazioni} columns={4} className="mt-12" />
       </Section>
 
-      {/* Router */}
-      <Section tone="ink" spacing="lg" id="percorsi">
+      {/* Da dove si parte */}
+      <Section tone="ink" spacing="lg" size="wide">
         <SectionHeader
-          eyebrow="Scegli il punto di partenza"
-          title="Cosa vuoi fare con la tua casa?"
-          description="Tre percorsi diversi. Se non sai ancora quale sia il tuo, va bene lo stesso: si parte comunque dall'immobile."
+          eyebrow="Da dove si parte"
+          title="Prima i numeri della tua casa. Poi tutto il resto."
+          description="Partiamo dalla gestione da remoto, che è la parte che pesa di più sui risultati e che possiamo seguire ovunque si trovi la casa in Sicilia. E prima ancora, da un'analisi gratuita."
           tone="dark"
         />
-        <RouteCards routes={percorsi} tone="dark" className="mt-12" />
-      </Section>
 
-      {/* Tre servizi */}
-      <Section tone="cream" spacing="lg" size="wide">
-        <SectionHeader
-          eyebrow="Servizi"
-          title="Tre modi di occuparci della tua casa"
-          description="Puoi affidarci una parte o l'intero percorso. Il referente resta lo stesso."
-        />
+        <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {cosaAnalizziamo.map((voce, indice) => (
+            <li
+              key={voce.title}
+              className="reveal flex flex-col rounded-lg border border-white/15 bg-white/5 p-6"
+            >
+              <span className="text-xs font-semibold tracking-[0.16em] text-gold">
+                {String(indice + 1).padStart(2, "0")}
+              </span>
+              <h3 className="mt-3 text-lg font-semibold text-white">
+                {voce.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-cream/75">
+                {voce.description}
+              </p>
+            </li>
+          ))}
+        </ol>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          <ServiceCard
-            eyebrow="Ristrutturazione"
-            title="La tua casa in Sicilia. I lavori, li seguiamo noi."
-            description="Dal sopralluogo alla consegna, con un referente unico che coordina cantiere, tecnici e artigiani."
-            bullets={[
-              "Sopralluogo e analisi dello stato reale",
-              "Preventivo e pianificazione dei lavori",
-              "Coordinamento del cantiere e aggiornamenti",
-            ]}
-            href={routes.ristrutturazione}
-            image={{
-              src: "/images/card-ristrutturazione.jpg",
-              alt: "Interno di una casa siciliana durante i lavori, con intonaco nuovo e pavimento in cotto",
-            }}
-          />
-          <ServiceCard
-            eyebrow="Property Management"
-            title="Hai una casa che non utilizzi? Può diventare qualcosa di più."
-            description="Gestione online in tutta la Sicilia e attività sul posto dove abbiamo una rete affidabile."
-            bullets={[
-              "Annunci, prezzi, calendario e prenotazioni",
-              "Comunicazione con gli ospiti e report",
-              "Check-in, pulizie e controlli dove disponibili",
-            ]}
+        <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+          <ButtonLink href={ctas.analisi.href} variant="accent" size="lg">
+            {ctas.analisi.label}
+          </ButtonLink>
+          <ButtonLink
             href={routes.propertyManagement}
-            image={{
-              src: "/images/card-property-management.jpg",
-              alt: "Soggiorno di una casa siciliana preparato per gli ospiti, con divano in lino e luce dalle persiane",
-            }}
-          />
-          <ServiceCard
-            eyebrow="Percorso integrato"
-            title="Prima di ristrutturare, capiamo cosa può diventare."
-            description="Analisi dell'immobile e del suo potenziale prima di decidere quanto e come investire."
-            bullets={[
-              "Analisi di immobile, zona e obiettivo",
-              "Lavori proporzionati alla strategia scelta",
-              "Preparazione, messa online e gestione",
-            ]}
-            href={routes.integrato}
-            image={{
-              src: "/images/card-percorso-integrato.jpg",
-              alt: "Facciata in pietra di una casa non ristrutturata in un paese siciliano, con persiane consumate",
-            }}
-          />
+            variant="onDark"
+            size="lg"
+          >
+            Come gestiamo la tua casa
+          </ButtonLink>
         </div>
       </Section>
 
@@ -281,7 +255,7 @@ export default function HomePage() {
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-center lg:gap-16">
           <ExperienceBlock
             title="Un progetto nuovo, costruito su esperienza reale."
-            description="GGM nasce oggi come brand: non abbiamo casi studio da mostrare e non ne inventiamo. Quello che portiamo è l'esperienza professionale dei fondatori, maturata prima di questo progetto."
+            description="GGM nasce oggi come brand: non abbiamo casi studio da mostrare e non ne inventiamo. Quello che portiamo è l'esperienza professionale del fondatore, maturata prima di questo progetto."
             points={[
               "Anni di lavoro in ristrutturazioni, cantieri e rapporti con artigiani e tecnici sul territorio siciliano.",
               "Competenze in marketing, tecnologia, automazione e gestione di attività online.",
@@ -336,9 +310,9 @@ export default function HomePage() {
 
       <CTASection
         eyebrow="Primo passo"
-        title="Hai una casa in Sicilia? Raccontaci dove si trova e cosa vorresti farne."
-        description="Ci bastano poche informazioni per capire se possiamo esserti utili. Se non è il caso, te lo diciamo."
-        cta={primaryCta}
+        title="Scopri se il tuo immobile può rendere di più."
+        description="Ci bastano poche informazioni per analizzare i numeri della tua casa. Se non conviene affidarcela, te lo diciamo."
+        cta={ctas.analisi}
       />
     </>
   );
