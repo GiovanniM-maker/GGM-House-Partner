@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter } from "next/font/google";
 
+import { RevealFallback } from "@/components/ui/RevealFallback";
 import { AttributionCapture } from "@/components/AttributionCapture";
 import { organizationSchema } from "@/lib/schema";
 import { site } from "@/content/site";
@@ -63,6 +64,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${inter.variable} ${fraunces.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-cream text-ink">
+        <RevealFallback />
         <a
           href="#contenuto"
           className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-sm focus:text-cream"

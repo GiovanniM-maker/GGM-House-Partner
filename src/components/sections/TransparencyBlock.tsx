@@ -52,11 +52,11 @@ export function TransparencyBlock({
         </p>
       )}
 
-      <ul className="mt-10 grid gap-px overflow-hidden rounded-lg sm:grid-cols-2">
+      <ul className="reveal-stagger mt-10 grid gap-px overflow-hidden rounded-lg sm:grid-cols-2">
         {items.map((item) => (
           <li
             key={item.claim}
-            className={`flex flex-col p-6 ${isDark ? "bg-ink-800" : "bg-white"}`}
+            className={`reveal flex flex-col p-6 ${isDark ? "bg-ink-800" : "bg-white"}`}
           >
             <p
               className={`flex items-start gap-2.5 font-medium ${

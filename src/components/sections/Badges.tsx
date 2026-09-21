@@ -12,11 +12,11 @@ export function Badges({ items, tone = "light", className = "" }: BadgesProps) {
   const isDark = tone === "dark";
 
   return (
-    <ul className={`flex flex-wrap gap-2 ${className}`}>
+    <ul className={`reveal-stagger flex flex-wrap gap-2 ${className}`}>
       {items.map((item) => (
         <li
           key={item}
-          className={`rounded-full border px-3 py-1.5 text-xs font-medium whitespace-nowrap ${
+          className={`reveal rounded-full border px-3 py-1.5 text-xs font-medium whitespace-nowrap ${
             isDark
               ? "border-white/20 bg-white/5 text-cream/85"
               : "border-line-strong bg-white text-ink-600"

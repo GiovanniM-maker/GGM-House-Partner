@@ -19,12 +19,12 @@ export function FAQAccordion({
 
   return (
     <div
-      className={`divide-y ${isDark ? "divide-white/15" : "divide-line"} border-y ${
+      className={`reveal-stagger divide-y ${isDark ? "divide-white/15" : "divide-line"} border-y ${
         isDark ? "border-white/15" : "border-line"
       } ${className}`}
     >
       {items.map((item) => (
-        <details key={item.question} className="group">
+        <details key={item.question} className="reveal group">
           <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-5 text-left [&::-webkit-details-marker]:hidden">
             <h3
               className={`text-base font-medium sm:text-lg ${

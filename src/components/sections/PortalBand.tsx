@@ -74,12 +74,12 @@ export function PortalBand({
       )}
 
       <ul
-        className={`flex flex-wrap items-center justify-center gap-4 ${
+        className={`reveal-stagger flex flex-wrap items-center justify-center gap-4 ${
           isCompatta ? "mt-6" : "mt-10"
         }`}
       >
         {portali.map((portale) => (
-          <li key={portale.nome}>
+          <li key={portale.nome} className="reveal">
             <span
               className={`flex h-16 items-center justify-center rounded-lg border px-8 sm:px-12 ${
                 isDark
