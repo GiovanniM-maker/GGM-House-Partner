@@ -98,9 +98,29 @@ export const caratteristiche = [
   "Spazio esterno comune",
 ] as const;
 
+/** Filtro lead: servono a capire se l'immobile e il proprietario sono in target. */
+export const numeroImmobili = ["1", "2", "3-5", "5+"] as const;
+
+export const ricaviAttuali = [
+  "Meno di 10.000 € l'anno",
+  "10.000 - 20.000 €",
+  "20.000 - 30.000 €",
+  "30.000 - 50.000 €",
+  "Oltre 50.000 €",
+  "Non lo so",
+] as const;
+
+export const annunciAttivi = [
+  { value: "airbnb", label: "Airbnb" },
+  { value: "booking", label: "Booking.com" },
+  { value: "entrambi", label: "Entrambi" },
+  { value: "altro", label: "Un altro portale" },
+  { value: "no", label: "Non è ancora online" },
+] as const;
+
 export const formSteps = [
   { id: 1, title: "L'immobile", short: "Immobile" },
-  { id: 2, title: "Cosa vorresti farne", short: "Obiettivo" },
+  { id: 2, title: "Come lavora oggi", short: "Numeri" },
   { id: 3, title: "Tu e l'utilizzo della casa", short: "Utilizzo" },
   { id: 4, title: "Caratteristiche", short: "Dettagli" },
   { id: 5, title: "Come ti ricontattiamo", short: "Contatti" },

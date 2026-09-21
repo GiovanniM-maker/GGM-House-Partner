@@ -4,16 +4,16 @@ import { coverage, routes } from "@/content/site";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Valuta la tua casa",
+  title: "Analisi gratuita del tuo immobile",
   description:
-    "Raccontaci la casa che hai in Sicilia: località, stato, obiettivo. Analizziamo la richiesta e ti ricontattiamo. Nessun impegno.",
+    "Raccontaci la casa che hai in Sicilia. Analizziamo ricavi, costi, commissioni e potenziale, e ti diciamo cosa vediamo. Gratis, senza impegno.",
   path: routes.valutazione,
 });
 
 const dopo = [
   {
     title: "Ci racconti la casa",
-    description: "Pochi minuti: località, stato, cosa vorresti farne.",
+    description: "Pochi minuti: località, stato, come lavora oggi.",
   },
   {
     title: "Analizziamo",
@@ -40,14 +40,18 @@ export default function ValutaLaTuaCasaPage() {
         <Container size="wide" className="py-14 sm:py-20">
           <div className="max-w-3xl">
             <p className="mb-4 text-xs font-semibold tracking-[0.2em] text-gold-700 uppercase">
-              Valuta la tua casa
+              Analisi gratuita
             </p>
             <h1 className="display-1 font-semibold text-ink">
               Raccontaci cosa hai in Sicilia.
             </h1>
             <p className="mt-6 lead text-muted">
-              Che tu voglia ristrutturarla, metterla a reddito o non sappia
-              ancora quale sia la strada migliore, partiamo dall&apos;immobile.
+              Analizziamo ricavi, costi, commissioni e potenziale del tuo
+              immobile, e ti diciamo cosa vediamo. Anche quando la conclusione è
+              che non ti conviene.
+            </p>
+            <p className="mt-4 text-sm font-medium text-gold-700">
+              Gratis. Senza impegno. Analisi personalizzata.
             </p>
           </div>
         </Container>

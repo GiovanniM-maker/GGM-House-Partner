@@ -67,7 +67,8 @@ var COLONNE = [
   'Comune', 'Provincia', 'Tipologia', 'Superficie (mq)', 'Camere',
   'Stato immobile', 'Obiettivo', 'Residenza', 'Utilizzo attuale',
   'Caratteristiche', 'Note', 'Foto', 'Privacy', 'Stato lavorazione', 'Conferma',
-  'gclid', 'gbraid', 'wbraid'
+  'gclid', 'gbraid', 'wbraid',
+  'Numero immobili', 'Ricavi attuali', 'Annuncio', 'Link annuncio'
 ];
 
 // La colonna dell'esito va cercata per nome, non presa come ultima: cosi'
@@ -142,7 +143,12 @@ function doPost(e) {
       // arriva da un annuncio. Servono a caricare le conversioni su Google Ads.
       String((d.gclid || '')),
       String((d.gbraid || '')),
-      String((d.wbraid || ''))
+      String((d.wbraid || '')),
+      // Filtro lead: servono a capire se la richiesta e in target.
+      String((d.numeroImmobili || '')),
+      String((d.ricaviAttuali || '')),
+      String((d.annuncioAttivo || '')),
+      String((d.linkAnnuncio || ''))
     ]);
     riga = sh.getLastRow();
   } catch (err) {
@@ -323,6 +329,10 @@ function corpoNotifica(d, riferimento, foto, esitoConferma) {
     + riga('Obiettivo', d.obiettivo)
     + riga('Residenza', d.residenza)
     + riga('Utilizzo', d.utilizzo)
+    + riga('Immobili da affidare', d.numeroImmobili)
+    + riga('Ricavi attuali', d.ricaviAttuali)
+    + riga('Annuncio', d.annuncioAttivo)
+    + riga('Link annuncio', d.linkAnnuncio)
     + riga('Caratteristiche', d.caratteristiche)
     + riga('Note', d.messaggio || d.note)
     + riga('Privacy', d.privacy ? 'consenso prestato' : 'NON prestato')

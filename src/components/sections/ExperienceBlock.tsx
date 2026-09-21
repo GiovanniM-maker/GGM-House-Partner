@@ -16,14 +16,14 @@ type ExperienceBlockProps = {
   images?: ExperienceImage[];
   /**
    * Disclaimer obbligatorio: chiarisce che si tratta di esperienza
-   * professionale pregressa dei fondatori e non di lavori realizzati da GGM.
+   * professionale pregressa del fondatore e non di lavori realizzati da GGM.
    */
   disclaimer?: string;
   tone?: "light" | "dark";
 };
 
 const DEFAULT_DISCLAIMER =
-  "Le immagini e le esperienze in questa sezione documentano l'attività professionale pregressa dei fondatori. Non sono lavori realizzati da GGM come società né casi studio del progetto, che è nuovo.";
+  "Le immagini e le esperienze in questa sezione documentano l'attività professionale pregressa del fondatore. Non sono lavori realizzati da GGM come società né casi studio del progetto, che è nuovo.";
 
 export function ExperienceBlock({
   eyebrow = "Esperienza",

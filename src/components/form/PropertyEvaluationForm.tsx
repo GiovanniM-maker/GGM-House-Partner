@@ -6,10 +6,13 @@ import { Button } from "@/components/ui/Button";
 import { ChoiceGroup, Field, inputClass } from "@/components/form/Field";
 import { OptionCard } from "@/components/form/OptionCard";
 import {
+  annunciAttivi,
   camere,
   caratteristiche,
   condizioni,
   formSteps,
+  numeroImmobili,
+  ricaviAttuali,
   MAX_PHOTOS,
   MAX_TOTAL_PHOTO_BYTES,
   obiettivi,
@@ -40,6 +43,10 @@ const initialState: FormState = {
   camere: "",
   condizioni: "",
   obiettivo: "",
+  numeroImmobili: "",
+  ricaviAttuali: "",
+  annuncioAttivo: "",
+  linkAnnuncio: "",
   residenza: "",
   utilizzo: "",
   caratteristiche: [],
@@ -68,11 +75,22 @@ function validateStep(step: number, state: FormState): Errors {
     if (!state.condizioni) errors.condizioni = "Indica lo stato dell'immobile.";
   }
 
-  if (step === 2 && !state.obiettivo) {
-    errors.obiettivo = "Scegli l'opzione più vicina alla tua situazione.";
+  if (step === 2) {
+    if (!state.numeroImmobili) {
+      errors.numeroImmobili = "Indica quanti immobili vorresti affidarci.";
+    }
+    if (!state.ricaviAttuali) {
+      errors.ricaviAttuali = "Scegli una fascia, anche approssimativa.";
+    }
+    if (!state.annuncioAttivo) {
+      errors.annuncioAttivo = "Indica se la casa è già online.";
+    }
   }
 
   if (step === 3) {
+    if (!state.obiettivo) {
+      errors.obiettivo = "Scegli l'opzione più vicina alla tua situazione.";
+    }
     if (!state.residenza) errors.residenza = "Indica dove vivi.";
     if (!state.utilizzo) errors.utilizzo = "Indica come viene usata la casa oggi.";
   }
@@ -333,30 +351,113 @@ export function PropertyEvaluationForm() {
         )}
 
         {step === 2 && (
-          <ChoiceGroup
-            legend="Cosa vorresti fare con questa casa?"
-            hint="Se non hai ancora deciso non è un problema: serve proprio a questo il primo contatto."
-            required
-            error={errors.obiettivo}
-          >
-            <div className="grid gap-3 sm:grid-cols-2">
-              {obiettivi.map((item) => (
-                <OptionCard
-                  key={item.value}
-                  name="obiettivo"
-                  value={item.value}
-                  label={item.label}
-                  hint={item.hint}
-                  checked={state.obiettivo === item.value}
-                  onChange={(value) => set("obiettivo", value)}
+          <div className="grid gap-8">
+            <ChoiceGroup
+              legend="Quanti immobili vorresti affidarci?"
+              required
+              error={errors.numeroImmobili}
+            >
+              <div className="grid gap-3 sm:grid-cols-4">
+                {numeroImmobili.map((item) => (
+                  <OptionCard
+                    key={item}
+                    name="numeroImmobili"
+                    value={item}
+                    label={item}
+                    checked={state.numeroImmobili === item}
+                    onChange={(value) => set("numeroImmobili", value)}
+                  />
+                ))}
+              </div>
+            </ChoiceGroup>
+
+            <Field
+              label="Quanto genera oggi, indicativamente?"
+              htmlFor={`${formId}-ricavi`}
+              required
+              error={errors.ricaviAttuali}
+              hint="Serve a capire da dove si parte. Se non lo sai, scegli l'ultima voce: lo ricostruiamo insieme."
+            >
+              <select
+                id={`${formId}-ricavi`}
+                name="ricaviAttuali"
+                value={state.ricaviAttuali}
+                onChange={(event) => set("ricaviAttuali", event.target.value)}
+                aria-invalid={Boolean(errors.ricaviAttuali)}
+                className={inputClass}
+              >
+                <option value="">Seleziona</option>
+                {ricaviAttuali.map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </select>
+            </Field>
+
+            <ChoiceGroup
+              legend="La casa è già online?"
+              required
+              error={errors.annuncioAttivo}
+            >
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {annunciAttivi.map((item) => (
+                  <OptionCard
+                    key={item.value}
+                    name="annuncioAttivo"
+                    value={item.value}
+                    label={item.label}
+                    checked={state.annuncioAttivo === item.value}
+                    onChange={(value) => set("annuncioAttivo", value)}
+                  />
+                ))}
+              </div>
+            </ChoiceGroup>
+
+            {state.annuncioAttivo && state.annuncioAttivo !== "no" && (
+              <Field
+                label="Link dell'annuncio"
+                htmlFor={`${formId}-link`}
+                hint="Facoltativo, ma è la cosa che rende l'analisi davvero precisa: possiamo guardare foto, prezzi e recensioni."
+              >
+                <input
+                  id={`${formId}-link`}
+                  name="linkAnnuncio"
+                  type="url"
+                  inputMode="url"
+                  value={state.linkAnnuncio}
+                  onChange={(event) => set("linkAnnuncio", event.target.value)}
+                  className={inputClass}
+                  placeholder="https://"
                 />
-              ))}
-            </div>
-          </ChoiceGroup>
+              </Field>
+            )}
+          </div>
         )}
 
         {step === 3 && (
           <div className="grid gap-8">
+            <ChoiceGroup
+              legend="Cosa vorresti fare con questa casa?"
+              hint="Se non hai ancora deciso non è un problema: serve proprio a questo il primo contatto."
+              required
+              error={errors.obiettivo}
+            >
+              <div className="grid gap-3 sm:grid-cols-2">
+                {obiettivi.map((item) => (
+                  <OptionCard
+                    key={item.value}
+                    name="obiettivo"
+                    value={item.value}
+                    label={item.label}
+                    hint={item.hint}
+                    checked={state.obiettivo === item.value}
+                    onChange={(value) => set("obiettivo", value)}
+                  />
+                ))}
+              </div>
+            </ChoiceGroup>
+
             <Field
               label="Dove vivi abitualmente?"
               htmlFor={`${formId}-residenza`}
