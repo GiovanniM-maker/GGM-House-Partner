@@ -42,7 +42,23 @@ const competenze = [
  * Ottenuti i file ufficiali, vanno messi in `public/images/portali/` e
  * indicati qui in `logo`: il componente li usa al posto del nome.
  */
-const portali = [{ nome: "Airbnb" }, { nome: "Booking.com" }] as const;
+const portali = [
+  {
+    nome: "Airbnb",
+    logo: "/images/portali/airbnb.svg",
+    larghezza: 320,
+    altezza: 100,
+    classeLogo: "h-6 sm:h-7",
+  },
+  {
+    nome: "Booking.com",
+    logo: "/images/portali/booking.svg",
+    larghezza: 119,
+    altezza: 20,
+    // Solo lettering: va più basso di Airbnb per pareggiarne la scritta.
+    classeLogo: "h-3.5 sm:h-4",
+  },
+] as const;
 
 /** Cosa riceve il proprietario con l'analisi gratuita. */
 const cosaAnalizziamo = [
