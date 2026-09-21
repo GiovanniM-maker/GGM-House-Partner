@@ -215,9 +215,9 @@ const nonPromettiamo = [
       "Per alcune case ha più senso un affitto a medio termine, per altre un uso diverso. La formula si decide dopo l'analisi, non prima.",
   },
   {
-    claim: "Una percentuale uguale per ogni casa",
+    claim: "Che ci paghi solo se la casa genera",
     reality:
-      "Si parte dal 12% dei ricavi, ma dipende da quanto lavora la casa e da quante cose seguiamo. La percentuale esatta arriva dopo l'analisi, per iscritto.",
+      "Il canone è fisso e non si muove con i ricavi. Il lavoro dei mesi vuoti serve a preparare quelli pieni, ma è giusto che tu sappia da subito che quei mesi li paghi comunque.",
   },
 ];
 
@@ -422,17 +422,17 @@ export default function PropertyManagementPage() {
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-16">
           <SectionHeader
             eyebrow="Come ci paghi"
-            title="Una percentuale sui ricavi, non un canone fisso."
-            description="Se la casa non genera, non guadagniamo. È il modo più semplice per essere sicuri che stiamo lavorando sulla stessa cosa."
+            title="Un canone fisso, non una percentuale sui tuoi ricavi."
+            description="Se il lavoro funziona e la casa inizia a rendere di più, quella differenza resta tua: non cresce anche quello che paghi a noi."
           />
           <div className="reveal rounded-lg border border-line-strong bg-white p-8">
-            <p className="text-sm text-muted">Gestione a partire dal</p>
-            <p className="mt-1 display-1 font-semibold text-ink">12%</p>
-            <p className="mt-1 text-sm text-muted">dei ricavi generati</p>
+            <p className="text-sm text-muted">Gestione</p>
+            <p className="mt-1 display-1 font-semibold text-ink">250€</p>
+            <p className="mt-1 text-sm text-muted">al mese, per immobile</p>
             <p className="mt-6 border-t border-line pt-6 text-sm leading-relaxed text-ink-600">
-              La percentuale dipende da quanto lavora la casa e da quante cose
-              seguiamo. Te la diciamo dopo l&apos;analisi, per iscritto, prima di
-              qualsiasi impegno.
+              Lo sai prima di cominciare e non cambia per stagione. Prima di
+              metterti sul mercato guardiamo i numeri della casa: se il
+              potenziale non c&apos;è, te lo diciamo invece di farti partire.
             </p>
           </div>
         </div>
