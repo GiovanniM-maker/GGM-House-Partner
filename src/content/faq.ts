@@ -149,7 +149,25 @@ export const faqCategories: FaqCategory[] = [
       {
         question: "Quanto costa la gestione della casa?",
         answer:
-          "Si parte dal 12% dei ricavi generati. La percentuale esatta dipende da quanto lavora la casa e da quante cose seguiamo, e te la diciamo dopo l'analisi, per iscritto, prima di qualsiasi impegno. Nessun canone fisso: se la casa non genera, non guadagniamo.",
+          "250€ al mese per immobile, canone fisso. Non prendiamo una percentuale sui ricavi: se la casa inizia a rendere di più, quella differenza resta tua. Il prezzo lo sai prima di cominciare e non cambia per stagione.",
+        tags: ["pagamenti", "property-management"],
+      },
+      {
+        question: "Perché un canone fisso e non una percentuale?",
+        answer:
+          "Perché su una percentuale, ogni euro in più che fa la tua casa diventa in parte nostro. Con un canone fisso il risultato del lavoro lo tieni tu per intero. In più sai in anticipo quanto spendi, senza doverlo ricalcolare ogni mese.",
+        tags: ["pagamenti", "property-management"],
+      },
+      {
+        question: "Pago anche nei mesi in cui la casa non lavora?",
+        answer:
+          "Sì, il canone è mensile e non si ferma in bassa stagione. Quei mesi servono a preparare i successivi: prezzi per la stagione che arriva, calendario, annuncio, richieste che arrivano mesi prima del soggiorno. Preferiamo dirlo prima che scoprirlo insieme a gennaio.",
+        tags: ["pagamenti", "property-management"],
+      },
+      {
+        question: "E se dall'analisi risulta che la mia casa rende poco?",
+        answer:
+          "Te lo diciamo. Se i numeri non reggono il costo della gestione, non ha senso per te affidarcela e non ha senso per noi prenderla. L'analisi serve anche a questo: capirlo prima di metterti sul mercato, non dopo.",
         tags: ["pagamenti", "property-management"],
       },
       {
