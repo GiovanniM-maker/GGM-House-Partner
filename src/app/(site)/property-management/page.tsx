@@ -40,12 +40,7 @@ const competenze = [
  * qui. Finché mancano viene mostrato il nome: un logo ricostruito a mano
  * violerebbe le linee guida del marchio.
  */
-const portali = [
-  { nome: "Airbnb" },
-  { nome: "Booking.com" },
-  { nome: "Vrbo" },
-  { nome: "Expedia" },
-] as const;
+const portali = [{ nome: "Airbnb" }, { nome: "Booking.com" }] as const;
 
 /** Cosa riceve il proprietario con l'analisi gratuita. */
 const cosaAnalizziamo = [
