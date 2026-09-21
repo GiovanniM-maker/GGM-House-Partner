@@ -34,6 +34,17 @@
     "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-serif: var(--font-fraunces), ui-serif, Georgia, "Times New Roman", serif;
 
+  /*
+   * Curve. Le easing native del browser sono troppo deboli: a un `ease-out`
+   * di serie manca lo scatto iniziale, cioè l'istante in cui chi guarda
+   * decide se l'interfaccia è reattiva. Queste sostituiscono `ease-out` e
+   * `ease-in-out` ovunque nel progetto.
+   */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  /* Curva dei pannelli, presa da iOS: parte decisa e si posa piano. */
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
   /* Raggi */
   --radius-xs: 0.25rem;
   --radius-sm: 0.5rem;
@@ -50,6 +61,25 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    /*
+     * Il browser dipinge un velo grigio su tutto quello che viene toccato.
+     * È il segnale più forte che dice "questo è un sito e non un'app", ma
+     * è anche l'unico riscontro che il telefono dà al dito: si toglie solo
+     * insieme a un feedback nostro, l'utility `pressable` qui sotto.
+     */
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /*
+   * Sui comandi: niente attesa del doppio tap prima di far partire il
+   * click, e una pressione lunga non seleziona l'etichetta. Sul testo
+   * della pagina questa regola sarebbe un difetto, per questo è limitata
+   * a bottoni e riepiloghi.
+   */
+  :where(button, summary, [role="button"]) {
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -168,7 +198,7 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .enter {
-    animation: ggm-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: ggm-rise 0.6s var(--ease-out) both;
   }
 
   @supports (animation-timeline: view()) {
@@ -176,6 +206,103 @@
       animation: ggm-shift linear both;
       animation-timeline: view();
       animation-range: entry 10% entry 60%;
+    }
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Interazione
+   -------------------------------------------------------------------------- */
+
+/*
+ * Feedback alla pressione. Un comando che cambia solo al rilascio sembra
+ * lento anche quando non lo è: la risposta deve arrivare quando il dito
+ * tocca, non quando si alza. Serve anche a restituire il riscontro che
+ * abbiamo tolto spegnendo il velo grigio del browser.
+ */
+@utility pressable {
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  transition-property: transform, color, background-color, border-color;
+  transition-duration: 140ms;
+  transition-timing-function: var(--ease-out);
+
+  @media (prefers-reduced-motion: no-preference) {
+    &:active {
+      transform: scale(0.97);
+    }
+
+    /* Un comando spento non deve rispondere al tocco. */
+    &:disabled:active {
+      transform: none;
+    }
+  }
+}
+
+/*
+ * Pannello a comparsa. Resta nel DOM e si nasconde con `display: none`,
+ * così sparisce anche dall'albero di accessibilità e dal giro del tab;
+ * `allow-discrete` lascia alla transizione il tempo di girare prima che
+ * il pannello sparisca davvero. Dove non è supportato, compare e scompare
+ * di colpo come prima: nessuna regressione, solo niente animazione.
+ */
+@utility sheet {
+  transition-property: opacity, transform, display;
+  transition-duration: 240ms;
+  transition-timing-function: var(--ease-drawer);
+  transition-behavior: allow-discrete;
+
+  &[data-state="closed"] {
+    display: none;
+    opacity: 0;
+  }
+
+  &[data-state="open"] {
+    opacity: 1;
+
+    @starting-style {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    &[data-state="closed"] {
+      transform: translateY(-8px);
+    }
+
+    &[data-state="open"] {
+      transform: translateY(0);
+
+      @starting-style {
+        transform: translateY(-8px);
+      }
+    }
+  }
+}
+
+/*
+ * Apertura delle domande nelle FAQ. Senza transizione la risposta compare
+ * di colpo e tutto quello che sta sotto salta di posto. `interpolate-size`
+ * serve perché il browser sappia interpolare un'altezza fino ad `auto`.
+ */
+@supports selector(::details-content) {
+  @media (prefers-reduced-motion: no-preference) {
+    :root {
+      interpolate-size: allow-keywords;
+    }
+
+    details::details-content {
+      block-size: 0;
+      overflow: hidden;
+      transition:
+        block-size 240ms var(--ease-out),
+        content-visibility 240ms allow-discrete;
+    }
+
+    details[open]::details-content {
+      block-size: auto;
     }
   }
 }

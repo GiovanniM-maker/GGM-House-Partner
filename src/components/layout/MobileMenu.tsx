@@ -48,7 +48,7 @@ export function MobileMenu() {
         onClick={() => setOpen((value) => !value)}
         aria-expanded={open}
         aria-controls={panelId}
-        className="flex h-10 w-10 items-center justify-center rounded-full border border-line-strong/70 text-ink transition-colors hover:border-ink"
+        className="pressable flex h-10 w-10 items-center justify-center rounded-full border border-line-strong/70 text-ink hover:border-ink"
       >
         <span className="sr-only">{open ? "Chiudi il menu" : "Apri il menu"}</span>
         <svg
@@ -68,60 +68,64 @@ export function MobileMenu() {
         </svg>
       </button>
 
-      {open && (
-        <div
-          id={panelId}
-          className="fixed inset-x-0 top-[var(--ggm-header-height)] bottom-0 z-40 overflow-y-auto border-t border-line bg-cream"
-        >
-          <nav aria-label="Navigazione principale" className="px-5 py-8">
+      {/*
+        Il pannello resta sempre montato: `display: none` da chiuso lo toglie
+        comunque dal giro del tab e dall'albero di accessibilità, ma lascia
+        alla transizione il tempo di girare in chiusura.
+      */}
+      <div
+        id={panelId}
+        data-state={open ? "open" : "closed"}
+        className="sheet fixed inset-x-0 top-[var(--ggm-header-height)] bottom-0 z-40 overflow-y-auto overscroll-contain border-t border-line bg-cream"
+      >
+        <nav aria-label="Navigazione principale" className="px-5 py-8">
+          <ul className="space-y-1">
+            {mainNav.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    onClick={close}
+                    aria-current={isActive ? "page" : undefined}
+                    className={`pressable block rounded-md px-3 py-3 text-lg font-medium ${
+                      isActive
+                        ? "bg-white text-gold-900"
+                        : "text-ink hover:bg-white"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+
+          <div className="mt-6 border-t border-line pt-6">
             <ul className="space-y-1">
-              {mainNav.map((item) => {
-                const isActive = pathname === item.href;
-                return (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      onClick={close}
-                      aria-current={isActive ? "page" : undefined}
-                      className={`block rounded-md px-3 py-3 text-lg font-medium transition-colors ${
-                        isActive
-                          ? "bg-white text-gold-900"
-                          : "text-ink hover:bg-white"
-                      }`}
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                );
-              })}
+              {secondaryLinks.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    onClick={close}
+                    className="pressable block rounded-md px-3 py-2.5 text-muted hover:bg-white hover:text-ink"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
+          </div>
 
-            <div className="mt-6 border-t border-line pt-6">
-              <ul className="space-y-1">
-                {secondaryLinks.map((item) => (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      onClick={close}
-                      className="block rounded-md px-3 py-2.5 text-muted transition-colors hover:bg-white hover:text-ink"
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <Link
-              href={primaryCta.href}
-              onClick={close}
-              className="mt-8 flex w-full items-center justify-center rounded-full bg-ink px-6 py-3.5 font-medium text-cream transition-colors hover:bg-ink-800"
-            >
-              {primaryCta.label}
-            </Link>
-          </nav>
-        </div>
-      )}
+          <Link
+            href={primaryCta.href}
+            onClick={close}
+            className="pressable mt-8 flex w-full items-center justify-center rounded-full bg-ink px-6 py-3.5 font-medium text-cream hover:bg-ink-800"
+          >
+            {primaryCta.label}
+          </Link>
+      </nav>
+      </div>
     </div>
   );
 }

@@ -42,7 +42,7 @@ export default function FaqPage() {
               <li key={category.id}>
                 <a
                   href={`#${category.id}`}
-                  className="inline-flex rounded-full border border-line-strong px-4 py-2 text-sm text-ink-600 transition-colors hover:border-ink hover:text-ink"
+                  className="pressable inline-flex rounded-full border border-line-strong px-4 py-2 text-sm text-ink-600 hover:border-ink hover:text-ink"
                 >
                   {category.title}
                 </a>

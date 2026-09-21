@@ -98,7 +98,7 @@ export function Footer() {
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
             <Link
               href={primaryCta.href}
-              className="inline-flex w-fit items-center justify-center rounded-full bg-gold px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-gold-50"
+              className="pressable inline-flex w-fit items-center justify-center rounded-full bg-gold px-5 py-2.5 text-sm font-medium text-ink hover:bg-gold-50"
             >
               {primaryCta.label}
             </Link>

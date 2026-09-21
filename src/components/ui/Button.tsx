@@ -5,7 +5,7 @@ type Variant = "primary" | "accent" | "outline" | "ghost" | "onDark";
 type Size = "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full font-medium transition duration-200 ease-out disabled:cursor-not-allowed disabled:opacity-60";
+  "pressable inline-flex items-center justify-center gap-2 rounded-full font-medium disabled:cursor-not-allowed disabled:opacity-60";
 
 const variants: Record<Variant, string> = {
   primary: "bg-ink text-cream hover:bg-ink-800 active:bg-ink-800",
