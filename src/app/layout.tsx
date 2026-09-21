@@ -50,6 +50,10 @@ export const viewport: Viewport = {
    * colore del marchio: altrimenti il telefono disegna sopra il sito una
    * fascia che non gli appartiene. */
   themeColor: "#F7F3EA",
+  /* Su Android la tastiera software di default copre il layout invece di
+   * restringerlo: un campo in fondo al modulo finisce sotto i tasti. Così
+   * si comporta come su iOS. */
+  interactiveWidget: "resizes-content",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

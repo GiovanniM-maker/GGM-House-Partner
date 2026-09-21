@@ -42,7 +42,10 @@ export function Field({
         </p>
       )}
       {error && (
-        <p id={`${htmlFor}-error`} className="mt-2 text-sm text-gold-900">
+        <p
+          id={`${htmlFor}-error`}
+          className="field-error mt-2 text-sm text-gold-900"
+        >
           {error}
         </p>
       )}
@@ -79,7 +82,7 @@ export function ChoiceGroup({
       {hint && <p className="mt-1 text-xs text-muted">{hint}</p>}
       <div className="mt-3">{children}</div>
       {error && (
-        <p role="alert" className="mt-2 text-sm text-gold-900">
+        <p role="alert" className="field-error mt-2 text-sm text-gold-900">
           {error}
         </p>
       )}
