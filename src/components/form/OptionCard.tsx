@@ -22,7 +22,7 @@ export function OptionCard({
 }: OptionCardProps) {
   return (
     <label
-      className={`flex cursor-pointer items-start gap-3 rounded-md border p-4 transition-colors has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-gold-700 ${
+      className={`pressable flex cursor-pointer items-start gap-3 rounded-md border p-4 has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-gold-700 ${
         checked
           ? "border-gold-700 bg-gold-50/60"
           : "border-line-strong bg-white hover:border-ink-600/40"

@@ -583,7 +583,7 @@ export function PropertyEvaluationForm() {
             <div>
               <span className="block text-sm font-medium text-ink">WhatsApp</span>
               <div className="mt-2">
-                <label className="flex cursor-pointer items-center gap-3 rounded-md border border-line-strong bg-white px-4 py-[0.875rem] transition-colors hover:border-ink-600/40">
+                <label className="pressable flex cursor-pointer items-center gap-3 rounded-md border border-line-strong bg-white px-4 py-[0.875rem] hover:border-ink-600/40">
                   <input
                     type="checkbox"
                     checked={state.whatsapp}
@@ -748,8 +748,8 @@ function StepIndicator({ step }: { step: number }) {
         className="mt-4 h-1 w-full overflow-hidden rounded-full bg-line"
       >
         <div
-          className="h-full rounded-full bg-gold transition-[width] duration-300 ease-out"
-          style={{ width: `${percentage}%` }}
+          className="h-full w-full origin-left rounded-full bg-gold transition-transform duration-300 ease-out"
+          style={{ transform: `scaleX(${percentage / 100})` }}
         />
       </div>
     </div>

@@ -46,7 +46,10 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#132B4F",
+  /* Deve pareggiare il colore in cima alla pagina, cioè la navbar, non il
+   * colore del marchio: altrimenti il telefono disegna sopra il sito una
+   * fascia che non gli appartiene. */
+  themeColor: "#F7F3EA",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
