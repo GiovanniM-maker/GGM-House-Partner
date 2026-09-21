@@ -306,3 +306,140 @@
     }
   }
 }
+
+/* --------------------------------------------------------------------------
+   Passaggi di stato
+   Tutto quello che compare al posto di qualcos'altro. Senza un ponte il
+   contenuto si teletrasporta, e chi guarda non capisce che è cambiato.
+   -------------------------------------------------------------------------- */
+
+/*
+ * Passo del modulo. La direzione dice da che parte si sta andando: avanti
+ * entra da destra, indietro da sinistra. È la stessa logica per cui un
+ * cassetto esce e rientra dallo stesso lato.
+ */
+@utility step-enter {
+  @media (prefers-reduced-motion: no-preference) {
+    transition:
+      opacity 220ms var(--ease-out),
+      transform 220ms var(--ease-out);
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility step-enter-avanti {
+  @media (prefers-reduced-motion: no-preference) {
+    @starting-style {
+      opacity: 0;
+      transform: translateX(14px);
+    }
+  }
+}
+
+@utility step-enter-indietro {
+  @media (prefers-reduced-motion: no-preference) {
+    @starting-style {
+      opacity: 0;
+      transform: translateX(-14px);
+    }
+  }
+}
+
+/*
+ * Messaggio di errore sotto un campo. Comparendo di colpo sembra sempre
+ * stato lì: la breve entrata lo fa leggere come una cosa appena successa.
+ */
+@utility field-error {
+  @media (prefers-reduced-motion: no-preference) {
+    transition:
+      opacity 160ms var(--ease-out),
+      transform 160ms var(--ease-out);
+    opacity: 1;
+    transform: none;
+
+    @starting-style {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+  }
+}
+
+/*
+ * Schermata di conferma. È l'unico momento raro e a carico emotivo alto di
+ * tutto il sito: qualcuno ha appena passato qualche minuto a raccontare la
+ * sua casa. Qui, e solo qui, ci si può permettere un tempo più lungo e un
+ * filo di rimbalzo.
+ */
+@utility arrival {
+  @media (prefers-reduced-motion: no-preference) {
+    transition:
+      opacity 420ms var(--ease-out),
+      transform 420ms var(--ease-out);
+    opacity: 1;
+    transform: none;
+
+    @starting-style {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+  }
+}
+
+/* Mai da `scale(0)`: niente, nella realtà, compare dal nulla. */
+@keyframes ggm-check {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@utility arrival-mark {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: ggm-check 420ms var(--ease-out) 120ms both;
+  }
+}
+
+@utility arrival-stagger {
+  @media (prefers-reduced-motion: no-preference) {
+    & > li {
+      animation: ggm-rise 380ms var(--ease-out) both;
+    }
+
+    & > li:nth-child(2) {
+      animation-delay: 60ms;
+    }
+
+    & > li:nth-child(3) {
+      animation-delay: 120ms;
+    }
+
+    & > li:nth-child(4) {
+      animation-delay: 180ms;
+    }
+  }
+}
+
+/*
+ * Rotellina di attesa. Gira più veloce del solito di proposito: a parità di
+ * tempo di caricamento, una rotellina rapida fa percepire l'attesa più
+ * corta. Movimento costante, quindi `linear`. Resta anche con il movimento
+ * ridotto: toglierla lascerebbe l'invio senza alcun segnale.
+ */
+@keyframes ggm-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@utility spinner {
+  animation: ggm-spin 600ms linear infinite;
+}

@@ -121,6 +121,12 @@ function totalBytes(files: File[]): number {
 
 export function PropertyEvaluationForm() {
   const [step, setStep] = useState(1);
+  // Da che parte si sta andando. Un passo che entra sempre dallo stesso lato
+  // non dice se si è avanzato o tornati indietro.
+  const [direzione, setDirezione] = useState<"avanti" | "indietro">("avanti");
+  const entrata = `step-enter ${
+    direzione === "avanti" ? "step-enter-avanti" : "step-enter-indietro"
+  }`;
   const [state, setState] = useState<FormState>(initialState);
   const [errors, setErrors] = useState<Errors>({});
   const [submitting, setSubmitting] = useState(false);
@@ -156,11 +162,13 @@ export function PropertyEvaluationForm() {
       setErrors(stepErrors);
       return;
     }
+    setDirezione("avanti");
     setStep((current) => Math.min(current + 1, TOTAL_STEPS));
     focusHeading();
   };
 
   const goBack = () => {
+    setDirezione("indietro");
     setStep((current) => Math.max(current - 1, 1));
     focusHeading();
   };
@@ -230,7 +238,7 @@ export function PropertyEvaluationForm() {
 
       <form onSubmit={handleSubmit} noValidate className="mt-8">
         {step === 1 && (
-          <div className="grid gap-6 sm:grid-cols-2">
+          <div className={`${entrata} grid gap-6 sm:grid-cols-2`}>
             <Field
               label="Comune"
               htmlFor={`${formId}-comune`}
@@ -351,7 +359,7 @@ export function PropertyEvaluationForm() {
         )}
 
         {step === 2 && (
-          <div className="grid gap-8">
+          <div className={`${entrata} grid gap-8`}>
             <ChoiceGroup
               legend="Quanti immobili vorresti affidarci?"
               required
@@ -436,7 +444,7 @@ export function PropertyEvaluationForm() {
         )}
 
         {step === 3 && (
-          <div className="grid gap-8">
+          <div className={`${entrata} grid gap-8`}>
             <ChoiceGroup
               legend="Cosa vorresti fare con questa casa?"
               hint="Se non hai ancora deciso non è un problema: serve proprio a questo il primo contatto."
@@ -505,6 +513,7 @@ export function PropertyEvaluationForm() {
 
         {step === 4 && (
           <ChoiceGroup
+            className={entrata}
             legend="Cosa ha questa casa?"
             hint="Seleziona tutto quello che è presente. Puoi anche saltare questo passo."
           >
@@ -525,7 +534,7 @@ export function PropertyEvaluationForm() {
         )}
 
         {step === 5 && (
-          <div className="grid gap-6 sm:grid-cols-2">
+          <div className={`${entrata} grid gap-6 sm:grid-cols-2`}>
             <Field
               label="Nome e cognome"
               htmlFor={`${formId}-nome`}
@@ -664,7 +673,10 @@ export function PropertyEvaluationForm() {
                 </span>
               </label>
               {errors.privacy && (
-                <p role="alert" className="mt-2 text-sm text-gold-900">
+                <p
+                  role="alert"
+                  className="field-error mt-2 text-sm text-gold-900"
+                >
                   {errors.privacy}
                 </p>
               )}
@@ -675,7 +687,7 @@ export function PropertyEvaluationForm() {
         {submitError && (
           <p
             role="alert"
-            className="mt-6 rounded-md border border-line-strong bg-sand px-4 py-3 text-sm text-ink"
+            className="field-error mt-6 rounded-md border border-line-strong bg-sand px-4 py-3 text-sm text-ink"
           >
             {submitError}
           </p>
@@ -695,13 +707,41 @@ export function PropertyEvaluationForm() {
               Continua
             </Button>
           ) : (
-            <Button type="submit" size="lg" disabled={submitting}>
+            <Button
+              type="submit"
+              size="lg"
+              disabled={submitting}
+              /* Larghezza ferma: le due etichette non sono lunghe uguali e
+                 senza questo il bottone si stringe proprio mentre parte
+                 l'invio. */
+              className="sm:min-w-[13rem]"
+            >
+              {submitting && <Spinner />}
               {submitting ? "Invio in corso…" : "Invia la richiesta"}
             </Button>
           )}
         </div>
       </form>
     </div>
+  );
+}
+
+/** Rotellina di attesa dell'invio. Decorativa: il testo accanto dice già tutto. */
+function Spinner() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 16 16"
+      className="spinner h-4 w-4"
+      fill="none"
+    >
+      <circle cx="8" cy="8" r="6.5" stroke="currentColor" opacity="0.3" />
+      <path
+        d="M8 1.5a6.5 6.5 0 0 1 6.5 6.5"
+        stroke="currentColor"
+        strokeLinecap="round"
+      />
+    </svg>
   );
 }
 
@@ -773,9 +813,9 @@ function Confirmation({
   return (
     <div
       role="status"
-      className="rounded-lg border border-line bg-white p-6 sm:p-10"
+      className="arrival rounded-lg border border-line bg-white p-6 sm:p-10"
     >
-      <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-gold-50 text-gold-900">
+      <span className="arrival-mark inline-flex h-11 w-11 items-center justify-center rounded-full bg-gold-50 text-gold-900">
         <svg
           aria-hidden="true"
           viewBox="0 0 24 24"
@@ -802,7 +842,7 @@ function Confirmation({
         le informazioni e ti ricontattiamo.
       </p>
 
-      <ol className="mt-8 space-y-4">
+      <ol className="arrival-stagger mt-8 space-y-4">
         {nextSteps.map((item, index) => (
           <li key={item} className="flex gap-4">
             <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-line text-xs font-semibold text-gold-700">
